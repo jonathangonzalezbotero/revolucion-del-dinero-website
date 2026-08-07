@@ -1,0 +1,73 @@
+.vtcards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px
+}
+
+.vtcard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px
+}
+
+.vtcard-poster {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 9/16;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: var(--ink)
+}
+
+.vtcard-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .3s ease
+}
+
+.vtcard-poster:hover img {
+  transform: scale(1.04)
+}
+
+.vt-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(20, 20, 20, .55);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  padding-left: 4px
+}
+
+.vtcard video {
+  width: 100%;
+  aspect-ratio: 9/16;
+  border-radius: var(--radius);
+  background: #000;
+  display: block
+}
+
+.vt-name {
+  text-align: center;
+  font-size: .92rem;
+  font-weight: 600;
+  color: var(--ink)
+}
+
+@media(max-width:980px) {
+  .vtcards {
+    grid-template-columns: repeat(2, 1fr)
+  }
+}

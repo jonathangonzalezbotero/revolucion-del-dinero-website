@@ -1,0 +1,64 @@
+:root{
+  --ivory:#f6f1e7;
+  --paper:#fbf8f1;
+  --sand:#ece2ce;
+  --ink:#1c1712;
+  --ink-soft:#5f564a;
+  --ink-faint:#8c8272;
+  --emerald:#0f6b4f;
+  --emerald-deep:#0a4d39;
+  --emerald-bright:#14875f;
+  --gold:#d99a2b;
+  --gold-deep:#b47c17;
+  --line:rgba(28,23,18,.13);
+  --line-strong:rgba(28,23,18,.22);
+  --cream:#f6f1e7;
+  --radius:18px;
+  --shadow:0 26px 60px -28px rgba(28,23,18,.35);
+  --shadow-soft:0 12px 40px -20px rgba(28,23,18,.28);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ivory);color:var(--ink);font-family:'Manrope',sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;line-height:1.03;letter-spacing:-.015em}
+.accent{color:var(--emerald)}
+.gold{color:var(--gold-deep)}
+.ital{font-style:italic;font-weight:500}
+.eyebrow{font-family:'Manrope';font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--emerald);display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--gold);border-radius:2px}
+
+/*
+  Per-page --maxw is set on the page's root wrapper (.page-home, .page-evento)
+  so both pages can share this single .wrap rule at different widths.
+*/
+.wrap{max-width:var(--maxw,1180px);margin:0 auto;padding:0 26px;position:relative}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:'Manrope';font-weight:700;font-size:15px;padding:16px 28px;border-radius:60px;cursor:pointer;border:1.5px solid transparent;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .25s,color .25s;white-space:nowrap}
+.btn-gold{background:var(--gold);color:#26190a;box-shadow:0 12px 26px -12px rgba(217,154,43,.7)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 18px 34px -12px rgba(217,154,43,.8);background:#e6a838}
+.btn-emerald{background:var(--emerald);color:var(--cream);box-shadow:0 12px 26px -12px rgba(15,107,79,.6)}
+.btn-emerald:hover{transform:translateY(-3px);background:var(--emerald-bright)}
+.btn-ink{background:var(--ink);color:var(--cream)}
+.btn-ink:hover{transform:translateY(-3px);background:#2e271e}
+.btn-outline{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+.btn-outline:hover{border-color:var(--emerald);color:var(--emerald);transform:translateY(-3px)}
+.btn-lg{padding:18px 32px;font-size:16px}
+.btn .ar{transition:transform .25s}
+.btn:hover .ar{transform:translateX(4px)}
+
+/* section base (shared by any page using .sec/.sec-head) */
+.sec{padding:100px 0;position:relative}
+.sec-head{max-width:700px;margin-bottom:56px}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.sec-head h2{font-size:clamp(2.1rem,4.4vw,3.4rem);margin:20px 0 18px}
+.sec-head p{color:var(--ink-soft);font-size:1.12rem}
+@media(max-width:640px){
+  .sec{padding:70px 0}
+}
+
+/* scroll-reveal utility, paired with the useRevealOnScroll hook */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}

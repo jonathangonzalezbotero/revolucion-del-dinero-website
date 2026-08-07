@@ -1,0 +1,129 @@
+.page-evento{--maxw:1080px}
+
+html{scroll-behavior:smooth}
+
+.ann{background:var(--emerald);color:var(--cream);text-align:center;font-size:13.5px;font-weight:700;padding:12px 16px}
+.ann b{color:#f4c56a}
+
+/* hero */
+.evt-hero{padding:60px 0 60px}
+.evt-hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start}
+.evt-hero-grid > *{min-width:0}
+.badge-price{display:inline-flex;align-items:center;gap:9px;max-width:100%;background:rgba(15,107,79,.1);border:1px solid rgba(15,107,79,.2);color:var(--emerald);font-size:13px;font-weight:800;padding:8px 16px;border-radius:40px;letter-spacing:.04em}
+.evt-hero h1{font-size:clamp(2.5rem,5vw,4rem);margin:22px 0 20px}
+.evt-hero h1 .ital{color:var(--emerald)}
+.evt-hero .lead{color:var(--ink-soft);font-size:1.14rem;max-width:520px;margin-bottom:26px}
+.meta-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:26px}
+.meta-chip{display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 18px}
+.meta-chip-head{display:flex;align-items:center;gap:7px}
+.meta-chip .ic{font-size:.85rem}
+.meta-chip small{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.meta-chip b{font-family:'Fraunces';font-size:1.02rem;font-weight:600}
+.meta-chip-price{grid-column:1 / -1;align-items:center;background:rgba(15,107,79,.08);border-color:rgba(15,107,79,.28);padding:14px 18px}
+.meta-chip-price .ic{font-size:1rem}
+.meta-chip-price small{color:var(--emerald)}
+.meta-chip-price b{font-size:1.2rem;color:var(--emerald-deep)}
+.plus-one{display:flex;align-items:center;gap:9px;background:rgba(217,154,43,.12);border:1px solid rgba(217,154,43,.3);color:var(--gold-deep);font-size:13.5px;font-weight:600;padding:11px 16px;border-radius:12px;margin-bottom:22px}
+.plus-one .ic{font-size:1.05rem}
+.plus-one b{color:var(--ink)}
+.hero-img{border-radius:20px;overflow:hidden;box-shadow:var(--shadow);position:relative;margin-bottom:18px;border:5px solid #fff}
+.hero-img img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.hero-img .ov{position:absolute;left:14px;bottom:14px;font-size:12.5px;background:var(--emerald);color:var(--cream);padding:8px 14px;border-radius:10px;font-weight:700}
+.scarce{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--gold-deep);font-weight:700}
+.scarce .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px rgba(217,154,43,.22);animation:evtPulse 1.8s infinite}
+@keyframes evtPulse{50%{box-shadow:0 0 0 9px rgba(217,154,43,0)}}
+
+/* form card
+   Sticky positioning and overflow:hidden clipping are split across two elements
+   on purpose: position:sticky + overflow:hidden on the SAME element fails to clip
+   absolutely-positioned content (like the glow below) in some browsers, letting it
+   leak past the viewport and cause horizontal page overflow. */
+.formcard-sticky{position:sticky;top:24px}
+.formcard{background:var(--ink);color:var(--cream);border-radius:22px;padding:32px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.formcard::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(15,107,79,.5),transparent 70%);top:-120px;right:-80px}
+.formcard .fhead{position:relative;z-index:1}
+.formcard h3{font-size:1.55rem;margin-bottom:6px;color:var(--cream)}
+.formcard .fsub{color:rgba(246,241,231,.72);font-size:14.5px;margin-bottom:22px}
+.field{margin-bottom:14px;position:relative;z-index:1}
+.field label{display:block;font-size:12px;font-weight:700;letter-spacing:.05em;color:rgba(246,241,231,.7);margin-bottom:7px;text-transform:uppercase}
+.field input{width:100%;background:rgba(246,241,231,.07);border:1.5px solid rgba(246,241,231,.16);border-radius:12px;padding:14px 16px;color:var(--cream);font-family:'Manrope';font-size:15.5px;transition:border-color .2s,background .2s}
+.field input:focus{outline:none;border-color:var(--gold);background:rgba(246,241,231,.12)}
+.field input::placeholder{color:rgba(246,241,231,.4)}
+.field-divider{position:relative;z-index:1;display:flex;align-items:baseline;gap:6px;font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--gold);margin:18px 0 14px;padding-top:16px;border-top:1px solid rgba(246,241,231,.14)}
+.field-divider span{font-weight:600;color:rgba(246,241,231,.55);text-transform:none;letter-spacing:0}
+.formcard .fine{font-size:12px;color:rgba(246,241,231,.55);text-align:center;margin-top:14px;line-height:1.5;position:relative;z-index:1}
+.trust-mini{display:flex;justify-content:center;gap:16px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(246,241,231,.14);color:rgba(246,241,231,.8);font-size:12.5px;font-weight:700;flex-wrap:wrap;position:relative;z-index:1}
+
+.evt-sec{padding:80px 0}
+.evt-sec-head{max-width:680px;margin:0 auto 46px;text-align:center}
+.evt-sec-head h2{font-size:clamp(1.9rem,3.8vw,2.9rem);margin:16px 0}
+.evt-sec-head p{color:var(--ink-soft);font-size:1.06rem}
+
+.list2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 36px;max-width:880px;margin:0 auto}
+.li{display:flex;gap:15px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--line)}
+.li .ck{flex:0 0 auto;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(15,107,79,.1);border:1px solid rgba(15,107,79,.24);color:var(--emerald);font-weight:800;font-size:13px}
+.li p b{color:var(--ink)}.li p{color:var(--ink-soft)}
+
+.learn{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.lcard{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;transition:transform .35s,box-shadow .35s}
+.lcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-soft)}
+.lcard .ic{font-size:1.4rem;width:52px;height:52px;display:grid;place-items:center;border-radius:14px;background:rgba(15,107,79,.09);border:1px solid rgba(15,107,79,.16);margin-bottom:18px}
+.lcard h3{font-size:1.25rem;margin-bottom:10px}
+.lcard p{color:var(--ink-soft);font-size:.98rem}
+.learn-cta{text-align:center;margin-top:44px}
+
+.evt-faq{max-width:780px;margin:0 auto}
+.evt-qa{border-bottom:1px solid var(--line)}
+.evt-qa summary{list-style:none;cursor:pointer;padding:22px 0;display:flex;justify-content:space-between;gap:18px;align-items:center;font-family:'Fraunces';font-size:1.18rem;font-weight:500;color:var(--ink)}
+.evt-qa summary::-webkit-details-marker{display:none}
+.evt-qa summary .pl{flex:0 0 auto;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line-strong);display:grid;place-items:center;color:var(--emerald);transition:transform .3s;font-size:17px}
+.evt-qa[open] summary .pl{transform:rotate(45deg)}
+.evt-qa .ans{color:var(--ink-soft);padding:0 0 24px;font-size:1rem}
+
+.final{background:var(--emerald);color:var(--cream);text-align:center;padding:90px 0;position:relative;overflow:hidden}
+.final::before{content:"";position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(217,154,43,.24),transparent 70%);top:-160px;left:50%;transform:translateX(-50%)}
+.final .inner{position:relative;z-index:1}
+.final h2{font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:18px;color:var(--cream)}
+.final p{color:rgba(246,241,231,.82);max-width:520px;margin:0 auto 30px;font-size:1.1rem}
+
+.evt-footer{background:var(--paper);border-top:1px solid var(--line);padding:40px 0;text-align:center}
+.evt-footer img{height:46px;margin:0 auto 16px}
+.evt-footer .cr{color:var(--ink-faint);font-size:13px}
+
+/* VIP overlay */
+.vip-overlay{position:fixed;inset:0;z-index:200;background:rgba(28,23,18,.62);backdrop-filter:blur(6px);display:none;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto}
+.vip-overlay.show{display:flex;animation:evtFade .4s ease}
+@keyframes evtFade{from{opacity:0}to{opacity:1}}
+.vip-modal{max-width:620px;width:100%;background:var(--paper);border-radius:26px;box-shadow:var(--shadow);overflow:hidden;animation:evtRise .5s cubic-bezier(.2,.8,.2,1)}
+@keyframes evtRise{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.vip-confirm{background:rgba(15,107,79,.1);border-bottom:1px solid rgba(15,107,79,.2);padding:20px 30px;display:flex;align-items:center;gap:14px}
+.vip-confirm .tick{width:40px;height:40px;flex:0 0 auto;border-radius:50%;background:var(--emerald);color:var(--cream);display:grid;place-items:center;font-size:20px;font-weight:800}
+.vip-confirm b{font-size:1.05rem;color:var(--ink)}.vip-confirm small{display:block;color:var(--ink-soft);font-size:13px}
+.vip-body{padding:32px 36px 36px}
+.vip-body .eyebrow{justify-content:center;width:100%;margin-bottom:14px}
+.vip-body h2{font-size:clamp(1.7rem,4vw,2.4rem);text-align:center;margin-bottom:10px}
+.vip-body .vsub{text-align:center;color:var(--ink-soft);margin-bottom:26px}
+.vip-feats{list-style:none;display:grid;gap:12px;margin-bottom:26px}
+.vip-feats li{display:flex;gap:13px;align-items:flex-start;background:var(--ivory);border:1px solid var(--line);border-radius:13px;padding:15px 18px}
+.vip-feats li .ic{flex:0 0 auto;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:rgba(217,154,43,.16);font-size:1.05rem}
+.vip-feats li b{display:block;font-size:1rem;color:var(--ink)}.vip-feats li small{color:var(--ink-soft);font-size:.88rem}
+.vip-price{text-align:center;margin-bottom:22px}
+.vip-price .amt{font-family:'Fraunces';font-size:3rem;font-weight:700;color:var(--emerald);line-height:1}
+.vip-price .amt sup{font-size:1.3rem;top:-1.1rem}
+.vip-price small{color:var(--ink-soft);display:block;margin-top:4px}
+.vip-actions{display:grid;gap:12px}
+.vip-skip{display:block;text-align:center;background:none;border:none;color:var(--ink-faint);font-family:'Manrope';font-size:13.5px;font-weight:600;cursor:pointer;padding:8px;text-decoration:underline;text-underline-offset:3px}
+.vip-skip:hover{color:var(--ink-soft)}
+.vip-guar{text-align:center;font-size:12.5px;color:var(--ink-faint);margin-top:8px}
+
+@media(max-width:920px){
+  .evt-hero-grid{grid-template-columns:1fr;gap:34px}
+  .formcard-sticky{position:static}
+  .learn{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .page-evento{font-size:16px}
+  .list2{grid-template-columns:1fr}
+  .evt-hero{padding:40px 0 50px}.evt-sec{padding:60px 0}
+  .vip-body{padding:26px 22px 30px}
+}
