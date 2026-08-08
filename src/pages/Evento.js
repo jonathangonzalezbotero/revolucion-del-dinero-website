@@ -126,11 +126,14 @@ function Evento() {
 
       {/* HERO + FORM */}
       <section className="evt-hero">
+        <div className="evt-hero-bg">
+          <video src="/videos/hero-bg.mp4" poster="/videos/hero-bg-poster.webp" autoPlay muted loop playsInline />
+        </div>
         <div className="wrap evt-hero-grid">
           <div className="hero-copy">
             <span className="badge-price">✦ Entrada $10 AUD · En español</span>
             <h1>Tu primer paso hacia la <span className="ital">libertad financiera.</span></h1>
-            <p className="lead">Un evento presencial donde aprenderás a reprogramar tu mente, administrar tu dinero y dar tus primeros pasos para invertir — junto a otros latinos en Australia que buscan lo mismo que tú.</p>
+            <p className="lead">Un evento presencial de finanzas personales donde aprenderás a reprogramar tu mente, administrar tu dinero y dar tus primeros pasos para invertir.</p>
             <div className="meta-row">
               <div className="meta-chip"><div className="meta-chip-head"><span className="ic">📅</span><small>Fecha</small></div><b>Sáb 12 de sept.</b></div>
               <div className="meta-chip"><div className="meta-chip-head"><span className="ic">📍</span><small>Lugar</small></div><b>Gold Coast, AU</b></div>

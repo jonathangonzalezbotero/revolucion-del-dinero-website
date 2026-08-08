@@ -62,7 +62,7 @@ function AboutSection({ id = 'sobre-mi' }) {
           <h2>Llegué a Australia para cambiar mi vida. Hoy ayudo a otros a cambiar la suya.</h2>
           <p>Hace 6 años llegué con la intención de aprender inglés y volver a Colombia a seguir mi profesión — como muchos de nosotros.</p>
           <p>Recuerdo viajar a Nueva York con mi papá y recoger tarjetas del metro del piso para ahorrarnos el pasaje. En ese momento no lo cuestioné: era lo normal. Hoy sé que <span className="hi">esas historias que cargamos sobre el dinero son exactamente lo que nos frena</span> — no la falta de esfuerzo, ni de inteligencia.</p>
-          <p>Mi pasión siempre fue el deporte, los negocios y las finanzas. Hoy tengo multiples negocios y una sola misión: impactar la vida de las personas que, como yo, <b className="hi">sueñan en grande</b>. Enseñé finanzas a mis amigos y familia por años; ahora lo hago en grande.</p>
+          <p>Mi pasión siempre ha sido el deporte, los negocios y las finanzas. Hoy tengo multiples negocios y una sola misión: impactar la vida de las personas que, como yo, <b className="hi">sueñan en grande</b>.</p>
           <div className="sig">Jonathan González Botero</div>
         </div>
       </div>
