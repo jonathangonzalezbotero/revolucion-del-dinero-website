@@ -46,6 +46,7 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;line-height:1.03;letter-sp
 .btn-outline{background:transparent;color:var(--ink);border-color:var(--line-strong)}
 .btn-outline:hover{border-color:var(--emerald);color:var(--emerald);transform:translateY(-3px)}
 .btn-lg{padding:18px 32px;font-size:16px}
+.btn-block{display:flex;width:100%}
 .btn .ar{transition:transform .25s}
 .btn:hover .ar{transform:translateX(4px)}
 
