@@ -11,6 +11,17 @@ const LOGO_URL = 'https://d1yei2z3i6k35z.cloudfront.net/17411220/69f4103eaf1164.
 const STRIPE_GENERAL_URL = 'https://buy.stripe.com/3cI5kD4Dg6I2cxS6VIf7i02';
 const STRIPE_VIP_URL = 'https://buy.stripe.com/8x214n0n01nI69u5REf7i03';
 
+const EXIT_POPUP_SESSION_KEY = 'rdd_evento_exit_popup_shown';
+
+// Mobile has no mouseleave, so we approximate exit-intent with a deliberate "swipe back
+// to the top" gesture — the kind of fast, sustained flick someone does to reach the
+// address bar / close the tab, not the short back-and-forth of re-reading content.
+const MOBILE_EXIT_MIN_START_Y = 500; // must start well down the page
+const MOBILE_EXIT_MIN_DISTANCE = 400; // must cover a large distance...
+const MOBILE_EXIT_MIN_DURATION_MS = 150; // ...but not too slowly...
+const MOBILE_EXIT_MAX_DURATION_MS = 900; // ...(fast flick, not a slow scroll)
+const MOBILE_EXIT_TOP_THRESHOLD = 120; // ...and land back near the very top
+
 const EVENTO_TITLE = 'Taller de Finanzas Personales en Gold Coast · $10 AUD | Revolución del Dinero';
 const EVENTO_DESCRIPTION = 'Evento presencial de educación financiera en español, en Gold Coast, Australia — 12 de septiembre de 2026. Entrada $10 AUD, incluye a tu pareja o acompañante. Cupos limitados.';
 
@@ -51,6 +62,7 @@ const EVENTO_JSON_LD = {
 
 function Evento() {
   const [showVip, setShowVip] = useState(false);
+  const [showExitPopup, setShowExitPopup] = useState(false);
 
   const formRef = useRef(null);
   const nombreRef = useRef(null);
@@ -60,17 +72,110 @@ function Evento() {
   const amigoTelRef = useRef(null);
   const regWrapRef = useRef(null);
 
+  const exitFormRef = useRef(null);
+  const exitNombreRef = useRef(null);
+  const exitEmailRef = useRef(null);
+  const exitTelRef = useRef(null);
+
+  const hasRegisteredRef = useRef(false);
+  const scrolledPastFormRef = useRef(false);
+  const exitPopupTriggeredRef = useRef(false);
+
   useRevealOnScroll();
 
   useEffect(() => {
-    document.body.style.overflow = showVip ? 'hidden' : '';
+    document.body.style.overflow = (showVip || showExitPopup) ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
-  }, [showVip]);
+  }, [showVip, showExitPopup]);
 
   useEffect(() => {
     window.fbq?.('track', 'ViewContent', { value: 10, currency: 'AUD', content_name: 'Evento Gold Coast' });
+  }, []);
+
+  // Track whether the visitor already scrolled past the hero form, so the exit
+  // popup never interrupts someone who hasn't even seen the offer yet.
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrolledPastFormRef.current || !regWrapRef.current) return;
+      const rect = regWrapRef.current.getBoundingClientRect();
+      if (rect.bottom < 0) scrolledPastFormRef.current = true;
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const triggerExitPopup = () => {
+    if (hasRegisteredRef.current || exitPopupTriggeredRef.current) return;
+    if (!scrolledPastFormRef.current) return;
+    if (sessionStorage.getItem(EXIT_POPUP_SESSION_KEY)) return;
+    exitPopupTriggeredRef.current = true;
+    sessionStorage.setItem(EXIT_POPUP_SESSION_KEY, '1');
+    setShowExitPopup(true);
+  };
+
+  // Desktop: fires when the cursor leaves through the top of the viewport
+  // (heading for the tab bar / address bar / close button).
+  useEffect(() => {
+    const handleMouseOut = (e) => {
+      if (e.relatedTarget || e.toElement) return;
+      if (e.clientY > 0) return;
+      triggerExitPopup();
+    };
+    document.addEventListener('mouseout', handleMouseOut);
+    return () => document.removeEventListener('mouseout', handleMouseOut);
+  }, []);
+
+  // Mobile fallback: mouseleave doesn't exist there, so treat a deliberate fast
+  // swipe back to the top of the page (not casual re-reading) as the equivalent signal.
+  useEffect(() => {
+    let lastY = window.scrollY;
+    let lastT = performance.now();
+    let raf = null;
+    let streakActive = false;
+    let streakStartY = 0;
+    let streakStartT = 0;
+
+    const handleScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = null;
+        const y = window.scrollY;
+        const t = performance.now();
+        const dy = lastY - y; // positive = scrolling up
+
+        if (dy > 2) {
+          if (!streakActive) {
+            streakActive = true;
+            streakStartY = lastY;
+            streakStartT = lastT;
+          }
+          const distance = streakStartY - y;
+          const duration = t - streakStartT;
+          if (
+            streakStartY >= MOBILE_EXIT_MIN_START_Y &&
+            distance >= MOBILE_EXIT_MIN_DISTANCE &&
+            duration >= MOBILE_EXIT_MIN_DURATION_MS &&
+            duration <= MOBILE_EXIT_MAX_DURATION_MS &&
+            y <= MOBILE_EXIT_TOP_THRESHOLD
+          ) {
+            triggerExitPopup();
+          }
+        } else if (dy < -2) {
+          streakActive = false;
+        }
+
+        lastY = y;
+        lastT = t;
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   const handleSubmit = (e) => {
@@ -93,6 +198,35 @@ function Evento() {
     }).catch((err) => console.error('systeme-contact request failed', err));
 
     window.fbq?.('track', 'Lead');
+    hasRegisteredRef.current = true;
+    setShowVip(true);
+  };
+
+  const handleExitSubmit = (e) => {
+    e.preventDefault();
+    const nombre = exitNombreRef.current.value.trim();
+    const email = exitEmailRef.current.value.trim();
+    const tel = exitTelRef.current.value.trim();
+    if (!nombre || !email || !tel) {
+      exitFormRef.current.reportValidity();
+      return;
+    }
+
+    // Mirror into the main form's refs so the VIP upsell and Stripe checkout
+    // tracking (which read from emailRef) work exactly as if this were the main form.
+    nombreRef.current.value = nombre;
+    emailRef.current.value = email;
+    telRef.current.value = tel;
+
+    fetch('/api/systeme-contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, email, tel, amigoNombre: '', amigoTel: '' }),
+    }).catch((err) => console.error('systeme-contact request failed', err));
+
+    window.fbq?.('track', 'Lead');
+    hasRegisteredRef.current = true;
+    setShowExitPopup(false);
     setShowVip(true);
   };
 
@@ -271,6 +405,23 @@ function Evento() {
             </div>
             <p className="vip-guar">Pago seguro con Stripe · Confirmación inmediata por correo</p>
           </div>
+        </div>
+      </div>
+
+      {/* EXIT-INTENT RESCUE POPUP */}
+      <div className={`exit-overlay${showExitPopup ? ' show' : ''}`}>
+        <div className="exit-modal">
+          <button type="button" className="exit-close" aria-label="Cerrar" onClick={() => setShowExitPopup(false)}>✕</button>
+          <span className="badge-price exit-badge">✦ Espera un momento</span>
+          <h2>¿Ya aseguraste tu cupo?</h2>
+          <p className="vsub">Los cupos son limitados y tu entrada de $10 AUD incluye a tu pareja o acompañante. Regístrate en segundos antes de irte.</p>
+          <form ref={exitFormRef} onSubmit={handleExitSubmit} noValidate>
+            <div className="field"><label htmlFor="exitNombre">Nombre completo</label><input id="exitNombre" name="exitNombre" type="text" placeholder="Tu nombre y apellido" ref={exitNombreRef} required /></div>
+            <div className="field"><label htmlFor="exitEmail">Correo electrónico</label><input id="exitEmail" name="exitEmail" type="email" placeholder="tucorreo@ejemplo.com" ref={exitEmailRef} required /></div>
+            <div className="field"><label htmlFor="exitTel">Teléfono</label><input id="exitTel" name="exitTel" type="tel" placeholder="+61 ..." ref={exitTelRef} required /></div>
+            <button type="submit" className="btn btn-gold btn-block">Asegurar mi cupo · $10 AUD →</button>
+          </form>
+          <button type="button" className="exit-later" onClick={() => setShowExitPopup(false)}>No gracias, seguiré navegando</button>
         </div>
       </div>
     </div>

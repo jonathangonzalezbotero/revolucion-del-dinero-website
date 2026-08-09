@@ -778,6 +778,120 @@ html {
   margin-top: 8px
 }
 
+/* Exit-intent rescue popup */
+.exit-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 210;
+  background: rgba(28, 23, 18, .62);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto
+}
+
+.exit-overlay.show {
+  display: flex;
+  animation: evtFade .4s ease
+}
+
+.exit-modal {
+  position: relative;
+  max-width: 440px;
+  width: 100%;
+  background: var(--paper);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  padding: 34px 30px 28px;
+  text-align: center;
+  animation: evtRise .5s cubic-bezier(.2, .8, .2, 1)
+}
+
+.exit-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--ivory);
+  color: var(--ink-soft);
+  font-size: 13px;
+  cursor: pointer;
+  display: grid;
+  place-items: center
+}
+
+.exit-close:hover {
+  color: var(--ink)
+}
+
+.exit-badge {
+  margin-bottom: 14px
+}
+
+.exit-modal h2 {
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+  margin-bottom: 10px
+}
+
+.exit-modal .vsub {
+  text-align: center;
+  color: var(--ink-soft);
+  margin-bottom: 22px
+}
+
+.exit-modal form {
+  text-align: left
+}
+
+.exit-modal .btn-block {
+  margin-top: 6px
+}
+
+.exit-later {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: none;
+  border: none;
+  color: var(--ink-faint);
+  font-family: 'Manrope';
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 12px 8px 0;
+  text-decoration: underline;
+  text-underline-offset: 3px
+}
+
+.exit-later:hover {
+  color: var(--ink-soft)
+}
+
+/* .field is normally styled for .formcard's dark background — override for this light modal */
+.exit-modal .field label {
+  color: var(--ink-soft)
+}
+
+.exit-modal .field input {
+  background: var(--ivory);
+  border-color: var(--line);
+  color: var(--ink)
+}
+
+.exit-modal .field input:focus {
+  border-color: var(--gold);
+  background: var(--paper)
+}
+
+.exit-modal .field input::placeholder {
+  color: var(--ink-faint)
+}
+
 @media(max-width:920px) {
   .evt-hero-grid {
     grid-template-columns: 1fr;
