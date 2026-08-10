@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 
 export const SITE_URL = 'https://www.revoluciondeldinero.com';
-export const DEFAULT_OG_IMAGE = 'https://d1yei2z3i6k35z.cloudfront.net/17411220/69f40e697ce5b6.59615049_Jonathan.png';
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/comunidad-og.jpg`;
 
 function Seo({ title, description, path = '/', image = DEFAULT_OG_IMAGE, type = 'website', jsonLd }) {
   const url = `${SITE_URL}${path}`;

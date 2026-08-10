@@ -7,7 +7,7 @@ import Jonathan04 from '../assets/images/Jonathan_04.webp';
 import Jonathan05 from '../assets/images/Jonathan_05.webp';
 import Jonathan06 from '../assets/images/Jonathan_06.webp';
 
-const ABOUT_PHOTOS = [Jonathan01, Jonathan02, Jonathan03, Jonathan04, Jonathan05, Jonathan06];
+const ABOUT_PHOTOS = [Jonathan04, Jonathan02, Jonathan03, Jonathan05, Jonathan06, Jonathan01];
 
 function AboutCarousel({ photos, alt }) {
   const [index, setIndex] = useState(0);
