@@ -5,33 +5,10 @@ import HeroPhoto from '../assets/images/Jonathan_06.webp';
 import AboutSection from '../components/AboutSection';
 import TestimonialsSection from '../components/TestimonialsSection';
 import useRevealOnScroll from '../hooks/useRevealOnScroll';
-import Seo, { SITE_URL, DEFAULT_OG_IMAGE } from '../components/Seo';
+import Seo from '../components/Seo';
+import { HOME_TITLE, HOME_DESCRIPTION, HOME_JSON_LD, SKOOL_URL } from '../seoData';
 
 const LOGO_URL = 'https://d1yei2z3i6k35z.cloudfront.net/17411220/69f4103eaf1164.06093873_REVOLUCIONDELDINERO-TRANSPARENT.png';
-const SKOOL_URL = 'https://www.skool.com/revolucion-del-dinero-7029';
-
-const HOME_TITLE = 'Revolución del Dinero — Educación Financiera en Español para Latinos | Jonathan González';
-const HOME_DESCRIPTION = 'Aprende a reprogramar tu mente, administrar tu dinero e invertir con confianza. Comunidad de educación financiera 100% en español para latinos en Australia y el mundo, liderada por Jonathan González.';
-
-const HOME_JSON_LD = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'Revolución del Dinero',
-    url: SITE_URL,
-    inLanguage: 'es',
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: 'Jonathan González Botero',
-    url: SITE_URL,
-    image: DEFAULT_OG_IMAGE,
-    jobTitle: 'Fundador, Revolución del Dinero',
-    description: 'Educador financiero para la comunidad latina en Australia y el mundo.',
-    sameAs: [SKOOL_URL],
-  },
-];
 
 function Home() {
   const [scrolled, setScrolled] = useState(false);

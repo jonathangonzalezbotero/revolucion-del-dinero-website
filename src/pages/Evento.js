@@ -4,7 +4,8 @@ import Comunidad from '../assets/images/Comunidad.webp';
 import AboutSection from '../components/AboutSection';
 import TestimonialsSection from '../components/TestimonialsSection';
 import useRevealOnScroll from '../hooks/useRevealOnScroll';
-import Seo, { SITE_URL, DEFAULT_OG_IMAGE } from '../components/Seo';
+import Seo from '../components/Seo';
+import { EVENTO_TITLE, EVENTO_DESCRIPTION, EVENTO_JSON_LD } from '../seoData';
 
 const LOGO_URL = 'https://d1yei2z3i6k35z.cloudfront.net/17411220/69f4103eaf1164.06093873_REVOLUCIONDELDINERO-TRANSPARENT.png';
 
@@ -21,44 +22,6 @@ const MOBILE_EXIT_MIN_DISTANCE = 400; // must cover a large distance...
 const MOBILE_EXIT_MIN_DURATION_MS = 150; // ...but not too slowly...
 const MOBILE_EXIT_MAX_DURATION_MS = 900; // ...(fast flick, not a slow scroll)
 const MOBILE_EXIT_TOP_THRESHOLD = 120; // ...and land back near the very top
-
-const EVENTO_TITLE = 'Taller de Finanzas Personales en Gold Coast · $10 AUD | Revolución del Dinero';
-const EVENTO_DESCRIPTION = 'Evento presencial de educación financiera en español, en Gold Coast, Australia — 12 de septiembre de 2026. Entrada $10 AUD, incluye a tu pareja o acompañante. Cupos limitados.';
-
-// TODO (Jonathan): update startDate with the exact start time once it's confirmed.
-const EVENTO_JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'Event',
-  name: 'Taller de Finanzas Personales — Revolución del Dinero',
-  description: EVENTO_DESCRIPTION,
-  startDate: '2026-09-12',
-  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-  eventStatus: 'https://schema.org/EventScheduled',
-  location: {
-    '@type': 'Place',
-    name: 'Gold Coast',
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Gold Coast',
-      addressRegion: 'QLD',
-      addressCountry: 'AU',
-    },
-  },
-  image: [DEFAULT_OG_IMAGE],
-  organizer: {
-    '@type': 'Person',
-    name: 'Jonathan González Botero',
-    url: SITE_URL,
-  },
-  offers: {
-    '@type': 'Offer',
-    price: '10',
-    priceCurrency: 'AUD',
-    availability: 'https://schema.org/InStock',
-    url: `${SITE_URL}/evento`,
-    validFrom: '2026-01-01',
-  },
-};
 
 function Evento() {
   const [showVip, setShowVip] = useState(false);

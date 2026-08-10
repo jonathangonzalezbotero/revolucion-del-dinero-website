@@ -1,11 +1,22 @@
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { SITE_URL, DEFAULT_OG_IMAGE } from '../seoData';
 
-export const SITE_URL = 'https://www.revoluciondeldinero.com';
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/comunidad-og.jpg`;
+export { SITE_URL, DEFAULT_OG_IMAGE };
 
 function Seo({ title, description, path = '/', image = DEFAULT_OG_IMAGE, type = 'website', jsonLd }) {
   const url = `${SITE_URL}${path}`;
   const jsonLdList = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+
+  // scripts/prerender.js bakes these same tags into the static HTML so social
+  // crawlers (which don't run JS) see correct per-page previews. Once Helmet
+  // has taken over here, drop the static copies so the live DOM isn't duplicated.
+  useEffect(() => {
+    const id = requestAnimationFrame(() => {
+      document.querySelectorAll('[data-prerendered]').forEach((el) => el.remove());
+    });
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   return (
     <Helmet>
