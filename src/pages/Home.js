@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import HeroPhoto from '../assets/images/Jonathan_06.webp';
+import Logo from '../assets/images/logo.webp';
 import AboutSection from '../components/AboutSection';
 import TestimonialsSection from '../components/TestimonialsSection';
 import useRevealOnScroll from '../hooks/useRevealOnScroll';
 import Seo from '../components/Seo';
 import { HOME_TITLE, HOME_DESCRIPTION, HOME_JSON_LD, SKOOL_URL } from '../seoData';
 
-const LOGO_URL = 'https://d1yei2z3i6k35z.cloudfront.net/17411220/69f4103eaf1164.06093873_REVOLUCIONDELDINERO-TRANSPARENT.png';
+const LOGO_URL = Logo;
 
 function Home() {
   const [scrolled, setScrolled] = useState(false);
@@ -156,8 +157,8 @@ function Home() {
       <section className="sec mission">
         <div className="wrap mission-inner reveal">
           <span className="eyebrow" style={{ justifyContent: 'center', marginBottom: 26 }}>Por qué existe esto</span>
-          <p className="big">El dinero no se trata de <em>cuánto ganas</em>. Se trata de las historias que cargas sobre él — historias heredadas que te frenan sin que te des cuenta. <em>Revolución del Dinero</em> existe para romper ese ciclo y darle a cada persona un camino claro hacia su libertad financiera.</p>
-          <div className="sig">— Esa es mi misión de vida.</div>
+          <p className="big">El dinero no se trata de <em>cuánto ganas</em>. Se trata de las historias que cargas sobre él, historias heredadas que te frenan sin que te des cuenta. <em>Revolución del Dinero</em> existe para romper ese ciclo y darle a cada persona un camino claro hacia su libertad financiera.</p>
+          <div className="sig">Esa es mi misión de vida.</div>
         </div>
       </section>
 
@@ -170,7 +171,7 @@ function Home() {
             <p>Nadie nos enseñó a manejar el dinero. Por eso lo dividí en un camino simple que cualquiera puede seguir, sin importar cuánto ganes hoy.</p>
           </div>
           <div className="pillars">
-            <div className="pillar reveal"><span className="step">01</span><div className="ic">🧠</div><h3>Reprograma tu mente</h3><p>Identifica exactamente qué creencias sobre el dinero te están costando hoy — y cámbialas por unas que te impulsen.</p></div>
+            <div className="pillar reveal"><span className="step">01</span><div className="ic">🧠</div><h3>Reprograma tu mente</h3><p>Identifica exactamente qué creencias sobre el dinero te están costando hoy y cámbialas por unas que te impulsen.</p></div>
             <div className="pillar reveal"><span className="step">02</span><div className="ic">📊</div><h3>Administra lo que ganas</h3><p>Un sistema simple para organizar tu dinero sin importar tus fuentes de ingreso.</p></div>
             <div className="pillar reveal"><span className="step">03</span><div className="ic">📈</div><h3>Invierte con confianza</h3><p>Da tus primeros pasos para hacer crecer tu dinero sin el miedo a perderlo todo, con un camino fácil de entender.</p></div>
           </div>
@@ -193,7 +194,7 @@ function Home() {
                 <span className="kicker k-em">🌎 Empieza aquí</span>
                 <h3>Programa online</h3>
               </div>
-              <p className="desc">El corazón de esta comunidad. Aprende a tu ritmo, rodeado de personas que van en la misma dirección — sin importar donde te encuentres.</p>
+              <p className="desc">El corazón de esta comunidad. Aprende a tu ritmo, rodeado de personas que van en la misma dirección, sin importar donde te encuentres.</p>
               <ul>
                 <li>Formación paso a paso en español</li>
                 <li>Comunidad activa que te impulsa</li>

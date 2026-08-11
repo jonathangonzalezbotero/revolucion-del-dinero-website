@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import './Evento.css';
 import Comunidad from '../assets/images/Comunidad.webp';
+import Logo from '../assets/images/logo.webp';
 import AboutSection from '../components/AboutSection';
 import TestimonialsSection from '../components/TestimonialsSection';
 import useRevealOnScroll from '../hooks/useRevealOnScroll';
 import Seo from '../components/Seo';
 import { EVENTO_TITLE, EVENTO_DESCRIPTION, EVENTO_JSON_LD } from '../seoData';
 
-const LOGO_URL = 'https://d1yei2z3i6k35z.cloudfront.net/17411220/69f4103eaf1164.06093873_REVOLUCIONDELDINERO-TRANSPARENT.png';
+const LOGO_URL = Logo;
 
 const STRIPE_GENERAL_URL = 'https://buy.stripe.com/3cI5kD4Dg6I2cxS6VIf7i02';
 const STRIPE_VIP_URL = 'https://buy.stripe.com/8x214n0n01nI69u5REf7i03';
