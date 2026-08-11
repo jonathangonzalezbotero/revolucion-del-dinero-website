@@ -219,7 +219,7 @@ function Evento() {
     <div className="page-evento">
       <Seo title={EVENTO_TITLE} description={EVENTO_DESCRIPTION} path="/evento" jsonLd={EVENTO_JSON_LD} />
 
-      <div className="ann">🎟️ Evento presencial · <b>$10 AUD</b> · Gold Coast · 12 de septiembre 2026 — cupos limitados</div>
+      <div className="ann">🎟️ Evento presencial · <b>$10 AUD</b> · Gold Coast · 12 de septiembre 2026 · cupos limitados</div>
 
       {/* HERO + FORM */}
       <section className="evt-hero">
@@ -236,7 +236,7 @@ function Evento() {
               <div className="meta-chip"><div className="meta-chip-head"><span className="ic">📍</span><small>Lugar</small></div><b>Gold Coast, AU</b></div>
               <div className="meta-chip meta-chip-price"><div className="meta-chip-head"><span className="ic">🎟️</span><small>Entrada</small></div><b>$10 AUD</b></div>
             </div>
-            <div className="plus-one"><b>$10 AUD</b> incluye a tu pareja o un acompañante — sin costo extra.</div>
+            <div className="plus-one"><b>$10 AUD</b> incluye a tu pareja o un acompañante, sin costo extra.</div>
             <div className="hero-img">
               <img src={Comunidad} alt="Asistentes en un evento de Revolución del Dinero" />
               <div className="ov">+50 asistentes en los eventos</div>
@@ -294,7 +294,7 @@ function Evento() {
             <h2>Saldrás con un plan claro, no con más teoría.</h2>
           </div>
           <div className="learn">
-            <div className="lcard"><div className="ic">🧠</div><h3>Reprograma tu mente</h3><p>Identificarás exactamente qué creencias te están costando dinero hoy — y cómo cambiarlas.</p></div>
+            <div className="lcard"><div className="ic">🧠</div><h3>Reprograma tu mente</h3><p>Identificarás exactamente qué creencias te están costando dinero hoy y cómo cambiarlas.</p></div>
             <div className="lcard"><div className="ic">📊</div><h3>Administra tu dinero</h3><p>Saldrás con un plan claro de cómo administrar lo que ganas, sin importar cuánto sea.</p></div>
             <div className="lcard"><div className="ic">🚀</div><h3>Tu primer paso real</h3><p>Entenderás qué es la libertad financiera y cuál es tu primer paso concreto para lograrla.</p></div>
           </div>
@@ -316,10 +316,10 @@ function Evento() {
             <h2>Todo lo que necesitas saber.</h2>
           </div>
           <div className="evt-faq">
-            <details className="evt-qa"><summary>¿Cuánto cuesta asistir? <span className="pl">+</span></summary><div className="ans">La entrada tiene un valor de <b>$10 AUD</b> e <b>incluye a tu pareja o un acompañante</b> — no pagan por separado. Solo agrega sus datos al registrarte para que también quede en la lista.</div></details>
+            <details className="evt-qa"><summary>¿Cuánto cuesta asistir? <span className="pl">+</span></summary><div className="ans">La entrada tiene un valor de <b>$10 AUD</b> e <b>incluye a tu pareja o un acompañante</b>, no pagan por separado. Solo agrega sus datos al registrarte para que también quede en la lista.</div></details>
             <details className="evt-qa"><summary>¿Qué voy a aprender allí? <span className="pl">+</span></summary><div className="ans">Aprenderás a reprogramar tu mente para mejorar tu relación con el dinero, a administrarlo de manera óptima y a aplicar los primeros pasos para lograr tranquilidad financiera.</div></details>
             <details className="evt-qa"><summary>No soy bueno con el dinero, ¿vale la pena? <span className="pl">+</span></summary><div className="ans">Justamente saldrás con las herramientas y la información necesarias para que eso deje de ser un problema en tu vida. Te guiaré paso a paso.</div></details>
-            <details className="evt-qa"><summary>¿Puedo asistir con mi pareja o un amigo? <span className="pl">+</span></summary><div className="ans">¡Claro! Tu entrada de $10 AUD ya incluye a un acompañante — agrega su nombre y WhatsApp en el formulario de registro y listo, no necesita pagar ni registrarse por separado.</div></details>
+            <details className="evt-qa"><summary>¿Puedo asistir con mi pareja o un amigo? <span className="pl">+</span></summary><div className="ans">¡Claro! Tu entrada de $10 AUD ya incluye a un acompañante. Agrega su nombre y WhatsApp en el formulario de registro y listo, no necesita pagar ni registrarse por separado.</div></details>
           </div>
         </div>
       </section>
@@ -329,7 +329,7 @@ function Evento() {
         <div className="wrap inner">
           <span className="eyebrow" style={{ justifyContent: 'center', color: '#f4c56a' }}>Cupos limitados</span>
           <h2 style={{ marginTop: 16 }}>Tu lugar en Gold Coast <span style={{ color: '#f4c56a', fontStyle: 'italic' }}>te está esperando.</span></h2>
-          <p>Regístrate hoy por $10 AUD — incluye a tu pareja o acompañante — y da el primer paso hacia la libertad financiera que viniste a buscar.</p>
+          <p>Regístrate hoy por $10 AUD, incluye a tu pareja o acompañante, y da el primer paso hacia la libertad financiera que viniste a buscar.</p>
           <a href="#regWrap" className="btn btn-gold btn-lg" onClick={handleScrollToForm}>Asegurar mi cupo · $10 AUD →</a>
         </div>
       </section>
