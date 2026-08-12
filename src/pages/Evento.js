@@ -10,9 +10,6 @@ import { EVENTO_TITLE, EVENTO_DESCRIPTION, EVENTO_JSON_LD } from '../seoData';
 
 const LOGO_URL = Logo;
 
-const STRIPE_GENERAL_URL = 'https://buy.stripe.com/3cI5kD4Dg6I2cxS6VIf7i02';
-const STRIPE_VIP_URL = 'https://buy.stripe.com/8x214n0n01nI69u5REf7i03';
-
 const EXIT_POPUP_SESSION_KEY = 'rdd_evento_exit_popup_shown';
 
 // Mobile has no mouseleave, so we approximate exit-intent with a deliberate "swipe back
@@ -27,6 +24,9 @@ const MOBILE_EXIT_TOP_THRESHOLD = 120; // ...and land back near the very top
 function Evento() {
   const [showVip, setShowVip] = useState(false);
   const [showExitPopup, setShowExitPopup] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState(null); // 'general' | 'vip' | null
+  const [checkoutError, setCheckoutError] = useState('');
+  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
 
   const formRef = useRef(null);
   const nombreRef = useRef(null);
@@ -56,6 +56,22 @@ function Evento() {
 
   useEffect(() => {
     window.fbq?.('track', 'ViewContent', { value: 10, currency: 'AUD', content_name: 'Evento Gold Coast' });
+  }, []);
+
+  // Returning here from a completed Stripe Checkout Session. The systeme.io contact was
+  // already created by the stripe-webhook — this just confirms the purchase to the visitor
+  // and fires the ads Purchase event (only the CRM sync is payment-gated, not this pixel).
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('payment') !== 'success') return;
+    const tier = params.get('tier') === 'vip' ? 'vip' : 'general';
+    window.fbq?.('track', 'Purchase', {
+      value: tier === 'vip' ? 20 : 10,
+      currency: 'AUD',
+      content_name: tier === 'vip' ? 'Entrada VIP' : 'Entrada General',
+    });
+    setPaymentConfirmed(true);
+    window.history.replaceState({}, '', '/evento');
   }, []);
 
   // Track whether the visitor already scrolled past the hero form, so the exit
@@ -151,18 +167,11 @@ function Evento() {
       formRef.current.reportValidity();
       return;
     }
-    const amigoNombre = amigoNombreRef.current.value.trim();
-    const amigoTel = amigoTelRef.current.value.trim();
-
-    // Fire-and-forget: sync to the systeme.io CRM without blocking the upsell modal.
-    fetch('/api/systeme-contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre, email, tel, amigoNombre, amigoTel }),
-    }).catch((err) => console.error('systeme-contact request failed', err));
-
+    // No CRM write here — the systeme.io contact is only created once Stripe confirms
+    // payment (see api/stripe-webhook.js). This just captures ad-attribution intent.
     window.fbq?.('track', 'Lead');
     hasRegisteredRef.current = true;
+    setCheckoutError('');
     setShowVip(true);
   };
 
@@ -177,38 +186,56 @@ function Evento() {
     }
 
     // Mirror into the main form's refs so the VIP upsell and Stripe checkout
-    // tracking (which read from emailRef) work exactly as if this were the main form.
+    // (which read from these refs) work exactly as if this were the main form.
     nombreRef.current.value = nombre;
     emailRef.current.value = email;
     telRef.current.value = tel;
-
-    fetch('/api/systeme-contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre, email, tel, amigoNombre: '', amigoTel: '' }),
-    }).catch((err) => console.error('systeme-contact request failed', err));
+    amigoNombreRef.current.value = '';
+    amigoTelRef.current.value = '';
 
     window.fbq?.('track', 'Lead');
     hasRegisteredRef.current = true;
+    setCheckoutError('');
     setShowExitPopup(false);
     setShowVip(true);
   };
 
-  const trackCheckoutTier = (tier, value) => {
-    window.fbq?.('track', 'InitiateCheckout', { value, currency: 'AUD', content_name: tier === 'vip' ? 'Entrada VIP' : 'Entrada General' });
+  const startCheckout = async (tier, value) => {
+    const nombre = nombreRef.current?.value.trim();
     const email = emailRef.current?.value.trim();
-    if (!email) return;
-    // keepalive lets this request survive the page navigating away to Stripe right after.
-    fetch('/api/systeme-tag', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, tier }),
-      keepalive: true,
-    }).catch((err) => console.error('systeme-tag request failed', err));
+    const tel = telRef.current?.value.trim();
+    if (!nombre || !email || !tel) return;
+
+    window.fbq?.('track', 'InitiateCheckout', { value, currency: 'AUD', content_name: tier === 'vip' ? 'Entrada VIP' : 'Entrada General' });
+
+    setCheckoutError('');
+    setCheckoutLoading(tier);
+    try {
+      const amigoNombre = amigoNombreRef.current?.value.trim() || '';
+      const amigoTel = amigoTelRef.current?.value.trim() || '';
+      const res = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, email, tel, amigoNombre, amigoTel, tier }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.url) throw new Error(data.error || 'No se pudo iniciar el pago.');
+      window.location.href = data.url;
+    } catch (err) {
+      console.error('create-checkout-session failed', err);
+      setCheckoutError('No se pudo iniciar el pago. Intenta de nuevo.');
+      setCheckoutLoading(null);
+    }
   };
 
-  const handleGeneralCheckoutClick = () => trackCheckoutTier('general', 10);
-  const handleVipCheckoutClick = () => trackCheckoutTier('vip', 20);
+  const handleGeneralCheckoutClick = (e) => {
+    e.preventDefault();
+    startCheckout('general', 10);
+  };
+  const handleVipCheckoutClick = (e) => {
+    e.preventDefault();
+    startCheckout('vip', 20);
+  };
 
   const handleScrollToForm = (e) => {
     e.preventDefault();
@@ -220,7 +247,11 @@ function Evento() {
     <div className="page-evento">
       <Seo title={EVENTO_TITLE} description={EVENTO_DESCRIPTION} path="/evento" jsonLd={EVENTO_JSON_LD} />
 
-      <div className="ann">🎟️ Evento presencial · <b>$10 AUD</b> · Gold Coast · 12 de septiembre 2026 · cupos limitados</div>
+      {paymentConfirmed ? (
+        <div className="ann" style={{ background: '#1f8a4c', color: '#fff' }}>✅ ¡Pago confirmado! Revisa tu correo para los detalles del evento.</div>
+      ) : (
+        <div className="ann">🎟️ Evento presencial · <b>$10 AUD</b> · Gold Coast · 12 de septiembre 2026 · cupos limitados</div>
+      )}
 
       {/* HERO + FORM */}
       <section className="evt-hero">
@@ -363,9 +394,14 @@ function Evento() {
               <div className="amt"><sup>$</sup>20 <span style={{ fontSize: '1.1rem', color: 'var(--ink-soft)', fontWeight: 500 }}>AUD</span></div>
               <small>Pago único · upgrade a VIP</small>
             </div>
+            {checkoutError && <p className="fine" style={{ color: '#e5484d' }}>{checkoutError}</p>}
             <div className="vip-actions">
-              <a href={STRIPE_VIP_URL} className="btn btn-emerald btn-block" onClick={handleVipCheckoutClick}>Sí, quiero ser VIP por $20 AUD →</a>
-              <a href={STRIPE_GENERAL_URL} className="vip-skip" onClick={handleGeneralCheckoutClick}>No gracias, asistiré con mi entrada estándar ($10 AUD)</a>
+              <button type="button" className="btn btn-emerald btn-block" onClick={handleVipCheckoutClick} disabled={checkoutLoading !== null}>
+                {checkoutLoading === 'vip' ? 'Redirigiendo a pago…' : 'Sí, quiero ser VIP por $20 AUD →'}
+              </button>
+              <button type="button" className="vip-skip" onClick={handleGeneralCheckoutClick} disabled={checkoutLoading !== null}>
+                {checkoutLoading === 'general' ? 'Redirigiendo a pago…' : 'No gracias, asistiré con mi entrada estándar ($10 AUD)'}
+              </button>
             </div>
             <p className="vip-guar">Pago seguro con Stripe · Confirmación inmediata por correo</p>
           </div>
