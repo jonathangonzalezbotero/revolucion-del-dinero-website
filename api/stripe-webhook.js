@@ -1,11 +1,5 @@
 const Stripe = require('stripe');
-const { splitName, upsertContact, addTagByName } = require('./_lib/systeme');
-
-const EVENT_TAG = 'evento-septiembre-2026';
-const TIER_TAGS = {
-  general: 'Entrada General $10 AUD',
-  vip: 'Entrada VIP $20 AUD',
-};
+const { syncPaidCheckoutSession } = require('./_lib/eventoRegistration');
 
 // Source of truth for "this person paid." Stripe calls this once a Checkout Session
 // actually completes, and only then do we create/tag the contact in systeme.io — so the
@@ -43,34 +37,17 @@ module.exports = async (req, res) => {
   }
 
   const session = event.data.object;
-  if (session.payment_status !== 'paid') {
-    return res.status(200).json({ received: true });
-  }
 
-  const { nombre, tel, tier } = session.metadata || {};
-  const email = session.customer_details?.email || session.customer_email;
-
-  if (!email || !nombre) {
-    console.error('checkout.session.completed missing expected metadata', session.id);
-    return res.status(200).json({ received: true });
-  }
-
-  const { firstName, surname } = splitName(nombre);
-
+  // Best-effort CRM sync: always ack 200 to Stripe (no retries) so a systeme.io hiccup
+  // never holds up or duplicates a registration. Anything not synced is logged so it can
+  // be added to systeme.io manually.
   try {
-    const contact = await upsertContact({
-      email,
-      firstName,
-      surname,
-      phone: tel || session.customer_details?.phone || '',
-    });
-    await addTagByName(contact.id, EVENT_TAG);
-    const tierTag = TIER_TAGS[tier];
-    if (tierTag) await addTagByName(contact.id, tierTag);
+    const result = await syncPaidCheckoutSession(session);
+    if (!result.synced) {
+      console.error('checkout.session.completed not synced:', result.reason, session.id);
+    }
   } catch (err) {
     console.error('stripe-webhook: systeme.io sync failed for session', session.id, err);
-    // Non-2xx tells Stripe to retry this event later instead of silently losing a paid contact.
-    return res.status(500).json({ error: 'CRM sync failed' });
   }
 
   return res.status(200).json({ received: true });

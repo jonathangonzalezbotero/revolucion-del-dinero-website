@@ -64,32 +64,33 @@ async function upsertContact({ email, firstName, surname, phone }) {
   return { id: existing.id, created: false };
 }
 
-// GET /api/contacts doesn't have officially-confirmed filter docs at the time of writing —
-// this is a best-effort lookup and intentionally never throws (tagging/patching is best-effort).
+// `email` is a documented exact-match filter (developer.systeme.io/reference), so any
+// item returned should already match — no arbitrary "first result" fallback needed.
+// Best-effort: never throws, so a CRM hiccup never blocks the registration.
 async function findContactByEmail(email) {
   try {
     const res = await systemeFetch(`/contacts?email=${encodeURIComponent(email)}`);
     if (!res.ok) return null;
     const data = await res.json();
     const list = Array.isArray(data) ? data : data.items || data['hydra:member'] || [];
-    return list.find((c) => c.email?.toLowerCase() === email.toLowerCase()) || list[0] || null;
+    return list.find((c) => c.email?.toLowerCase() === email.toLowerCase()) || null;
   } catch (err) {
     console.error('systeme.io findContactByEmail failed', err);
     return null;
   }
 }
 
+// Uses the API's server-side text search (?query=) rather than paging through the
+// unfiltered tag list — an account accumulates tags over time (past events, other
+// campaigns), and an unfiltered/unpaginated GET /tags can miss a tag that isn't on
+// whatever page the API happens to return by default. This was the actual bug behind
+// paid contacts not getting the event/tier tags.
 async function findTagByName(name) {
-  try {
-    const res = await systemeFetch('/tags');
-    if (!res.ok) return null;
-    const data = await res.json();
-    const list = Array.isArray(data) ? data : data.items || data['hydra:member'] || [];
-    return list.find((t) => t.name?.toLowerCase() === name.toLowerCase()) || null;
-  } catch (err) {
-    console.error('systeme.io findTagByName failed', err);
-    return null;
-  }
+  const res = await systemeFetch(`/tags?query=${encodeURIComponent(name)}&limit=100`);
+  if (!res.ok) return null;
+  const data = await res.json();
+  const list = Array.isArray(data) ? data : data.items || data['hydra:member'] || [];
+  return list.find((t) => t.name?.toLowerCase() === name.toLowerCase()) || null;
 }
 
 async function ensureTag(name) {
@@ -116,13 +117,14 @@ async function tagContact(contactId, tagId) {
 }
 
 // Best-effort: create/find the tag, then assign it. Never throws — tagging failures
-// shouldn't take down a registration request.
+// shouldn't block or retry a registration; the event tag and price tag ("evento-septiembre-2026"
+// and "Entrada General $10 AUD" / "Entrada VIP $20 AUD") are what get applied when this succeeds.
 async function addTagByName(contactId, tagName) {
   try {
     const tag = await ensureTag(tagName);
     await tagContact(contactId, tag.id);
   } catch (err) {
-    console.error('systeme.io addTagByName failed', err);
+    console.error('systeme.io addTagByName failed', tagName, err);
   }
 }
 
