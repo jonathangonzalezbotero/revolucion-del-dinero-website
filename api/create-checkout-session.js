@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
     return res.status(500).json({ error: 'El pago no está configurado todavía.' });
   }
 
-  const { nombre, email, tel, amigoNombre, amigoTel, tier } = req.body || {};
+  const { nombre, email, tel, tier } = req.body || {};
   const priceId = TIER_PRICES[tier];
   if (!nombre?.trim() || !email?.trim() || !tel?.trim() || !priceId) {
     return res.status(400).json({ error: 'Faltan datos: nombre, correo, teléfono y tipo de entrada son requeridos.' });
@@ -46,8 +46,6 @@ module.exports = async (req, res) => {
       metadata: {
         nombre: nombre.trim(),
         tel: tel.trim(),
-        amigoNombre: amigoNombre?.trim() || '',
-        amigoTel: amigoTel?.trim() || '',
         tier,
       },
     });

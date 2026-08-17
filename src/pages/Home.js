@@ -220,7 +220,7 @@ function Home() {
               </ul>
               <div className="foot">
                 <div className="price"><span className="free">$10 AUD</span></div>
-                <div className="price-note">Incluye a tu pareja o acompañante</div>
+                <div className="price-note">100% donado a Colombia</div>
                 <Link to="/evento" className="btn btn-ink">Registrarme al evento →</Link>
               </div>
             </div>
@@ -260,7 +260,7 @@ function Home() {
               <div><small>Lugar</small><b>Gold Coast</b></div>
               <div><small>Entrada</small><b>$10 AUD</b></div>
             </div>
-            <p className="event-note">✨ Tu entrada incluye a tu pareja o un acompañante, sin costo extra.</p>
+            <p className="event-note">❤️ El 100% de tu entrada se dona a las víctimas del terremoto en Colombia.</p>
           </div>
           <div className="event-actions reveal">
             <Link to="/evento" className="btn btn-gold btn-lg">Registrarme · $10 AUD →</Link>

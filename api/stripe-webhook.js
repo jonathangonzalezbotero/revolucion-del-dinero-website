@@ -47,7 +47,7 @@ module.exports = async (req, res) => {
     return res.status(200).json({ received: true });
   }
 
-  const { nombre, tel, amigoNombre, amigoTel, tier } = session.metadata || {};
+  const { nombre, tel, tier } = session.metadata || {};
   const email = session.customer_details?.email || session.customer_email;
 
   if (!email || !nombre) {
@@ -56,9 +56,6 @@ module.exports = async (req, res) => {
   }
 
   const { firstName, surname } = splitName(nombre);
-  const extraFields = [];
-  if (amigoNombre) extraFields.push({ slug: 'partners_name', value: amigoNombre });
-  if (amigoTel) extraFields.push({ slug: 'partners_phone', value: amigoTel });
 
   try {
     const contact = await upsertContact({
@@ -66,7 +63,6 @@ module.exports = async (req, res) => {
       firstName,
       surname,
       phone: tel || session.customer_details?.phone || '',
-      extraFields,
     });
     await addTagByName(contact.id, EVENT_TAG);
     const tierTag = TIER_TAGS[tier];

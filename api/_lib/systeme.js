@@ -31,34 +31,20 @@ function splitName(fullName) {
 }
 
 // Creates a contact, or — if the email already exists — looks it up and patches it instead.
-// `extraFields` (e.g. partners_name/partners_phone custom fields) is applied best-effort: if
-// systeme.io rejects the payload because a custom field slug doesn't exist in the account, we
-// retry with just the standard fields so the contact still gets created either way.
-async function upsertContact({ email, firstName, surname, phone, extraFields = [] }) {
+async function upsertContact({ email, firstName, surname, phone }) {
   const standardFields = [
     { slug: 'first_name', value: firstName || null },
     { slug: 'surname', value: surname || null },
     { slug: 'phone_number', value: phone || null },
   ];
 
-  const attempt = async (fields) => {
-    const res = await systemeFetch('/contacts', {
-      method: 'POST',
-      body: JSON.stringify({ email, locale: 'es', fields }),
-    });
-    if (res.status === 201) return res.json();
-    return { error: res.status, body: await res.text().catch(() => '') };
-  };
+  const res = await systemeFetch('/contacts', {
+    method: 'POST',
+    body: JSON.stringify({ email, locale: 'es', fields: standardFields }),
+  });
+  const result = res.status === 201 ? await res.json() : { error: res.status, body: await res.text().catch(() => '') };
 
-  let result = await attempt([...standardFields, ...extraFields]);
-
-  // Custom field slugs not configured in the account — fall back to the fields
-  // every systeme.io account has by default.
-  if (result?.error && extraFields.length) {
-    result = await attempt(standardFields);
-  }
-
-  if (!result?.error) return { id: result.id, created: true };
+  if (!result.error) return { id: result.id, created: true };
 
   // Most likely cause of a non-201 here: the email already exists. Look it up and patch it.
   const existing = await findContactByEmail(email);
@@ -69,7 +55,7 @@ async function upsertContact({ email, firstName, surname, phone, extraFields = [
   const patchRes = await systemeFetch(`/contacts/${existing.id}`, {
     method: 'PATCH',
     contentType: 'application/merge-patch+json',
-    body: JSON.stringify({ locale: 'es', fields: [...standardFields, ...extraFields] }),
+    body: JSON.stringify({ locale: 'es', fields: standardFields }),
   });
   if (!patchRes.ok) {
     // Non-fatal — the contact already exists in the CRM, it just didn't get these updated fields.

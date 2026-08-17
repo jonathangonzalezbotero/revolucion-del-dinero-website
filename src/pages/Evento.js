@@ -32,8 +32,6 @@ function Evento() {
   const nombreRef = useRef(null);
   const emailRef = useRef(null);
   const telRef = useRef(null);
-  const amigoNombreRef = useRef(null);
-  const amigoTelRef = useRef(null);
   const regWrapRef = useRef(null);
 
   const exitFormRef = useRef(null);
@@ -190,8 +188,6 @@ function Evento() {
     nombreRef.current.value = nombre;
     emailRef.current.value = email;
     telRef.current.value = tel;
-    amigoNombreRef.current.value = '';
-    amigoTelRef.current.value = '';
 
     window.fbq?.('track', 'Lead');
     hasRegisteredRef.current = true;
@@ -211,12 +207,10 @@ function Evento() {
     setCheckoutError('');
     setCheckoutLoading(tier);
     try {
-      const amigoNombre = amigoNombreRef.current?.value.trim() || '';
-      const amigoTel = amigoTelRef.current?.value.trim() || '';
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre, email, tel, amigoNombre, amigoTel, tier }),
+        body: JSON.stringify({ nombre, email, tel, tier }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok || !data.url) throw new Error(data.error || 'No se pudo iniciar el pago.');
@@ -248,9 +242,9 @@ function Evento() {
       <Seo title={EVENTO_TITLE} description={EVENTO_DESCRIPTION} path="/evento" jsonLd={EVENTO_JSON_LD} />
 
       {paymentConfirmed ? (
-        <div className="ann" style={{ background: '#1f8a4c', color: '#fff' }}>✅ ¡Pago confirmado! Revisa tu correo para los detalles del evento.</div>
+        <div className="ann" style={{ background: '#1f8a4c', color: '#fff' }}>✅ ¡Pago confirmado! Gracias por ayudar a Colombia. Revisa tu correo para los detalles del evento.</div>
       ) : (
-        <div className="ann">🎟️ Evento presencial · <b>$10 AUD</b> · Gold Coast · 12 de septiembre 2026 · cupos limitados</div>
+        <div className="ann">❤️ 100% de tu entrada se dona al terremoto en Colombia · <b>$10 AUD</b> · 12 de septiembre 2026 · cupos limitados</div>
       )}
 
       {/* HERO + FORM */}
@@ -260,15 +254,14 @@ function Evento() {
         </div>
         <div className="wrap evt-hero-grid">
           <div className="hero-copy">
-            <span className="badge-price">✦ Entrada $10 AUD · En español</span>
+            <span className="badge-price">❤️ 100% de tu entrada donado a Colombia</span>
             <h1>Tu primer paso hacia la <span className="ital">libertad financiera.</span></h1>
-            <p className="lead">Un evento presencial de finanzas personales donde aprenderás a reprogramar tu mente, administrar tu dinero y dar tus primeros pasos para invertir.</p>
+            <p className="lead">Un evento presencial de finanzas personales donde aprenderás a reprogramar tu mente, administrar tu dinero y dar tus primeros pasos para invertir. Y esta vez, tu entrada hace algo más: el 100% de lo recaudado se dona a las familias afectadas por el terremoto que sacudió a Colombia el 10 de agosto de 2026.</p>
             <div className="meta-row">
               <div className="meta-chip"><div className="meta-chip-head"><span className="ic">📅</span><small>Fecha</small></div><b>Sáb 12 de sept.</b></div>
               <div className="meta-chip"><div className="meta-chip-head"><span className="ic">📍</span><small>Lugar</small></div><b>Gold Coast, AU</b></div>
               <div className="meta-chip meta-chip-price"><div className="meta-chip-head"><span className="ic">🎟️</span><small>Entrada</small></div><b>$10 AUD</b></div>
             </div>
-            <div className="plus-one"><b>$10 AUD</b> incluye a tu pareja o un acompañante, sin costo extra.</div>
             <div className="hero-img">
               <img src={Comunidad} alt="Asistentes en un evento de Revolución del Dinero" />
               <div className="ov">+50 asistentes en los eventos</div>
@@ -280,23 +273,41 @@ function Evento() {
             <div className="formcard">
               <div className="fhead">
                 <h3>Asegura tu cupo por $10 AUD</h3>
-                <p className="fsub">Completa tus datos y reserva tu lugar en segundos. Tu entrada incluye a tu pareja o un amigo, sin pagar de más.</p>
+                <p className="fsub">Completa tus datos y reserva tu lugar en segundos. El 100% de tu entrada se dona a las víctimas del terremoto en Colombia.</p>
               </div>
               <form ref={formRef} onSubmit={handleSubmit} noValidate>
                 <div className="field"><label htmlFor="nombre">Nombre completo</label><input id="nombre" name="nombre" type="text" placeholder="Tu nombre y apellido" ref={nombreRef} required /></div>
                 <div className="field"><label htmlFor="email">Correo electrónico</label><input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" ref={emailRef} required /></div>
                 <div className="field"><label htmlFor="tel">Teléfono</label><input id="tel" name="tel" type="tel" placeholder="+61 ..." ref={telRef} required /></div>
 
-                <div className="field-divider">✦ Invita a tu pareja o un amigo (incluido en tu entrada)</div>
-                <div className="field"><label htmlFor="amigoNombre">Nombre de tu amigo/pareja</label><input id="amigoNombre" name="amigoNombre" type="text" placeholder="Nombre y apellido" ref={amigoNombreRef} /></div>
-                <div className="field"><label htmlFor="amigoTel">Teléfono de tu amigo/pareja</label><input id="amigoTel" name="amigoTel" type="tel" placeholder="+61 ..." ref={amigoTelRef} /></div>
-
                 <button type="submit" className="btn btn-gold btn-block">Asegurar mi cupo · $10 AUD →</button>
                 <p className="fine">Te enviaremos los detalles del evento por correo y SMS.</p>
-                <div className="trust-mini"><span>✓ Pago seguro</span><span>✓ Incluye a tu +1</span><span>✓ Cupos limitados</span></div>
+                <div className="trust-mini"><span>✓ Pago seguro</span><span>✓ 100% donado a Colombia</span><span>✓ Cupos limitados</span></div>
               </form>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* CAUSE / DONATION */}
+      <section className="evt-sec" id="causa">
+        <div className="wrap">
+          <div className="evt-sec-head">
+            <span className="eyebrow" style={{ justifyContent: 'center' }}>Por qué este evento es diferente</span>
+            <h2>Tu entrada se convierte en <span className="accent ital">ayuda real</span> para Colombia.</h2>
+          </div>
+          <p style={{ maxWidth: 700, margin: '0 auto 18px', textAlign: 'center', color: 'var(--ink-soft)', fontSize: '1.05rem', lineHeight: 1.65 }}>
+            El 10 de agosto de 2026, un terremoto de magnitud 7.4 sacudió el Chocó y se sintió en gran parte del país. Dejó más de <b>294 personas fallecidas</b>, casi <b>4,000 heridos</b> y a miles de familias sin hogar en 12 departamentos.
+          </p>
+          <p style={{ maxWidth: 700, margin: '0 auto 28px', textAlign: 'center', color: 'var(--ink-soft)', fontSize: '1.05rem', lineHeight: 1.65 }}>
+            Por eso decidimos donar el <b>100% de lo recaudado en este evento</b> — cada entrada, sin descontar ningún gasto — a los esfuerzos de ayuda para las familias afectadas. Al registrarte no solo das tu primer paso hacia la libertad financiera: le das una mano real a alguien que hoy lo perdió todo.
+          </p>
+          <div className="learn">
+            <div className="lcard"><div className="ic">💔</div><h3>294+ vidas perdidas</h3><p>El sismo más mortal que ha sufrido Colombia en más de dos décadas.</p></div>
+            <div className="lcard"><div className="ic">🏥</div><h3>3,937+ heridos</h3><p>Miles de personas atendidas en hospitales y centros de salud dañados.</p></div>
+            <div className="lcard"><div className="ic">🏚️</div><h3>12 departamentos afectados</h3><p>Más de 81,500 viviendas dañadas y 14,000 destruidas por completo.</p></div>
+          </div>
+          <p style={{ textAlign: 'center', fontSize: '.85rem', color: 'var(--ink-soft)', marginTop: 24 }}>Compartiremos el comprobante de la donación después del evento, con total transparencia.</p>
         </div>
       </section>
 
@@ -348,10 +359,11 @@ function Evento() {
             <h2>Todo lo que necesitas saber.</h2>
           </div>
           <div className="evt-faq">
-            <details className="evt-qa"><summary>¿Cuánto cuesta asistir? <span className="pl">+</span></summary><div className="ans">La entrada tiene un valor de <b>$10 AUD</b> e <b>incluye a tu pareja o un acompañante</b>, no pagan por separado. Solo agrega sus datos al registrarte para que también quede en la lista.</div></details>
+            <details className="evt-qa"><summary>¿Cuánto cuesta asistir? <span className="pl">+</span></summary><div className="ans">La entrada tiene un valor de <b>$10 AUD</b> por persona, y el 100% se dona a las víctimas del terremoto en Colombia.</div></details>
+            <details className="evt-qa"><summary>¿A dónde va el dinero de mi entrada? <span className="pl">+</span></summary><div className="ans">El <b>100% de lo recaudado</b> en este evento, sin descontar ningún gasto, se destina a apoyar a las familias afectadas por el terremoto que sacudió a Colombia el 10 de agosto de 2026. Compartiremos el comprobante de la donación después del evento.</div></details>
             <details className="evt-qa"><summary>¿Qué voy a aprender allí? <span className="pl">+</span></summary><div className="ans">Aprenderás a reprogramar tu mente para mejorar tu relación con el dinero, a administrarlo de manera óptima y a aplicar los primeros pasos para lograr tranquilidad financiera.</div></details>
             <details className="evt-qa"><summary>No soy bueno con el dinero, ¿vale la pena? <span className="pl">+</span></summary><div className="ans">Justamente saldrás con las herramientas y la información necesarias para que eso deje de ser un problema en tu vida. Te guiaré paso a paso.</div></details>
-            <details className="evt-qa"><summary>¿Puedo asistir con mi pareja o un amigo? <span className="pl">+</span></summary><div className="ans">¡Claro! Tu entrada de $10 AUD ya incluye a un acompañante. Agrega su nombre y WhatsApp en el formulario de registro y listo, no necesita pagar ni registrarse por separado.</div></details>
+            <details className="evt-qa"><summary>¿Puedo asistir con mi pareja o un amigo? <span className="pl">+</span></summary><div className="ans">¡Claro! Cada persona que asista debe registrarse y adquirir su propia entrada de $10 AUD.</div></details>
           </div>
         </div>
       </section>
@@ -361,7 +373,7 @@ function Evento() {
         <div className="wrap inner">
           <span className="eyebrow" style={{ justifyContent: 'center', color: '#f4c56a' }}>Cupos limitados</span>
           <h2 style={{ marginTop: 16 }}>Tu lugar en Gold Coast <span style={{ color: '#f4c56a', fontStyle: 'italic' }}>te está esperando.</span></h2>
-          <p>Regístrate hoy por $10 AUD, incluye a tu pareja o acompañante, y da el primer paso hacia la libertad financiera que viniste a buscar.</p>
+          <p>Regístrate hoy por $10 AUD — el 100% se dona a las víctimas del terremoto en Colombia — y da el primer paso hacia la libertad financiera que viniste a buscar.</p>
           <a href="#regWrap" className="btn btn-gold btn-lg" onClick={handleScrollToForm}>Asegurar mi cupo · $10 AUD →</a>
         </div>
       </section>
@@ -392,7 +404,7 @@ function Evento() {
             </ul>
             <div className="vip-price">
               <div className="amt"><sup>$</sup>20 <span style={{ fontSize: '1.1rem', color: 'var(--ink-soft)', fontWeight: 500 }}>AUD</span></div>
-              <small>Pago único · upgrade a VIP</small>
+              <small>Pago único · upgrade a VIP · 100% donado a Colombia</small>
             </div>
             {checkoutError && <p className="fine" style={{ color: '#e5484d' }}>{checkoutError}</p>}
             <div className="vip-actions">
@@ -414,7 +426,7 @@ function Evento() {
           <button type="button" className="exit-close" aria-label="Cerrar" onClick={() => setShowExitPopup(false)}>✕</button>
           <span className="badge-price exit-badge">✦ Espera un momento</span>
           <h2>¿Ya aseguraste tu cupo?</h2>
-          <p className="vsub">Los cupos son limitados y tu entrada de $10 AUD incluye a tu pareja o acompañante. Regístrate en segundos antes de irte.</p>
+          <p className="vsub">Los cupos son limitados y el 100% de tu entrada se dona a las víctimas del terremoto en Colombia. Regístrate en segundos antes de irte.</p>
           <form ref={exitFormRef} onSubmit={handleExitSubmit} noValidate>
             <div className="field"><label htmlFor="exitNombre">Nombre completo</label><input id="exitNombre" name="exitNombre" type="text" placeholder="Tu nombre y apellido" ref={exitNombreRef} required /></div>
             <div className="field"><label htmlFor="exitEmail">Correo electrónico</label><input id="exitEmail" name="exitEmail" type="email" placeholder="tucorreo@ejemplo.com" ref={exitEmailRef} required /></div>
