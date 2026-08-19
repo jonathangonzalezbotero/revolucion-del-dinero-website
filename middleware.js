@@ -85,23 +85,23 @@ const HOME_HTML = page({
 const EVENTO_HTML = page({
   title: 'Taller de Finanzas Personales en Gold Coast · $10 AUD | Revolución del Dinero',
   description:
-    'Evento presencial de educación financiera en español, en Gold Coast, Australia — 12 de septiembre de 2026. Entrada $10 AUD, incluye a tu pareja o acompañante. Cupos limitados.',
+    'Evento presencial de educación financiera en español, en el Robina Events Centre, Gold Coast, Australia — 12 de septiembre de 2026. Entrada $10 AUD, incluye a tu pareja o acompañante. Cupos limitados.',
   path: '/evento',
   heading: 'Taller de Finanzas Personales en Gold Coast — $10 AUD',
-  body: 'Evento presencial de educación financiera en español, en Gold Coast, Australia, el 12 de septiembre de 2026. Entrada $10 AUD, incluye a tu pareja o acompañante. Cupos limitados.',
+  body: 'Evento presencial de educación financiera en español, en el Robina Events Centre, Gold Coast, Australia, el 12 de septiembre de 2026. Entrada $10 AUD, incluye a tu pareja o acompañante. Cupos limitados.',
   jsonLd: {
     '@context': 'https://schema.org',
     '@type': 'Event',
     name: 'Taller de Finanzas Personales — Revolución del Dinero',
     description:
-      'Evento presencial de educación financiera en español, en Gold Coast, Australia — 12 de septiembre de 2026. Entrada $10 AUD, incluye a tu pareja o acompañante. Cupos limitados.',
+      'Evento presencial de educación financiera en español, en el Robina Events Centre, Gold Coast, Australia — 12 de septiembre de 2026. Entrada $10 AUD, incluye a tu pareja o acompañante. Cupos limitados.',
     startDate: '2026-09-12',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     eventStatus: 'https://schema.org/EventScheduled',
     location: {
       '@type': 'Place',
-      name: 'Gold Coast',
-      address: { '@type': 'PostalAddress', addressLocality: 'Gold Coast', addressRegion: 'QLD', addressCountry: 'AU' },
+      name: 'Robina Events Centre',
+      address: { '@type': 'PostalAddress', addressLocality: 'Robina', addressRegion: 'QLD', addressCountry: 'AU' },
     },
     image: [OG_IMAGE],
     organizer: { '@type': 'Person', name: 'Jonathan González Botero', url: SITE_URL },

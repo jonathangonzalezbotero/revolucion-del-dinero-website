@@ -53,7 +53,7 @@ function Evento() {
   }, [showVip, showExitPopup]);
 
   useEffect(() => {
-    window.fbq?.('track', 'ViewContent', { value: 10, currency: 'AUD', content_name: 'Evento Gold Coast' });
+    window.fbq?.('track', 'ViewContent', { content_name: 'Evento Gold Coast' });
   }, []);
 
   // Returning here from a completed Stripe Checkout Session. The systeme.io contact was
@@ -167,7 +167,7 @@ function Evento() {
     }
     // No CRM write here — the systeme.io contact is only created once Stripe confirms
     // payment (see api/stripe-webhook.js). This just captures ad-attribution intent.
-    window.fbq?.('track', 'Lead');
+    if (!hasRegisteredRef.current) window.fbq?.('track', 'Lead');
     hasRegisteredRef.current = true;
     setCheckoutError('');
     setShowVip(true);
@@ -189,7 +189,7 @@ function Evento() {
     emailRef.current.value = email;
     telRef.current.value = tel;
 
-    window.fbq?.('track', 'Lead');
+    if (!hasRegisteredRef.current) window.fbq?.('track', 'Lead');
     hasRegisteredRef.current = true;
     setCheckoutError('');
     setShowExitPopup(false);
@@ -244,7 +244,7 @@ function Evento() {
       {paymentConfirmed ? (
         <div className="ann" style={{ background: '#1f8a4c', color: '#fff' }}>✅ ¡Pago confirmado! Gracias por ayudar a Colombia. Revisa tu correo para los detalles del evento.</div>
       ) : (
-        <div className="ann">❤️ 100% de tu entrada se dona al terremoto en Colombia · <b>$10 AUD</b> · 12 de septiembre 2026 · cupos limitados</div>
+        <div className="ann">❤️ 100% de tu entrada se dona al terremoto en Colombia · <b>$10 AUD</b> · 12 de septiembre 2026 · Robina Events Centre, Gold Coast · cupos limitados</div>
       )}
 
       {/* HERO + FORM */}
@@ -259,7 +259,7 @@ function Evento() {
             <p className="lead">Un evento presencial de finanzas personales donde aprenderás a reprogramar tu mente, administrar tu dinero y dar tus primeros pasos para invertir. Y esta vez, tu entrada hace algo más: el 100% de lo recaudado se dona a las familias afectadas por el terremoto que sacudió a Colombia el 10 de agosto de 2026.</p>
             <div className="meta-row">
               <div className="meta-chip"><div className="meta-chip-head"><span className="ic">📅</span><small>Fecha</small></div><b>Sáb 12 de sept.</b></div>
-              <div className="meta-chip"><div className="meta-chip-head"><span className="ic">📍</span><small>Lugar</small></div><b>Gold Coast, AU</b></div>
+              <div className="meta-chip"><div className="meta-chip-head"><span className="ic">📍</span><small>Lugar</small></div><b>Robina Events Centre</b></div>
               <div className="meta-chip meta-chip-price"><div className="meta-chip-head"><span className="ic">🎟️</span><small>Entrada</small></div><b>$10 AUD</b></div>
             </div>
             <div className="hero-img">
