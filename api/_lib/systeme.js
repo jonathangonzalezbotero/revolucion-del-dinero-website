@@ -31,18 +31,28 @@ function splitName(fullName) {
 }
 
 // Creates a contact, or — if the email already exists — looks it up and patches it instead.
-async function upsertContact({ email, firstName, surname, phone }) {
+// `extraFields` (e.g. partners_name/partners_phone) is applied best-effort: if systeme.io
+// rejects the payload because a custom field slug isn't configured in the account, we retry
+// with just the standard fields so the contact still gets created either way.
+async function upsertContact({ email, firstName, surname, phone, extraFields = [] }) {
   const standardFields = [
     { slug: 'first_name', value: firstName || null },
     { slug: 'surname', value: surname || null },
     { slug: 'phone_number', value: phone || null },
   ];
 
-  const res = await systemeFetch('/contacts', {
-    method: 'POST',
-    body: JSON.stringify({ email, locale: 'es', fields: standardFields }),
-  });
-  const result = res.status === 201 ? await res.json() : { error: res.status, body: await res.text().catch(() => '') };
+  const attempt = async (fields) => {
+    const res = await systemeFetch('/contacts', {
+      method: 'POST',
+      body: JSON.stringify({ email, locale: 'es', fields }),
+    });
+    return res.status === 201 ? res.json() : { error: res.status, body: await res.text().catch(() => '') };
+  };
+
+  let result = await attempt([...standardFields, ...extraFields]);
+  if (result.error && extraFields.length) {
+    result = await attempt(standardFields);
+  }
 
   if (!result.error) return { id: result.id, created: true };
 
@@ -55,7 +65,7 @@ async function upsertContact({ email, firstName, surname, phone }) {
   const patchRes = await systemeFetch(`/contacts/${existing.id}`, {
     method: 'PATCH',
     contentType: 'application/merge-patch+json',
-    body: JSON.stringify({ locale: 'es', fields: standardFields }),
+    body: JSON.stringify({ locale: 'es', fields: [...standardFields, ...extraFields] }),
   });
   if (!patchRes.ok) {
     // Non-fatal — the contact already exists in the CRM, it just didn't get these updated fields.

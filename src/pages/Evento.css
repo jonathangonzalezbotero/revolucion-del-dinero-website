@@ -163,6 +163,28 @@ html {
   color: var(--cream)
 }
 
+.plus-one {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(217, 154, 43, .85);
+  border: 1px solid rgba(217, 154, 43, .3);
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 11px 16px;
+  border-radius: 12px;
+  margin-bottom: 22px
+}
+
+.plus-one .ic {
+  font-size: 1.05rem
+}
+
+.plus-one b {
+  color: var(--ink)
+}
+
 .hero-img {
   border-radius: 20px;
   overflow: hidden;
@@ -298,6 +320,28 @@ html {
 
 .field input::placeholder {
   color: rgba(246, 241, 231, .4)
+}
+
+.field-divider {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  color: var(--gold);
+  margin: 18px 0 14px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(246, 241, 231, .14)
+}
+
+.field-divider span {
+  font-weight: 600;
+  color: rgba(246, 241, 231, .55);
+  text-transform: none;
+  letter-spacing: 0
 }
 
 .formcard .fine {

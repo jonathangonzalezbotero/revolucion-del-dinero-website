@@ -25,18 +25,23 @@ async function syncPaidCheckoutSession(session) {
     return { synced: false, reason: 'not paid' };
   }
 
-  const { nombre, tel, tier } = session.metadata || {};
+  const { nombre, tel, amigoNombre, amigoTel, tier } = session.metadata || {};
   const email = session.customer_details?.email || session.customer_email;
   if (!email || !nombre) {
     return { synced: false, reason: 'missing metadata' };
   }
 
   const { firstName, surname } = splitName(nombre);
+  const extraFields = [];
+  if (amigoNombre) extraFields.push({ slug: 'partners_name', value: amigoNombre });
+  if (amigoTel) extraFields.push({ slug: 'partners_phone', value: normalizePhone(amigoTel) });
+
   const contact = await upsertContact({
     email,
     firstName,
     surname,
     phone: normalizePhone(tel || session.customer_details?.phone || ''),
+    extraFields,
   });
 
   await addTagByName(contact.id, EVENT_TAG);
