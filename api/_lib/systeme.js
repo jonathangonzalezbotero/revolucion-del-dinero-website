@@ -123,19 +123,43 @@ async function tagContact(contactId, tagId) {
   });
   if (res.status !== 204) {
     console.error('systeme.io tagContact failed', res.status, await res.text().catch(() => ''));
+    return false;
   }
+  return true;
 }
 
 // Best-effort: create/find the tag, then assign it. Never throws — tagging failures
 // shouldn't block or retry a registration; the event tag and price tag ("evento-septiembre-2026"
 // and "Entrada General $10 AUD" / "Entrada VIP $20 AUD") are what get applied when this succeeds.
+// Returns whether the tag actually landed, so callers that need to act on it (e.g. only
+// dropping the "hasn't paid" tag once the buyer tag is really in place) can check.
 async function addTagByName(contactId, tagName) {
   try {
     const tag = await ensureTag(tagName);
-    await tagContact(contactId, tag.id);
+    return await tagContact(contactId, tag.id);
   } catch (err) {
     console.error('systeme.io addTagByName failed', tagName, err);
+    return false;
   }
 }
 
-module.exports = { splitName, upsertContact, findContactByEmail, addTagByName };
+// Mirror of addTagByName. A tag that doesn't exist in the account counts as removed —
+// the contact demonstrably isn't carrying it, which is all the caller cares about.
+async function removeTagByName(contactId, tagName) {
+  try {
+    const tag = await findTagByName(tagName);
+    if (!tag) return true;
+
+    const res = await systemeFetch(`/contacts/${contactId}/tags/${tag.id}`, { method: 'DELETE' });
+    if (res.status !== 204) {
+      console.error('systeme.io removeTagByName failed', tagName, res.status, await res.text().catch(() => ''));
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error('systeme.io removeTagByName failed', tagName, err);
+    return false;
+  }
+}
+
+module.exports = { splitName, upsertContact, findContactByEmail, addTagByName, removeTagByName };

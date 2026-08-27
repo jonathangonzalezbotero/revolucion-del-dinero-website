@@ -2,8 +2,9 @@ const Stripe = require('stripe');
 const { syncPaidCheckoutSession } = require('./_lib/eventoRegistration');
 
 // Source of truth for "this person paid." Stripe calls this once a Checkout Session
-// actually completes, and only then do we create/tag the contact in systeme.io — so the
-// CRM only ever holds people who confirmed a payment, not everyone who filled the form.
+// actually completes, and only then does the contact get the buyer tags in systeme.io and
+// lose the "hasn't paid yet" tag that api/evento-lead.js applied at form submit. The
+// EVENT_TAG a systeme.io automation hangs off is assigned here and nowhere else.
 //
 // Vercel auto-parses JSON bodies by default, but Stripe signature verification requires
 // the exact raw bytes that were sent, so body parsing is disabled below and the raw

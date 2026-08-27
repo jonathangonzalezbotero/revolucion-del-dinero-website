@@ -21,6 +21,22 @@ const MOBILE_EXIT_MIN_DURATION_MS = 150; // ...but not too slowly...
 const MOBILE_EXIT_MAX_DURATION_MS = 900; // ...(fast flick, not a slow scroll)
 const MOBILE_EXIT_TOP_THRESHOLD = 120; // ...and land back near the very top
 
+// Pushes the registration into systeme.io (tagged as "hasn't paid yet") the moment the form
+// is submitted, so people who register and never reach checkout are still reachable in the
+// CRM. Deliberately not awaited and never surfaced to the user: the CRM write must not delay
+// the VIP modal or the Stripe redirect, and a CRM outage must not stop anyone from paying.
+// `keepalive` lets the request finish even if the visitor navigates to Stripe right away.
+function sendLeadToCrm(payload) {
+  fetch('/api/evento-lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+    keepalive: true,
+  }).catch((err) => {
+    console.error('evento-lead failed', err);
+  });
+}
+
 function Evento() {
   const [showVip, setShowVip] = useState(false);
   const [showExitPopup, setShowExitPopup] = useState(false);
@@ -167,8 +183,14 @@ function Evento() {
       formRef.current.reportValidity();
       return;
     }
-    // No CRM write here — the systeme.io contact is only created once Stripe confirms
-    // payment (see api/stripe-webhook.js). This just captures ad-attribution intent.
+    sendLeadToCrm({
+      nombre,
+      email,
+      tel,
+      amigoNombre: amigoNombreRef.current?.value.trim() || '',
+      amigoTel: amigoTelRef.current?.value.trim() || '',
+    });
+
     if (!hasRegisteredRef.current) window.fbq?.('track', 'Lead');
     hasRegisteredRef.current = true;
     setCheckoutError('');
@@ -192,6 +214,8 @@ function Evento() {
     telRef.current.value = tel;
     amigoNombreRef.current.value = '';
     amigoTelRef.current.value = '';
+
+    sendLeadToCrm({ nombre, email, tel, amigoNombre: '', amigoTel: '' });
 
     if (!hasRegisteredRef.current) window.fbq?.('track', 'Lead');
     hasRegisteredRef.current = true;

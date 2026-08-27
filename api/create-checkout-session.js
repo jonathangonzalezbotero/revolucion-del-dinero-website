@@ -7,9 +7,10 @@ const TIER_PRICES = {
 };
 
 // Creates a Stripe Checkout Session server-side (instead of using static Payment Links)
-// so the registration form data can travel with the payment as metadata. The systeme.io
-// contact is only ever created later, by stripe-webhook.js, once Stripe confirms the
-// payment actually succeeded — this endpoint never touches the CRM.
+// so the registration form data can travel with the payment as metadata. This endpoint
+// never touches the CRM: the contact was already created at form submit by
+// api/evento-lead.js, and stripe-webhook.js promotes it to a buyer once Stripe confirms
+// the payment actually succeeded.
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
