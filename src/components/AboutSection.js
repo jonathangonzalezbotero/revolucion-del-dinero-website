@@ -59,10 +59,11 @@ function AboutSection({ id = 'sobre-mi' }) {
         </div>
         <div className="about-body reveal">
           <span className="eyebrow">Hola, soy Jonathan</span>
-          <h2>Llegué a Australia para cambiar mi vida. Hoy ayudo a otros a cambiar la suya.</h2>
-          <p>Hace 6 años llegué con la intención de aprender inglés y volver a Colombia a seguir mi profesión — como muchos de nosotros.</p>
-          <p>Recuerdo viajar a Nueva York con mi papá y recoger tarjetas del metro del piso para ahorrarnos el pasaje. En ese momento no lo cuestioné: era lo normal. Hoy sé que <span className="hi">esas historias que cargamos sobre el dinero son exactamente lo que nos frena</span> — no la falta de esfuerzo, ni de inteligencia.</p>
-          <p>Mi pasión siempre ha sido el deporte, los negocios y las finanzas. Hoy tengo multiples negocios y una sola misión: impactar la vida de las personas que, como yo, <b className="hi">sueñan en grande</b>.</p>
+          <h2>Manejé Uber, lavé platos y limpié oficinas. Todo eso también cuenta.</h2>
+          <p>Llegué a Australia hace 6 años a aprender inglés y volverme a Colombia. Los primeros meses hice de todo: Uber, limpieza de oficinas, turnos en una warehouse, lavando platos en un restaurante. Sabía que era temporal, pero uno igual se cansa.</p>
+          <p>Mi primer paso real hacia la tranquilidad financiera fue el día que empecé a trabajar como ingeniero de software. Ahí dejé de sobrevivir el mes y pude empezar a pensar. Hoy tengo dos negocios: <b className="hi">Héroes Colombia</b> allá, y <b className="hi">EasyAussie</b> acá en Australia.</p>
+          <p>Llevo más de 10 años metido en el tema de las finanzas personales. Te lo digo con un número, que es más honesto que cualquier cosa: <span className="hi">hoy me faltan $1.500 al mes en ingresos que no dependan de mi trabajo</span> para poder decir que soy libre financieramente. Todavía no llego. Pero sé exactamente cuánto me falta, y eso es justo lo que quiero que tú tengas al salir del evento.</p>
+          <p>En septiembre voy a dar una masterclass para LatinHub en Brisbane. Y el sábado 12, en Robina, va a estar la segunda edición de este evento.</p>
           <div className="sig">Jonathan González Botero</div>
         </div>
       </div>

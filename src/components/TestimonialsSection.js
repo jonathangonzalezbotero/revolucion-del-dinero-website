@@ -33,8 +33,8 @@ function TestimonialsSection({ id = 'testimonios' }) {
     <section className="sec" id={id} style={{ background: 'var(--sand)' }}>
       <div className="wrap">
         <div className="sec-head center reveal">
-          <span className="eyebrow" style={{ justifyContent: 'center' }}>Historias reales</span>
-          <h2>Lo que pasa cuando cambias tu relación <span className="accent ital">con el dinero.</span></h2>
+          <span className="eyebrow" style={{ justifyContent: 'center' }}>Del primer evento</span>
+          <h2>Les pregunté al salir <span className="accent ital">qué se llevaban.</span></h2>
         </div>
         <div className="vtcards">
           {TESTIMONIAL_VIDEOS.map((t) => (

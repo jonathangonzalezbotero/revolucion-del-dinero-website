@@ -30,14 +30,16 @@ const HOME_JSON_LD = [
 ];
 
 const EVENTO_TITLE = 'Taller de Finanzas Personales en Gold Coast · $10 AUD | Revolución del Dinero';
-const EVENTO_DESCRIPTION = 'Evento presencial de educación financiera en español, en el Robina Events Centre, Gold Coast, Australia — 12 de septiembre de 2026. Entrada $10 AUD, incluye a tu pareja o acompañante, 100% donado a las víctimas del terremoto en Colombia. Cupos limitados.';
+const EVENTO_DESCRIPTION = 'Taller presencial de finanzas personales en español, en el Robina Events Centre, Gold Coast, Australia. Sábado 12 de septiembre de 2026, de 3:00 a 6:30 pm. Entrada $10 AUD e incluye a tu pareja o acompañante. Lo recaudado en entradas se dona a las familias afectadas por el terremoto en Colombia.';
 
 const EVENTO_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'Event',
   name: 'Taller de Finanzas Personales — Revolución del Dinero',
   description: EVENTO_DESCRIPTION,
-  startDate: '2026-09-12',
+  startDate: '2026-09-12T15:00:00+10:00',
+  endDate: '2026-09-12T18:30:00+10:00',
+  doorTime: '2026-09-12T14:30:00+10:00',
   eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
   eventStatus: 'https://schema.org/EventScheduled',
   location: {

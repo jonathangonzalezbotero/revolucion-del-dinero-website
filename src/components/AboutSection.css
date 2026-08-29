@@ -134,7 +134,7 @@
 }
 
 .about-body .sig {
-  font-family: 'Fraunces';
+  font-family: var(--font-display);
   font-style: italic;
   font-size: 1.5rem;
   color: var(--emerald);
