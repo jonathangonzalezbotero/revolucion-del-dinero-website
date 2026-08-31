@@ -127,7 +127,7 @@ function Home() {
                 <span className="badge-pill">Para latinos ✦</span>
               </div>
               <div className="hero-stats">
-                <div className="hstat"><div className="num">50+</div><div className="lbl">asistentes en sus<br />eventos</div></div>
+                <div className="hstat"><div className="num">50+</div><div className="lbl">personas en el<br />primer evento</div></div>
                 <div className="hstat"><div className="num">6 años</div><div className="lbl">construyendo<br />en Australia</div></div>
               </div>
             </div>
@@ -146,9 +146,9 @@ function Home() {
       {/* STATS */}
       <section className="stats">
         <div className="wrap stats-grid">
-          <div className="stat reveal"><div className="n"><span className="accent">50+</span></div><div className="t">Asistentes en sus<br />eventos presenciales</div></div>
-          <div className="stat reveal"><div className="n">6+</div><div className="t">Testimonios en video<br />de transformación real</div></div>
-          <div className="stat reveal"><div className="n">3</div><div className="t">Negocios propios<br />en Colombia y Australia</div></div>
+          <div className="stat reveal"><div className="n"><span className="accent">50+</span></div><div className="t">Personas en el primer<br />evento presencial</div></div>
+          <div className="stat reveal"><div className="n">6</div><div className="t">Testimonios en video<br />de quienes ya vinieron</div></div>
+          <div className="stat reveal"><div className="n">2</div><div className="t">Negocios propios<br />en Colombia y Australia</div></div>
           <div className="stat reveal"><div className="n"><span className="accent">100%</span></div><div className="t">En español, para latinos</div></div>
         </div>
       </section>
@@ -157,7 +157,7 @@ function Home() {
       <section className="sec mission">
         <div className="wrap mission-inner reveal">
           <span className="eyebrow" style={{ justifyContent: 'center', marginBottom: 26 }}>Por qué existe esto</span>
-          <p className="big">El dinero no se trata de <em>cuánto ganas</em>. Se trata de las historias que cargas sobre él, historias heredadas que te frenan sin que te des cuenta. <em>Revolución del Dinero</em> existe para romper ese ciclo y darle a cada persona un camino claro hacia su libertad financiera.</p>
+          <p className="big">A casi ninguno de nosotros le enseñaron esto en la casa. Lo aprendimos mirando: cómo hablaban tus papás de la plata, qué se decía en la mesa el mes que no alcanzaba, qué te dijeron cuando te fuiste. Todo eso se queda, y termina decidiendo por ti mucho más que <em>cuánto ganas</em>. <em>Revolución del Dinero</em> existe para que puedas mirarlo de frente y decidir tú.</p>
           <div className="sig">Esa es mi misión de vida.</div>
         </div>
       </section>
@@ -167,13 +167,13 @@ function Home() {
         <div className="wrap">
           <div className="sec-head reveal">
             <span className="eyebrow">El método</span>
-            <h2>Tres pasos para cambiar tu relación con el dinero <span className="accent ital">para siempre.</span></h2>
-            <p>Nadie nos enseñó a manejar el dinero. Por eso lo dividí en un camino simple que cualquiera puede seguir, sin importar cuánto ganes hoy.</p>
+            <h2>Tres pasos, y <span className="accent ital">en este orden.</span></h2>
+            <p>No hace falta ganar más para arrancar. Hace falta saber qué está pasando con lo que ya entra.</p>
           </div>
           <div className="pillars">
-            <div className="pillar reveal"><span className="step">01</span><div className="ic">🧠</div><h3>Reprograma tu mente</h3><p>Identifica exactamente qué creencias sobre el dinero te están costando hoy y cámbialas por unas que te impulsen.</p></div>
-            <div className="pillar reveal"><span className="step">02</span><div className="ic">📊</div><h3>Administra lo que ganas</h3><p>Un sistema simple para organizar tu dinero sin importar tus fuentes de ingreso.</p></div>
-            <div className="pillar reveal"><span className="step">03</span><div className="ic">📈</div><h3>Invierte con confianza</h3><p>Da tus primeros pasos para hacer crecer tu dinero sin el miedo a perderlo todo, con un camino fácil de entender.</p></div>
+            <div className="pillar reveal"><span className="step">01</span><div className="ic">🧠</div><h3>Reprograma tu mente</h3><p>Qué creencias sobre la plata traes de tu casa y cuáles te están costando dinero hoy. Va primero porque sin esto lo demás no se sostiene.</p></div>
+            <div className="pillar reveal"><span className="step">02</span><div className="ic">📊</div><h3>Administra lo que ganas</h3><p>Un sistema simple para repartir lo que entra, sea mucho o poco, y venga de uno o de tres lados.</p></div>
+            <div className="pillar reveal"><span className="step">03</span><div className="ic">📈</div><h3>Invierte con confianza</h3><p>Tus primeros pasos para que la plata crezca, explicados de forma que se entiendan y sin el miedo a perderlo todo.</p></div>
           </div>
         </div>
       </section>
@@ -185,16 +185,16 @@ function Home() {
         <div className="wrap">
           <div className="sec-head center reveal">
             <span className="eyebrow" style={{ justifyContent: 'center' }}>Cómo trabajamos juntos</span>
-            <h2>Elige tu punto de <span className="accent ital">partida.</span></h2>
-            <p>Desde donde estés en el mundo, hay una forma de empezar tu revolución hoy.</p>
+            <h2>Por dónde puedes <span className="accent ital">empezar.</span></h2>
+            <p>Tres formas de entrar, según dónde estés viviendo y qué tanto te quieras meter.</p>
           </div>
           <div className="offers">
             <div className="offer feat reveal">
               <div className="top">
                 <span className="kicker k-em">🌎 Empieza aquí</span>
-                <h3>Programa online</h3>
+                <h3>Círculo Online</h3>
               </div>
-              <p className="desc">El corazón de esta comunidad. Aprende a tu ritmo, rodeado de personas que van en la misma dirección, sin importar donde te encuentres.</p>
+              <p className="desc">Para latinos que viven fuera de su país, estén donde estén. Aprendes a tu ritmo, con gente que va en la misma dirección. Es la puerta de entrada más fácil si no estás en Australia.</p>
               <ul>
                 <li>Formación paso a paso en español</li>
                 <li>Comunidad activa que te impulsa</li>
@@ -202,7 +202,8 @@ function Home() {
                 <li>Acceso directo a las sesiones en vivo</li>
               </ul>
               <div className="foot">
-                <div className="price"><span className="free">$59 USD/mes</span></div>
+                <div className="price"><span className="free">$50 USD/mes</span></div>
+                <div className="price-note">O $500 USD al año</div>
                 <a href={SKOOL_URL} target="_blank" rel="noopener noreferrer" className="btn btn-emerald">Unirme en Skool →</a>
               </div>
             </div>
@@ -211,25 +212,25 @@ function Home() {
                 <span className="kicker k-go">📍 En Australia</span>
                 <h3>Taller de finanzas</h3>
               </div>
-              <p className="desc">Aprende de finanzas personales y da tu primer paso real hacia la libertad financiera, junto a otros latinos.</p>
+              <p className="desc">Una tarde presencial en Gold Coast para dar el primer paso en serio, con otros latinos que están en lo mismo que tú.</p>
               <ul>
-                <li>Reprograma tu mentalidad en vivo</li>
-                <li>Sal con un plan claro y aplicable</li>
-                <li>Conecta con una comunidad real</li>
-                <li>Opción VIP: primera fila y Q&amp;A</li>
+                <li>Los cuatro pilares, trabajados en vivo</li>
+                <li>Sales con tu plan escrito, no con apuntes</li>
+                <li>Conoces gente que va en la misma dirección</li>
+                <li>Opción VIP: workbook impreso, primera fila y Q&amp;A</li>
               </ul>
               <div className="foot">
                 <div className="price"><span className="free">$10 AUD</span></div>
-                <div className="price-note">Incluye a tu +1 · 100% donado a Colombia</div>
+                <div className="price-note">Admite 2 personas · lo recaudado en entradas se dona a Colombia</div>
                 <Link to="/evento" className="btn btn-ink">Registrarme al evento →</Link>
               </div>
             </div>
             <div className="offer reveal">
               <div className="top">
                 <span className="kicker k-soon">🎯 Programa de 1 año</span>
-                <h3>Comunidad RD</h3>
+                <h3>Círculo Presencial</h3>
               </div>
-              <p className="desc">Es un programa de acompañamiento de 12 meses, directamente conmigo, para transformar tu relación con el dinero paso a paso.</p>
+              <p className="desc">Doce meses de acompañamiento directo conmigo, en Australia, para trabajar esto a fondo y no solo enterarte de que existe.</p>
               <ul>
                 <li>12 meses de acompañamiento continuo</li>
                 <li>Acceso a eventos exclusivos</li>
@@ -253,14 +254,15 @@ function Home() {
         <div className="wrap event-grid">
           <div className="reveal">
             <span className="au">📍 Evento presencial · Gold Coast, Australia</span>
-            <h2>¿Estás en Australia? Ven a vivirlo en persona.</h2>
-            <p>Un taller de finanzas donde darás tu primer paso real hacia la libertad financiera, junto a otras personas como tú que buscan mejorar su situación financiera.</p>
+            <h2>¿Estás en Australia? Nos vemos el sábado 12.</h2>
+            <p>Tres horas y media de taller para mirar tu plata de frente: de dónde viene, en qué se te va, y qué vas a hacer distinto a partir del lunes. Te vas con tu plan escrito de tu puño y letra.</p>
             <div className="when">
-              <div><small>Fecha</small><b>12 de septiembre, 2026</b></div>
-              <div><small>Lugar</small><b>Gold Coast</b></div>
+              <div><small>Fecha</small><b>Sáb 12 de sept., 2026</b></div>
+              <div><small>Hora</small><b>3:00 a 6:30 pm</b></div>
+              <div><small>Lugar</small><b>Robina Events Centre</b></div>
               <div><small>Entrada</small><b>$10 AUD</b></div>
             </div>
-            <p className="event-note">✨ Tu entrada incluye a tu pareja o un acompañante, sin costo extra — y el 100% se dona a las víctimas del terremoto en Colombia.</p>
+            <p className="event-note">✨ Tu entrada admite dos personas, así que tu pareja o un amigo entra sin pagar de más. Y todo lo que se recaude en entradas se va para las familias afectadas por el terremoto en Colombia.</p>
           </div>
           <div className="event-actions reveal">
             <Link to="/evento" className="btn btn-gold btn-lg">Registrarme · $10 AUD →</Link>
@@ -274,13 +276,13 @@ function Home() {
         <div className="wrap">
           <div className="sec-head center reveal">
             <span className="eyebrow" style={{ justifyContent: 'center' }}>Preguntas frecuentes</span>
-            <h2>Lo que quizás te estás <span className="accent ital">preguntando.</span></h2>
+            <h2>Lo que más me <span className="accent ital">preguntan.</span></h2>
           </div>
           <div className="faq">
-            <details className="qa reveal"><summary>¿Necesito estar en Australia para aprender de finanzas? <span className="pl">+</span></summary><div className="ans">No. El programa online es <b>global y 100% en español</b>. Puedes unirte y aprender desde cualquier país del mundo. Los eventos presenciales sí son en Australia, pero la comunidad no tiene fronteras.</div></details>
-            <details className="qa reveal"><summary>No soy bueno con los números, ¿esto es para mí? <span className="pl">+</span></summary><div className="ans">Justamente para ti. Saldrás con las herramientas y la información necesarias para que eso deje de ser un problema. Te guío paso a paso para eliminar esa creencia de tu vida.</div></details>
-            <details className="qa reveal"><summary>¿Cuánto cuesta unirme a la comunidad? <span className="pl">+</span></summary><div className="ans">Puedes empezar en el programa online por solo $59 USD/mes. Únete, conoce el espacio y comienza a aplicar lo que aprendas desde el primer día.</div></details>
-            <details className="qa reveal"><summary>¿Qué voy a aprender exactamente? <span className="pl">+</span></summary><div className="ans">A reprogramar tu mente y mejorar tu relación con el dinero, a administrarlo de manera óptima y a dar los primeros pasos para lograr tranquilidad y libertad financiera.</div></details>
+            <details className="qa reveal"><summary>¿Necesito estar en Australia? <span className="pl">+</span></summary><div className="ans">Para el Círculo Online, no. Es <b>100% en español</b> y puedes entrar desde cualquier país. Los eventos presenciales y el Círculo Presencial sí son acá en Australia.</div></details>
+            <details className="qa reveal"><summary>No soy bueno con los números, ¿esto es para mí? <span className="pl">+</span></summary><div className="ans">Esa frase es de las primeras que revisamos, porque casi siempre viene de la casa y no de la realidad. No hay matemáticas complicadas acá: sumar, restar y sacar porcentajes.</div></details>
+            <details className="qa reveal"><summary>¿Cuánto cuesta unirme? <span className="pl">+</span></summary><div className="ans">El Círculo Online cuesta <b>$50 USD al mes</b>, o $500 al año si prefieres pagarlo de una. El taller presencial son $10 AUD y admite dos personas.</div></details>
+            <details className="qa reveal"><summary>¿Qué voy a aprender exactamente? <span className="pl">+</span></summary><div className="ans">Las creencias sobre el dinero que traes de tu casa, qué es libertad financiera y cuál es tu número, cómo repartir lo que ganas cada mes, y cómo construir tu fondo de emergencia desde cero.</div></details>
           </div>
         </div>
       </section>
@@ -292,7 +294,7 @@ function Home() {
             <div className="inner">
               <span className="eyebrow" style={{ justifyContent: 'center', color: '#f4c56a', marginBottom: 20 }}>Tu revolución empieza hoy</span>
               <h2>Únete a los que decidieron <span className="ital">tomar el control.</span></h2>
-              <p>Sé parte de la comunidad Revolución del Dinero y empieza a construir tu libertad financiera y a vivir la vida que siempre has soñado</p>
+              <p>Adentro vas a encontrar el contenido, los encuentros en vivo y gente que está haciendo exactamente lo mismo que tú. Eso último es lo que más cuesta encontrar solo.</p>
               <div className="join-cta">
                 <a href={SKOOL_URL} target="_blank" rel="noopener noreferrer" className="btn btn-gold btn-lg">Unirme a la comunidad →</a>
                 <Link to="/evento" className="btn btn-outline btn-lg" style={{ borderColor: 'rgba(246,241,231,.4)', color: 'var(--cream)' }}>Asistir al evento · $10 AUD</Link>

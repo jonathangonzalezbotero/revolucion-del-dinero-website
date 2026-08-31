@@ -673,7 +673,7 @@ header:not(.scrolled) .burger span {
 
 .event .when {
   display: flex;
-  gap: 30px;
+  gap: 20px 28px;
   margin-top: 26px;
   flex-wrap: wrap
 }
@@ -688,7 +688,7 @@ header:not(.scrolled) .burger span {
 
 .event .when b {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   color: var(--cream)
 }
 
