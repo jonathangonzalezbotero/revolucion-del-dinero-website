@@ -1093,24 +1093,16 @@ footer {
   border-color: var(--emerald)
 }
 
-.mentor-human {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--ink-soft);
-  cursor: pointer;
-  user-select: none
-}
-
-.mentor-human input {
-  width: 18px;
-  height: 18px;
-  flex: none;
-  accent-color: var(--emerald);
-  cursor: pointer
+/* Honeypot. Moved off-screen instead of display:none / visibility:hidden, which the bots
+   worth catching know to skip. Invisible and unfocusable for real visitors. */
+.mentor-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none
 }
 
 .mentor-modal form .btn {
