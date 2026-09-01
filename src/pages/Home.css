@@ -1093,6 +1093,26 @@ footer {
   border-color: var(--emerald)
 }
 
+.mentor-human {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  cursor: pointer;
+  user-select: none
+}
+
+.mentor-human input {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  accent-color: var(--emerald);
+  cursor: pointer
+}
+
 .mentor-modal form .btn {
   width: 100%;
   margin-top: 6px

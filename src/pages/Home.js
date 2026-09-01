@@ -29,6 +29,7 @@ function Home() {
   const [mentorSending, setMentorSending] = useState(false);
   const [mentorError, setMentorError] = useState('');
   const [mentorFirstName, setMentorFirstName] = useState('');
+  const [mentorIsHuman, setMentorIsHuman] = useState(false);
   const mentorFormRef = useRef(null);
   const mentorNombreRef = useRef(null);
   const mentorEmailRef = useRef(null);
@@ -56,6 +57,10 @@ function Home() {
       mentorFormRef.current.reportValidity();
       return;
     }
+    if (!mentorIsHuman) {
+      setMentorError('Confirma que no eres un robot para enviar tu solicitud.');
+      return;
+    }
 
     setMentorSending(true);
     setMentorError('');
@@ -63,13 +68,14 @@ function Home() {
       const res = await fetch('/api/mentor-request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre, email, whatsapp }),
+        body: JSON.stringify({ nombre, email, whatsapp, humano: true }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         throw new Error(data.error || 'No se pudo enviar la solicitud.');
       }
       setMentorFirstName(nombre.split(' ')[0]);
+      setMentorIsHuman(false);
       setMentorSent(true);
     } catch (err) {
       setMentorError(err.message || 'No se pudo enviar la solicitud. Intenta de nuevo.');
@@ -348,8 +354,19 @@ function Home() {
                 <div className="mentor-field"><label htmlFor="mentor-nombre">Nombre completo</label><input id="mentor-nombre" type="text" placeholder="Tu nombre y apellido" ref={mentorNombreRef} required /></div>
                 <div className="mentor-field"><label htmlFor="mentor-email">Correo electrónico</label><input id="mentor-email" type="email" placeholder="tucorreo@ejemplo.com" ref={mentorEmailRef} required /></div>
                 <div className="mentor-field"><label htmlFor="mentor-tel">WhatsApp / Teléfono</label><input id="mentor-tel" type="tel" placeholder="+61 ..." ref={mentorTelRef} required /></div>
+                <label className="mentor-human">
+                  <input
+                    type="checkbox"
+                    checked={mentorIsHuman}
+                    onChange={(e) => {
+                      setMentorIsHuman(e.target.checked);
+                      if (e.target.checked) setMentorError('');
+                    }}
+                  />
+                  <span>No soy un robot</span>
+                </label>
                 {mentorError && <p className="mentor-error">{mentorError}</p>}
-                <button type="submit" className="btn btn-emerald" disabled={mentorSending}>
+                <button type="submit" className="btn btn-emerald" disabled={mentorSending || !mentorIsHuman}>
                   {mentorSending ? 'Enviando…' : 'Enviar solicitud →'}
                 </button>
               </form>

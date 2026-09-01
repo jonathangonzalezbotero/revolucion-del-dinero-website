@@ -15,9 +15,15 @@ module.exports = async (req, res) => {
     return res.status(500).json({ error: 'Server is not configured to send emails yet.' });
   }
 
-  const { nombre, email, whatsapp } = req.body || {};
+  const { nombre, email, whatsapp, humano } = req.body || {};
   if (!nombre?.trim() || !email?.trim() || !whatsapp?.trim()) {
     return res.status(400).json({ error: 'Faltan datos: nombre, correo y whatsapp son requeridos.' });
+  }
+  // The form's "No soy un robot" confirmation. Checked here as well as in the browser so the
+  // endpoint can't be used without it — though note this only costs an attacker one extra
+  // field in their payload; it is friction, not a real bot control.
+  if (humano !== true) {
+    return res.status(400).json({ error: 'Confirma que no eres un robot para enviar tu solicitud.' });
   }
   if (!EMAIL_RE.test(email.trim())) {
     return res.status(400).json({ error: 'El correo no es válido.' });
