@@ -28,13 +28,21 @@ function VideoTestimonial({ src, poster, name }) {
   );
 }
 
-function TestimonialsSection({ id = 'testimonios' }) {
+// `eyebrow` y `heading` traen por defecto exactamente el copy que ya usaban la home y
+// /evento, así que esas dos páginas siguen renderizando lo mismo sin cambiar una línea.
+// /bootcamp los sobreescribe para hablarle a su propio contexto — los videos son los
+// mismos porque la promesa es la misma: un día presencial en una sala.
+function TestimonialsSection({
+  id = 'testimonios',
+  eyebrow = 'Del primer evento',
+  heading = <>Les pregunté al salir <span className="accent ital">qué se llevaban.</span></>,
+}) {
   return (
     <section className="sec" id={id} style={{ background: 'var(--sand)' }}>
       <div className="wrap">
         <div className="sec-head center reveal">
-          <span className="eyebrow" style={{ justifyContent: 'center' }}>Del primer evento</span>
-          <h2>Les pregunté al salir <span className="accent ital">qué se llevaban.</span></h2>
+          <span className="eyebrow" style={{ justifyContent: 'center' }}>{eyebrow}</span>
+          <h2>{heading}</h2>
         </div>
         <div className="vtcards">
           {TESTIMONIAL_VIDEOS.map((t) => (

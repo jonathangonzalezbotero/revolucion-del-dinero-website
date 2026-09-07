@@ -14,11 +14,14 @@
 // it runs in a separate Edge runtime.
 
 export const config = {
-  matcher: ['/', '/evento'],
+  matcher: ['/', '/evento', '/bootcamp', '/circulo'],
 };
 
 const SITE_URL = 'https://www.revoluciondeldinero.com';
-const OG_IMAGE = 'https://d1yei2z3i6k35z.cloudfront.net/17411220/69f40e697ce5b6.59615049_Jonathan.png';
+// 1200x630 JPG crop of src/assets/images/Jonathan_01.webp, served from
+// public/ so the URL is stable (bundled src/assets get hashed filenames) and
+// in JPG because WhatsApp/LinkedIn previews don't reliably render WebP.
+const OG_IMAGE = `${SITE_URL}/assets/jonathan-og.jpg`;
 
 const BOT_UA_RE =
   /facebookexternalhit|Facebot|Twitterbot|LinkedInBot|WhatsApp|TelegramBot|Slackbot|Discordbot|SkypeUriPreview|Pinterest|redditbot|Applebot|vkShare|Googlebot|Google-InspectionTool|bingbot|DuckDuckBot|Baiduspider|YandexBot|Sogou|Exabot|ia_archiver|W3C_Validator/i;
@@ -116,12 +119,116 @@ const EVENTO_HTML = page({
   },
 });
 
+// Sin temario publicado y sin lenguaje de asesoría sobre productos financieros, igual que
+// la página real: esto es lo que WhatsApp, Meta y Google leen del enlace /bootcamp, así
+// que es texto publicado con el mismo peso que el de src/pages/Bootcamp.js.
+const BOOTCAMP_DESCRIPTION =
+  'Un día presencial en español para ordenar tu plata: tus números, tus deudas, tus hábitos y tu proyección del año. Sábado 14 de noviembre de 2026, de 10:00 a 19:00, en Gold Coast, Australia. $250 AUD por persona o $400 AUD para dos, e incluye una sesión de 30 minutos con Jonathan. El almuerzo no está incluido.';
+
+const BOOTCAMP_HTML = page({
+  title: 'Bootcamp Financiero en Gold Coast · Sábado 14 de noviembre de 2026 | Revolución del Dinero',
+  description: BOOTCAMP_DESCRIPTION,
+  path: '/bootcamp',
+  heading: 'Bootcamp Financiero en Gold Coast — Sábado 14 de noviembre de 2026',
+  body: BOOTCAMP_DESCRIPTION,
+  jsonLd: {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: 'Bootcamp Financiero — Revolución del Dinero',
+    description: BOOTCAMP_DESCRIPTION,
+    startDate: '2026-11-14T10:00:00+10:00',
+    endDate: '2026-11-14T19:00:00+10:00',
+    doorTime: '2026-11-14T09:30:00+10:00',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    eventStatus: 'https://schema.org/EventScheduled',
+    location: {
+      '@type': 'Place',
+      name: 'Gold Coast, Australia',
+      address: { '@type': 'PostalAddress', addressLocality: 'Gold Coast', addressRegion: 'QLD', addressCountry: 'AU' },
+    },
+    image: [OG_IMAGE],
+    inLanguage: 'es',
+    organizer: { '@type': 'Person', name: 'Jonathan González Botero', url: SITE_URL },
+    offers: [
+      {
+        '@type': 'Offer',
+        name: 'Entrada individual',
+        price: '250',
+        priceCurrency: 'AUD',
+        availability: 'https://schema.org/InStock',
+        url: `${SITE_URL}/bootcamp`,
+        validFrom: '2026-09-12',
+      },
+      {
+        '@type': 'Offer',
+        name: 'Entrada para dos personas',
+        price: '400',
+        priceCurrency: 'AUD',
+        availability: 'https://schema.org/InStock',
+        url: `${SITE_URL}/bootcamp`,
+        validFrom: '2026-09-12',
+      },
+    ],
+  },
+});
+
+// Sin conteo de contenido y sin lenguaje de asesoría sobre productos financieros, igual
+// que la página real: esto es lo que WhatsApp, Meta y Google leen del enlace /circulo.
+const CIRCULO_DESCRIPTION =
+  'Un año con Jonathan González y un grupo pequeño de latinos en Australia para ordenar tu plata: comunidad privada, sesiones mensuales en grupo, sesiones uno a uno y el Bootcamp Financiero presencial incluido. $1.000 AUD o 6 cuotas de $180. Todo en español.';
+
+const CIRCULO_HTML = page({
+  title: 'Círculo Presencial — Un año de acompañamiento financiero en español, en Australia | Revolución del Dinero',
+  description: CIRCULO_DESCRIPTION,
+  path: '/circulo',
+  heading: 'Círculo Presencial — Un año de acompañamiento financiero en español, en Australia',
+  body: CIRCULO_DESCRIPTION,
+  jsonLd: {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Círculo Presencial — Revolución del Dinero',
+    description: CIRCULO_DESCRIPTION,
+    serviceType: 'Programa de educación financiera y acompañamiento en grupo',
+    inLanguage: 'es',
+    areaServed: { '@type': 'Place', name: 'Gold Coast, Queensland, Australia' },
+    provider: { '@type': 'Person', name: 'Jonathan González Botero', url: SITE_URL },
+    image: [OG_IMAGE],
+    offers: [
+      {
+        '@type': 'Offer',
+        name: 'Círculo Presencial — Individual',
+        price: '1000',
+        priceCurrency: 'AUD',
+        availability: 'https://schema.org/InStock',
+        url: `${SITE_URL}/circulo`,
+      },
+      {
+        '@type': 'Offer',
+        name: 'Círculo Presencial — Para dos personas',
+        price: '1500',
+        priceCurrency: 'AUD',
+        availability: 'https://schema.org/InStock',
+        url: `${SITE_URL}/circulo`,
+      },
+    ],
+    termsOfService: `${SITE_URL}/terminos`,
+    disclaimer:
+      'Revolución del Dinero ofrece educación financiera general. No damos asesoría sobre productos financieros específicos. Para decisiones sobre inversiones, seguros, superannuation, préstamos o impuestos, consulta a un profesional licenciado en Australia.',
+  },
+});
+
+const CRAWLER_PAGES = {
+  '/evento': EVENTO_HTML,
+  '/bootcamp': BOOTCAMP_HTML,
+  '/circulo': CIRCULO_HTML,
+};
+
 export default function middleware(request) {
   const ua = request.headers.get('user-agent') || '';
   if (!BOT_UA_RE.test(ua)) return;
 
   const { pathname } = new URL(request.url);
-  const html = pathname === '/evento' ? EVENTO_HTML : HOME_HTML;
+  const html = CRAWLER_PAGES[pathname] || HOME_HTML;
 
   return new Response(html, {
     status: 200,

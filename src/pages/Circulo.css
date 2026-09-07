@@ -1,0 +1,470 @@
+/*
+  Círculo Presencial — /circulo
+  =============================
+
+  Reutiliza el sistema de diseño que ya vive en Bootcamp.css (hero de dos columnas con
+  tarjeta oscura pegada, meta-chips, bandas CTA, results con numerales dorados, trustband,
+  cierre esmeralda). Circulo.js importa los dos archivos: casi todo Bootcamp.css son
+  clases .bc-* sin acoplar a la página, así que se aplican tal cual. Acá va solo:
+
+    1. Las cuatro reglas de Bootcamp.css que sí están acotadas a .page-bootcamp,
+       replicadas para .page-circulo.
+    2. Lo que este producto tiene y el Bootcamp no: el selector de plan de pago, la
+       matriz de precios de cuatro combinaciones, la lista de lo que incluye, el bloque
+       del ritmo de contenido, el hueco del testimonio de transformación y el disclaimer
+       legal del pie.
+
+  Nada de esto toca Evento.css, que declara clases globales sin prefijo y está en
+  producción.
+
+  $1.000 no se decide en 30 segundos, así que la página está pensada para resistir una
+  lectura completa: más aire entre bloques que en /bootcamp y el botón repetido después de
+  cada bloque de valor.
+*/
+
+.page-circulo {
+  --maxw: 1080px;
+}
+
+/* ---------- lo que incluye ---------- */
+.cir-includes {
+  display: grid;
+  gap: 14px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.cir-inc {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 18px;
+  align-items: start;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  transition: transform .35s, box-shadow .35s;
+}
+.cir-inc:hover { transform: translateY(-3px); box-shadow: var(--shadow-soft); }
+.cir-inc .cir-ic {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: rgba(15, 107, 79, .09);
+  border: 1px solid rgba(15, 107, 79, .16);
+  font-size: 1.4rem;
+}
+.cir-inc h3 {
+  font-size: 1.2rem;
+  margin-bottom: 7px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.cir-inc p { color: var(--ink-soft); font-size: .99rem; line-height: 1.6; }
+
+/* "Vale $250 por separado" / "se vende aparte por USD $200" */
+.cir-worth {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  background: rgba(217, 154, 43, .16);
+  border: 1px solid rgba(217, 154, 43, .4);
+  border-radius: 30px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+/* La nota de que el almuerzo no va incluido, dentro del punto del Bootcamp. */
+.cir-inc-note {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line-strong);
+  font-size: .92rem;
+  color: var(--ink-faint);
+}
+
+/* El alcance escrito de las sesiones uno a uno, y su línea de lo que NO son. Es el punto
+   de mayor exposición legal de la página, así que se destaca en vez de esconderse. */
+.cir-inc-scope {
+  margin-top: 12px;
+  background: var(--paper);
+  border-left: 3px solid var(--emerald);
+  border-radius: 0 10px 10px 0;
+  padding: 13px 15px;
+  font-size: .97rem;
+  color: var(--ink);
+}
+.cir-inc-notis {
+  margin-top: 10px;
+  font-size: .92rem;
+  color: var(--ink-faint);
+  line-height: 1.55;
+}
+
+/* ---------- el ritmo del contenido ---------- */
+.cir-ritmo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 760px;
+  margin: 0 auto 28px;
+}
+.cir-ritmo-card {
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: var(--radius);
+  padding: 26px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.cir-ritmo-card::before {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(15, 107, 79, .45), transparent 70%);
+  top: -100px;
+  right: -70px;
+}
+.cir-ritmo-card > * { position: relative; z-index: 1; }
+.cir-ritmo-card small {
+  display: block;
+  font-size: 10.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #f4c56a;
+  margin-bottom: 10px;
+}
+.cir-ritmo-card b {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.cir-ritmo-card p { color: rgba(246, 241, 231, .74); font-size: .93rem; line-height: 1.55; }
+
+/* ---------- selector de plan de pago ---------- */
+.cir-plan {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: rgba(246, 241, 231, .07);
+  border: 1.5px solid rgba(246, 241, 231, .16);
+  border-radius: 16px;
+  padding: 6px;
+  margin-bottom: 18px;
+}
+.cir-plan button {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: rgba(246, 241, 231, .72);
+  background: none;
+  border: 0;
+  border-radius: 11px;
+  padding: 12px 10px;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+  line-height: 1.35;
+}
+.cir-plan button small {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  opacity: .8;
+  margin-top: 3px;
+}
+.cir-plan button:hover { color: var(--cream); }
+.cir-plan button.cir-on {
+  background: var(--gold);
+  color: #26190a;
+}
+
+/* Total en grande dentro de la tarjeta de compra. */
+.cir-total {
+  text-align: center;
+  padding: 18px 0 4px;
+}
+.cir-total .cir-amt {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #f4c56a;
+}
+.cir-total .cir-amt sup { font-size: 1.3rem; top: -1.1rem; }
+.cir-total .cir-amt em {
+  font-style: normal;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(246, 241, 231, .6);
+}
+.cir-total small {
+  display: block;
+  color: rgba(246, 241, 231, .7);
+  font-size: 13px;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+/* ---------- matriz de precios ---------- */
+.cir-prices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  max-width: 880px;
+  margin: 0 auto;
+  align-items: start;
+}
+.cir-card {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 30px 28px;
+}
+.cir-card-dark {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--cream);
+}
+.cir-card-flag {
+  position: absolute;
+  top: -12px;
+  left: 28px;
+  background: var(--gold);
+  color: #26190a;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 6px 13px;
+  border-radius: 30px;
+}
+.cir-card-name {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.cir-card-dark .cir-card-name { color: var(--gold); }
+.cir-card-price {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  margin: 10px 0 2px;
+}
+.cir-card-price sup { font-size: 1.1rem; top: -1rem; }
+.cir-card-price em {
+  font-style: normal;
+  font-size: .95rem;
+  font-weight: 500;
+  color: var(--ink-faint);
+  font-family: var(--font-body);
+}
+.cir-card-dark .cir-card-price em { color: rgba(246, 241, 231, .6); }
+
+/* La alternativa en cuotas, dentro de la misma tarjeta. */
+.cir-alt {
+  margin: 16px 0 18px;
+  padding: 14px 16px;
+  background: rgba(15, 107, 79, .07);
+  border: 1px solid rgba(15, 107, 79, .18);
+  border-radius: 12px;
+  font-size: .95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.cir-alt b { color: var(--ink); }
+.cir-card-dark .cir-alt {
+  background: rgba(246, 241, 231, .07);
+  border-color: rgba(246, 241, 231, .16);
+  color: rgba(246, 241, 231, .78);
+}
+.cir-card-dark .cir-alt b { color: var(--cream); }
+
+/* Las dos notas obligatorias: la comisión de la pasarela en pago único y el 8% en
+   cuotas. Neutras, pequeñas, siempre debajo del botón. */
+.cir-fee {
+  margin-top: 12px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-faint);
+  text-align: center;
+}
+.cir-card-dark .cir-fee { color: rgba(246, 241, 231, .6); }
+
+/* ---------- la renovación ---------- */
+.cir-renew {
+  max-width: 760px;
+  margin: 34px auto 0;
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 24px 26px;
+}
+.cir-renew b {
+  display: block;
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 8px;
+}
+.cir-renew h3 { font-size: 1.25rem; margin-bottom: 9px; }
+.cir-renew p { color: var(--ink-soft); font-size: .99rem; line-height: 1.6; }
+
+/* ---------- el hueco del testimonio de transformación ---------- */
+.cir-transf {
+  max-width: 820px;
+  margin: 0 auto;
+  background: #fff;
+  border: 2px dashed var(--line-strong);
+  border-radius: var(--radius);
+  padding: 30px 28px;
+  position: relative;
+}
+.cir-transf-todo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(217, 154, 43, .18);
+  border: 1px solid rgba(217, 154, 43, .5);
+  color: var(--gold-deep);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 30px;
+  margin-bottom: 18px;
+}
+.cir-transf-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.6vw, 1.6rem);
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--ink-faint);
+  border-left: 3px solid var(--line-strong);
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+.cir-transf-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.cir-transf-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--sand);
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  flex: none;
+}
+.cir-transf-meta b { display: block; font-size: .98rem; color: var(--ink-soft); }
+.cir-transf-meta small { color: var(--ink-faint); font-size: .86rem; }
+.cir-transf-help {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: var(--paper);
+  border-radius: 12px;
+  font-size: .88rem;
+  color: var(--ink-faint);
+  line-height: 1.55;
+}
+.cir-transf-help code {
+  font-size: .85rem;
+  background: var(--sand);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* ---------- fotos del primer evento ---------- */
+.cir-photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  max-width: 940px;
+  margin: 34px auto 0;
+}
+.cir-photo {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 4px solid #fff;
+  box-shadow: var(--shadow-soft);
+}
+.cir-photo img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+
+/* ---------- disclaimer legal del pie ----------
+   Legible a propósito: no es gris sobre gris. Es la línea que separa educación
+   financiera de asesoría sobre productos financieros, y tiene que poder leerse. */
+.cir-disclaimer {
+  max-width: 720px;
+  margin: 24px auto 0;
+  padding: 18px 20px;
+  background: var(--ivory);
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  color: var(--ink);
+  font-size: 13.5px;
+  line-height: 1.65;
+  text-align: left;
+}
+.cir-disclaimer b { display: block; margin-bottom: 6px; color: var(--ink); }
+
+/* ---------- las cuatro reglas de Bootcamp.css acotadas a su página ---------- */
+@media (max-width: 640px) {
+  .page-circulo { font-size: 16px; }
+}
+@media (max-width: 430px) {
+  .page-circulo .btn {
+    white-space: normal;
+    text-align: center;
+    padding-left: 18px;
+    padding-right: 18px;
+    line-height: 1.35;
+  }
+  .page-circulo .wrap { padding: 0 18px; }
+}
+
+/* ---------- tablet ---------- */
+@media (max-width: 920px) {
+  .cir-photos { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---------- teléfono ---------- */
+@media (max-width: 640px) {
+  .cir-inc { grid-template-columns: 1fr; gap: 14px; padding: 22px 20px; }
+  .cir-ritmo { grid-template-columns: 1fr; }
+  .cir-prices { grid-template-columns: 1fr; gap: 28px; }
+  .cir-photos { grid-template-columns: 1fr; }
+  .cir-transf { padding: 24px 20px; }
+  .cir-renew { padding: 20px 22px; }
+  .cir-card { padding: 26px 22px; }
+}
+@media (max-width: 430px) {
+  /* El selector de plan en una sola columna: "6 cuotas de $180/mes" no cabe al lado de
+     "Pago único" en 375px sin quedar ilegible. */
+  .cir-plan { grid-template-columns: 1fr; }
+  .cir-total .cir-amt { font-size: 2.6rem; }
+}

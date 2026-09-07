@@ -68,6 +68,122 @@ const EVENTO_JSON_LD = {
   },
 };
 
+const BOOTCAMP_TITLE = 'Bootcamp Financiero en Gold Coast · Sábado 14 de noviembre de 2026 | Revolución del Dinero';
+const BOOTCAMP_DESCRIPTION = 'Un día presencial en español para ordenar tu plata: tus números, tus deudas, tus hábitos y tu proyección del año. Sábado 14 de noviembre de 2026, de 10:00 a 19:00, en Gold Coast, Australia. $250 AUD por persona o $400 AUD para dos, e incluye una sesión de 30 minutos con Jonathan. El almuerzo no está incluido.';
+
+// Educación y formación — deliberadamente sin temario publicado y sin lenguaje de
+// asesoría sobre productos financieros: Jonathan opera bajo su ABN personal y no tiene
+// licencia AFSL. Ver la cabecera de src/pages/Bootcamp.js.
+const BOOTCAMP_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: 'Bootcamp Financiero — Revolución del Dinero',
+  description: BOOTCAMP_DESCRIPTION,
+  startDate: '2026-11-14T10:00:00+10:00',
+  endDate: '2026-11-14T19:00:00+10:00',
+  doorTime: '2026-11-14T09:30:00+10:00',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  eventStatus: 'https://schema.org/EventScheduled',
+  location: {
+    '@type': 'Place',
+    name: 'Gold Coast, Australia',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Gold Coast',
+      addressRegion: 'QLD',
+      addressCountry: 'AU',
+    },
+  },
+  image: [DEFAULT_OG_IMAGE],
+  inLanguage: 'es',
+  organizer: {
+    '@type': 'Person',
+    name: 'Jonathan González Botero',
+    url: SITE_URL,
+  },
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'Entrada individual',
+      price: '250',
+      priceCurrency: 'AUD',
+      availability: 'https://schema.org/InStock',
+      url: `${SITE_URL}/bootcamp`,
+      validFrom: '2026-09-12',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Entrada para dos personas',
+      price: '400',
+      priceCurrency: 'AUD',
+      availability: 'https://schema.org/InStock',
+      url: `${SITE_URL}/bootcamp`,
+      validFrom: '2026-09-12',
+    },
+  ],
+};
+
+const BOOTCAMP_GRACIAS_TITLE = 'Tu lugar en el Bootcamp está confirmado | Revolución del Dinero';
+const BOOTCAMP_GRACIAS_DESCRIPTION = 'Confirmación de compra del Bootcamp Financiero del sábado 14 de noviembre de 2026 en Gold Coast, y el enlace para agendar tu sesión de 30 minutos con Jonathan.';
+
+// Disclaimer legal obligatorio. Va en el pie de /circulo y /circulo/gracias, y en
+// /terminos. Jonathan no tiene licencia AFSL en Australia y opera bajo su ABN personal:
+// esta línea es la que separa educación financiera general de asesoría sobre productos
+// financieros. Se declara una sola vez acá para que no pueda divergir entre páginas, y se
+// pinta legible (ver .cir-disclaimer), no gris sobre gris.
+const DISCLAIMER_AFSL = 'Revolución del Dinero ofrece educación financiera general. No damos asesoría sobre productos financieros específicos. Para decisiones sobre inversiones, seguros, superannuation, préstamos o impuestos, consulta a un profesional licenciado en Australia.';
+
+const CIRCULO_TITLE = 'Círculo Presencial — Un año de acompañamiento financiero en español, en Australia | Revolución del Dinero';
+const CIRCULO_DESCRIPTION = 'Un año con Jonathan González y un grupo pequeño de latinos en Australia para ordenar tu plata: comunidad privada, sesiones mensuales en grupo, sesiones uno a uno y el Bootcamp Financiero presencial incluido. $1.000 AUD o 6 cuotas de $180. Todo en español.';
+
+// Se declara como Service y no como Event: es un programa de un año, no una fecha. Sin
+// conteo de contenido y sin lenguaje de asesoría sobre productos financieros — ver la
+// cabecera de src/pages/Circulo.js.
+const CIRCULO_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Círculo Presencial — Revolución del Dinero',
+  description: CIRCULO_DESCRIPTION,
+  serviceType: 'Programa de educación financiera y acompañamiento en grupo',
+  inLanguage: 'es',
+  areaServed: {
+    '@type': 'Place',
+    name: 'Gold Coast, Queensland, Australia',
+  },
+  provider: {
+    '@type': 'Person',
+    name: 'Jonathan González Botero',
+    url: SITE_URL,
+  },
+  image: [DEFAULT_OG_IMAGE],
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'Círculo Presencial — Individual',
+      price: '1000',
+      priceCurrency: 'AUD',
+      availability: 'https://schema.org/InStock',
+      url: `${SITE_URL}/circulo`,
+    },
+    {
+      '@type': 'Offer',
+      name: 'Círculo Presencial — Para dos personas',
+      price: '1500',
+      priceCurrency: 'AUD',
+      availability: 'https://schema.org/InStock',
+      url: `${SITE_URL}/circulo`,
+    },
+  ],
+  termsOfService: `${SITE_URL}/terminos`,
+  disclaimer: DISCLAIMER_AFSL,
+};
+
+const CIRCULO_GRACIAS_TITLE = 'Ya estás en el Círculo Presencial | Revolución del Dinero';
+const CIRCULO_GRACIAS_DESCRIPTION = 'Confirmación de tu entrada al Círculo Presencial de Revolución del Dinero, con tu plan de pago, el enlace para agendar tu primera sesión uno a uno y la fecha del Bootcamp Financiero incluido.';
+
+const TERMINOS_TITLE = 'Términos y política de reembolso | Revolución del Dinero';
+const TERMINOS_DESCRIPTION = 'Términos de compra y política de reembolso de los programas y eventos presenciales de Revolución del Dinero, en lenguaje llano.';
+
 // Add an entry here (+ a matching rewrite in vercel.json) whenever a new route
 // needs its own prerendered <head> tags for social/search crawlers.
 const ROUTES = [
@@ -87,6 +203,22 @@ const ROUTES = [
     image: DEFAULT_OG_IMAGE,
     jsonLd: EVENTO_JSON_LD,
   },
+  {
+    path: '/bootcamp',
+    outputFile: 'bootcamp/index.html',
+    title: BOOTCAMP_TITLE,
+    description: BOOTCAMP_DESCRIPTION,
+    image: DEFAULT_OG_IMAGE,
+    jsonLd: BOOTCAMP_JSON_LD,
+  },
+  {
+    path: '/circulo',
+    outputFile: 'circulo/index.html',
+    title: CIRCULO_TITLE,
+    description: CIRCULO_DESCRIPTION,
+    image: DEFAULT_OG_IMAGE,
+    jsonLd: CIRCULO_JSON_LD,
+  },
 ];
 
 module.exports = {
@@ -99,5 +231,18 @@ module.exports = {
   EVENTO_TITLE,
   EVENTO_DESCRIPTION,
   EVENTO_JSON_LD,
+  BOOTCAMP_TITLE,
+  BOOTCAMP_DESCRIPTION,
+  BOOTCAMP_JSON_LD,
+  BOOTCAMP_GRACIAS_TITLE,
+  BOOTCAMP_GRACIAS_DESCRIPTION,
+  CIRCULO_TITLE,
+  CIRCULO_DESCRIPTION,
+  CIRCULO_JSON_LD,
+  CIRCULO_GRACIAS_TITLE,
+  CIRCULO_GRACIAS_DESCRIPTION,
+  DISCLAIMER_AFSL,
+  TERMINOS_TITLE,
+  TERMINOS_DESCRIPTION,
   ROUTES,
 };

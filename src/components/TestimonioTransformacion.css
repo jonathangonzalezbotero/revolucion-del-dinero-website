@@ -1,0 +1,22 @@
+/*
+  Estilos del hueco del testimonio de transformación.
+
+  Las clases .cir-transf* base viven en src/pages/Circulo.css, junto al resto de lo propio
+  del Círculo. Acá va solo lo que el componente necesita por su cuenta, para que pueda
+  moverse a otra página sin arrastrar la hoja entera.
+*/
+
+.cir-transf-video {
+  width: 100%;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  background: #000;
+  aspect-ratio: 16 / 9;
+}
+
+/* Con el testimonio pendiente, el borde discontinuo y la cita en gris dejan claro que es
+   un hueco declarado y no una cita real. Cuando PENDIENTE pase a false, esta clase deja
+   de aplicarse y el bloque se ve como una tarjeta normal. */
+.cir-transf:has(.cir-transf-todo) {
+  background: var(--paper);
+}

@@ -49,7 +49,16 @@ function AboutCarousel({ photos, alt }) {
   );
 }
 
-function AboutSection({ id = 'sobre-mi' }) {
+// `closing` trae por defecto exactamente el párrafo que ya usaban la home y /evento, así
+// que esas dos páginas siguen renderizando lo mismo. /bootcamp lo sobreescribe porque el
+// texto por defecto está fechado ("el sábado 12, en Robina") y quedaría desactualizado en
+// una página que se vende hasta noviembre.
+function AboutSection({
+  id = 'sobre-mi',
+  closing = (
+    <p>En septiembre voy a dar una masterclass para LatinHub en Brisbane. Y el sábado 12, en Robina, va a estar la segunda edición de este evento.</p>
+  ),
+}) {
   return (
     <section className="sec" id={id} style={{ background: 'var(--paper)' }}>
       <div className="wrap about-grid">
@@ -63,7 +72,7 @@ function AboutSection({ id = 'sobre-mi' }) {
           <p>Llegué a Australia hace 6 años a aprender inglés y volverme a Colombia. Los primeros meses hice de todo: Uber, limpieza de oficinas, turnos en una warehouse, lavando platos en un restaurante. Sabía que era temporal, pero uno igual se cansa.</p>
           <p>Mi primer paso real hacia la tranquilidad financiera fue el día que empecé a trabajar como ingeniero de software. Ahí dejé de sobrevivir el mes y pude empezar a pensar. Hoy tengo dos negocios: <b className="hi">Héroes Colombia</b> allá, y <b className="hi">EasyAussie</b> acá en Australia.</p>
           <p>Llevo más de 10 años metido en el tema de las finanzas personales. Te lo digo con un número, que es más honesto que cualquier cosa: <span className="hi">hoy me faltan $1.500 al mes en ingresos que no dependan de mi trabajo</span> para poder decir que soy libre financieramente. Todavía no llego. Pero sé exactamente cuánto me falta, y eso es justo lo que quiero que tú tengas al salir del evento.</p>
-          <p>En septiembre voy a dar una masterclass para LatinHub en Brisbane. Y el sábado 12, en Robina, va a estar la segunda edición de este evento.</p>
+          {closing}
           <div className="sig">Jonathan González Botero</div>
         </div>
       </div>

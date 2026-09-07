@@ -123,7 +123,7 @@ function Home() {
         </div>
         <div className="wrap hero-grid">
           <div className="hero-copy reveal">
-            <h1>Es hora de hacer tu propia <span className="ital">revolución</span> <span className="u">del dinero.</span></h1>
+            <h1>Ganas más que allá. <span className="ital">¿Y tienes más</span> <span className="u">guardado?</span></h1>
             {/* <p className="lead">Soy Jonathan González. Te ayudo a reprogramar tu mente, administrar lo que ganas e invertir con confianza — para que dejes de trabajar 50–60 horas y aun así sentir que el dinero no alcanza.</p> */}
             <div className="hero-cta">
               {/* <a href={SKOOL_URL} target="_blank" rel="noopener noreferrer" className="btn btn-emerald btn-lg">Unirme a la comunidad <span className="ar">→</span></a> */}
@@ -235,29 +235,47 @@ function Home() {
                 <Link to="/evento" className="btn btn-ink">Registrarme al evento →</Link>
               </div>
             </div>
+            {/*
+              Esta tarjeta existía antes de que /circulo existiera: no tenía precio, decía
+              "Cupos limitados" (que va contra la regla de no anunciar aforo) y su botón
+              abría el formulario de solicitud. Ahora lleva a la página del producto, con
+              su precio real. El modal de solicitud sigue existiendo para la mentoría.
+            */}
             <div className="offer reveal">
               <div className="top">
                 <span className="kicker k-soon">🎯 Programa de 1 año</span>
                 <h3>Círculo Presencial</h3>
               </div>
-              <p className="desc">Doce meses de acompañamiento directo conmigo, en Australia, para trabajar esto a fondo y no solo enterarte de que existe.</p>
+              <p className="desc">Un año de acompañamiento directo conmigo y con un grupo pequeño, en Australia, para trabajar esto a fondo y no solo enterarte de que existe.</p>
               <ul>
-                <li>12 meses de acompañamiento continuo</li>
-                <li>Acceso a eventos exclusivos</li>
-                <li>Encuentro mensual en grupo</li>
-                <li>Seguimiento cercano de tu progreso</li>
+                <li>Un año completo desde el día que entras</li>
+                <li>El Bootcamp Financiero presencial incluido</li>
+                <li>Sesión mensual con todo el grupo</li>
+                <li>Sesiones uno a uno conmigo durante el año</li>
               </ul>
               <div className="foot">
-                <div className="price">Programa de 12 meses</div>
-                <div className="price-note">Cupos limitados · Por solicitud</div>
-                <button type="button" className="btn btn-outline" onClick={openMentorModal}>Escribeme →</button>
+                <div className="price"><span className="free">$1.000 AUD</span></div>
+                <div className="price-note">O 6 cuotas de $180 · un año completo</div>
+                <Link to="/circulo" className="btn btn-ink">Ver el Círculo →</Link>
+                {/*
+                  Este botón era el único punto de entrada al modal de solicitud (y con él
+                  a /api/mentor-request y sus correos). Se conserva como vía secundaria
+                  para quien prefiere hablar antes de decidir: quitarlo dejaría muerto un
+                  formulario que funciona.
+                */}
+                <button type="button" className="ask-call" onClick={openMentorModal}>
+                  ¿Prefieres que hablemos primero? Escríbeme
+                </button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <TestimonialsSection />
+      <TestimonialsSection
+        eyebrow="De la primera sala"
+        heading={<>Esto es lo que dijo la gente <span className="accent ital">al salir de la primera sala.</span></>}
+      />
 
       {/* EVENT */}
       <section className="sec event">
