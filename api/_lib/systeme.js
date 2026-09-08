@@ -162,4 +162,66 @@ async function removeTagByName(contactId, tagName) {
   }
 }
 
-module.exports = { splitName, upsertContact, findContactByEmail, addTagByName, removeTagByName };
+// Creates a contact and nothing else — no lookup, no patch. Callers that already know the
+// email isn't in the CRM (see eventoCheckin.js) use this instead of upsertContact.
+// Returns the created contact, or throws on a non-201.
+async function createContact({ email, firstName, surname, phone }) {
+  const res = await systemeFetch('/contacts', {
+    method: 'POST',
+    body: JSON.stringify({
+      email,
+      locale: 'es',
+      fields: [
+        { slug: 'first_name', value: firstName || null },
+        { slug: 'surname', value: surname || null },
+        { slug: 'phone_number', value: phone || null },
+      ],
+    }),
+  });
+  if (res.status !== 201) {
+    throw new Error(`systeme.io createContact failed (${res.status}): ${await res.text().catch(() => '')}`);
+  }
+  return res.json();
+}
+
+// The non-destructive counterpart to upsertContact's PATCH: only writes standard fields the
+// contact currently has EMPTY. Exists for the self-service check-in form, where whatever the
+// attendee types at the door must never overwrite what the CRM already knows about them
+// (a paying buyer's registration data is the source of truth, not a rushed phone entry).
+// Best-effort: never throws — the contact exists and gets tagged regardless.
+async function fillEmptyContactFields(contact, { firstName, surname, phone }) {
+  try {
+    const current = new Map((contact.fields || []).map((f) => [f.slug, f.value]));
+    const isEmpty = (slug) => !String(current.get(slug) ?? '').trim();
+
+    const fields = [];
+    if (firstName && isEmpty('first_name')) fields.push({ slug: 'first_name', value: firstName });
+    if (surname && isEmpty('surname')) fields.push({ slug: 'surname', value: surname });
+    if (phone && isEmpty('phone_number')) fields.push({ slug: 'phone_number', value: phone });
+    if (!fields.length) return false;
+
+    const res = await systemeFetch(`/contacts/${contact.id}`, {
+      method: 'PATCH',
+      contentType: 'application/merge-patch+json',
+      body: JSON.stringify({ fields }),
+    });
+    if (!res.ok) {
+      console.error('systeme.io fillEmptyContactFields failed', res.status, await res.text().catch(() => ''));
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error('systeme.io fillEmptyContactFields failed', err);
+    return false;
+  }
+}
+
+module.exports = {
+  splitName,
+  upsertContact,
+  createContact,
+  fillEmptyContactFields,
+  findContactByEmail,
+  addTagByName,
+  removeTagByName,
+};

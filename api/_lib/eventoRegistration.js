@@ -94,4 +94,4 @@ async function syncPaidCheckoutSession(session) {
   return { synced: true, contactId: contact.id, email };
 }
 
-module.exports = { registerEventoLead, syncPaidCheckoutSession, EVENT_TAG, NO_PAGO_TAG, TIER_TAGS };
+module.exports = { registerEventoLead, syncPaidCheckoutSession, normalizePhone, EVENT_TAG, NO_PAGO_TAG, TIER_TAGS };

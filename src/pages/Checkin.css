@@ -1,0 +1,199 @@
+/*
+  /checkin — una sola tarjeta centrada, pensada para el teléfono de alguien parado en una
+  puerta: un formulario, un botón grande, y nada más. Reutiliza los tokens y botones de
+  styles/shared.css y el lenguaje visual de la tarjeta de registro de Evento.css.
+*/
+
+.page-checkin {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--ivory);
+  display: flex;
+  flex-direction: column;
+}
+
+.checkin-wrap {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 28px 18px 40px;
+  padding-top: max(28px, env(safe-area-inset-top));
+  padding-bottom: max(40px, env(safe-area-inset-bottom));
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 22px;
+}
+
+.checkin-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 6px;
+}
+
+.checkin-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+
+.checkin-head .eyebrow {
+  font-size: 11px;
+}
+
+.checkin-card {
+  background: var(--ink);
+  color: var(--cream);
+  border-radius: 22px;
+  padding: 30px 26px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.checkin-card::before {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(15, 107, 79, .5), transparent 70%);
+  top: -120px;
+  right: -80px;
+  pointer-events: none;
+}
+
+.checkin-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.checkin-card h1 {
+  font-size: clamp(1.9rem, 6vw, 2.4rem);
+  margin-bottom: 8px;
+  color: var(--cream);
+}
+
+.checkin-sub {
+  color: rgba(246, 241, 231, .72);
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+/* Campos: mismo aspecto que la tarjeta de registro del evento. */
+.checkin-card .field {
+  margin-bottom: 14px;
+}
+
+.checkin-card .field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  color: rgba(246, 241, 231, .7);
+  margin-bottom: 7px;
+  text-transform: uppercase;
+}
+
+.checkin-card .field input {
+  width: 100%;
+  background: rgba(246, 241, 231, .07);
+  border: 1.5px solid rgba(246, 241, 231, .16);
+  border-radius: 12px;
+  padding: 15px 16px;
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 16px; /* ≥16px evita el zoom automático de iOS al enfocar */
+  transition: border-color .2s, background .2s;
+}
+
+.checkin-card .field input:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: rgba(246, 241, 231, .12);
+}
+
+.checkin-card .field input::placeholder {
+  color: rgba(246, 241, 231, .4);
+}
+
+.checkin-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.checkin-error {
+  background: rgba(217, 154, 43, .14);
+  border: 1px solid rgba(217, 154, 43, .5);
+  color: #f3d9a5;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.checkin-card .btn-block {
+  margin-top: 6px;
+  min-height: 56px;
+  white-space: normal;
+}
+
+.checkin-card .btn[disabled] {
+  opacity: .7;
+  cursor: wait;
+  transform: none;
+}
+
+/* Pantalla de confirmación */
+.checkin-done {
+  text-align: center;
+  padding-top: 38px;
+}
+
+.checkin-check {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: var(--emerald);
+  color: var(--cream);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 68px;
+  box-shadow: 0 12px 26px -12px rgba(15, 107, 79, .8);
+}
+
+.checkin-done .checkin-sub {
+  margin-bottom: 26px;
+}
+
+.checkin-otro {
+  color: var(--cream);
+  border-color: rgba(246, 241, 231, .35);
+}
+
+.checkin-otro:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+@media (max-width: 420px) {
+  .checkin-card {
+    padding: 26px 20px;
+    border-radius: 18px;
+  }
+}
+
+@media (min-width: 900px) {
+  .checkin-wrap {
+    max-width: 560px;
+  }
+}

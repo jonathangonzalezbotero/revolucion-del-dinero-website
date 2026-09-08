@@ -13,6 +13,8 @@ function useFacebookPixelPageView() {
       isFirstRender.current = false;
       return;
     }
+    // /checkin (check-in en la puerta del evento) no se mide. Ver también public/index.html.
+    if (location.pathname.startsWith('/checkin')) return;
     window.fbq?.('track', 'PageView');
   }, [location.pathname, location.search]);
 }

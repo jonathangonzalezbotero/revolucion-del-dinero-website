@@ -6,8 +6,11 @@ import BootcampGracias from './pages/BootcampGracias';
 import Circulo from './pages/Circulo';
 import CirculoGracias from './pages/CirculoGracias';
 import Terminos from './pages/Terminos';
+import Checkin from './pages/Checkin';
 import useFacebookPixelPageView from './hooks/useFacebookPixelPageView';
 
+// /checkin es solo para la puerta del evento: nada de píxel. La carga inicial ya se
+// omite en public/index.html; esto cubre las navegaciones dentro de la SPA.
 function PixelTracker() {
   useFacebookPixelPageView();
   return null;
@@ -25,6 +28,7 @@ function App() {
         <Route path="/circulo" element={<Circulo />} />
         <Route path="/circulo/gracias" element={<CirculoGracias />} />
         <Route path="/terminos" element={<Terminos />} />
+        <Route path="/checkin" element={<Checkin />} />
       </Routes>
     </BrowserRouter>
   );
