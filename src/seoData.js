@@ -68,20 +68,19 @@ const EVENTO_JSON_LD = {
   },
 };
 
-const BOOTCAMP_TITLE = 'Bootcamp Financiero en Gold Coast · Sábado 14 de noviembre de 2026 | Revolución del Dinero';
-const BOOTCAMP_DESCRIPTION = 'Un día presencial en español para ordenar tu plata: tus números, tus deudas, tus hábitos y tu proyección del año. Sábado 14 de noviembre de 2026, de 10:00 a 19:00, en Gold Coast, Australia. $250 AUD por persona o $400 AUD para dos, e incluye una sesión de 30 minutos con Jonathan. El almuerzo no está incluido.';
+const BOOTCAMP_TITLE = 'Bootcamp Financiero en Gold Coast · Sábado 28 de noviembre de 2026 | Revolución del Dinero';
+const BOOTCAMP_DESCRIPTION = 'Un día presencial en español para ordenar tu plata: tus números, tus deudas, tus hábitos y tu proyección del año. Sábado 28 de noviembre de 2026, de 10:00 a 19:00, en Gold Coast, Australia. $250 AUD por persona o $400 AUD para dos, con el curso completo «Proyección anual financiera» incluido.';
 
-// Educación y formación — deliberadamente sin temario publicado y sin lenguaje de
-// asesoría sobre productos financieros: Jonathan opera bajo su ABN personal y no tiene
-// licencia AFSL. Ver la cabecera de src/pages/Bootcamp.js.
+// Educación y formación — deliberadamente sin temario publicado. Ver la cabecera de
+// src/pages/Bootcamp.js.
 const BOOTCAMP_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'Event',
   name: 'Bootcamp Financiero — Revolución del Dinero',
   description: BOOTCAMP_DESCRIPTION,
-  startDate: '2026-11-14T10:00:00+10:00',
-  endDate: '2026-11-14T19:00:00+10:00',
-  doorTime: '2026-11-14T09:30:00+10:00',
+  startDate: '2026-11-28T10:00:00+10:00',
+  endDate: '2026-11-28T19:00:00+10:00',
+  doorTime: '2026-11-28T09:30:00+10:00',
   eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
   eventStatus: 'https://schema.org/EventScheduled',
   location: {
@@ -124,7 +123,7 @@ const BOOTCAMP_JSON_LD = {
 };
 
 const BOOTCAMP_GRACIAS_TITLE = 'Tu lugar en el Bootcamp está confirmado | Revolución del Dinero';
-const BOOTCAMP_GRACIAS_DESCRIPTION = 'Confirmación de compra del Bootcamp Financiero del sábado 14 de noviembre de 2026 en Gold Coast, y el enlace para agendar tu sesión de 30 minutos con Jonathan.';
+const BOOTCAMP_GRACIAS_DESCRIPTION = 'Confirmación de compra del Bootcamp Financiero del sábado 28 de noviembre de 2026 en Gold Coast, con el curso «Proyección anual financiera» incluido.';
 
 // Disclaimer legal obligatorio. Va en el pie de /circulo y /circulo/gracias, y en
 // /terminos. Jonathan no tiene licencia AFSL en Australia y opera bajo su ABN personal:
@@ -134,7 +133,7 @@ const BOOTCAMP_GRACIAS_DESCRIPTION = 'Confirmación de compra del Bootcamp Finan
 const DISCLAIMER_AFSL = 'Revolución del Dinero ofrece educación financiera general. No damos asesoría sobre productos financieros específicos. Para decisiones sobre inversiones, seguros, superannuation, préstamos o impuestos, consulta a un profesional licenciado en Australia.';
 
 const CIRCULO_TITLE = 'Círculo Presencial — Un año de acompañamiento financiero en español, en Australia | Revolución del Dinero';
-const CIRCULO_DESCRIPTION = 'Un año con Jonathan González y un grupo pequeño de latinos en Australia para ordenar tu plata: comunidad privada, sesiones mensuales en grupo, sesiones uno a uno y el Bootcamp Financiero presencial incluido. $1.000 AUD o 6 cuotas de $180. Todo en español.';
+const CIRCULO_DESCRIPTION = 'Un año con Jonathan González y un grupo pequeño de latinos en Australia para ordenar tu plata: grupo privado de WhatsApp, sesiones mensuales en grupo, 4 sesiones uno a uno, el Bootcamp Financiero de noviembre y el evento «Libera tu potencial» de marzo, presenciales e incluidos. $1.000 AUD o 6 cuotas de $180. Todo en español.';
 
 // Se declara como Service y no como Event: es un programa de un año, no una fecha. Sin
 // conteo de contenido y sin lenguaje de asesoría sobre productos financieros — ver la

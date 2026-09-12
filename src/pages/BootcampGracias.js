@@ -1,9 +1,10 @@
 /**
  * /bootcamp/gracias — success_url de la Stripe Checkout Session del Bootcamp.
  *
- * Es el ÚNICO sitio donde aparece el link de Calendly para agendar la sesión de 30
- * minutos: quien no ha pagado no debe poder agendar. El link vive en la constante
- * LINK_AGENDA (src/config/bootcamp.js), no repetido acá.
+ * El bono incluido es el curso "Proyección anual financiera" (CURSO_NOMBRE en
+ * src/config/bootcamp.js). Los detalles de acceso se mandan por correo, así que acá solo
+ * se anuncia. La sesión 1:1 de 30 minutos y su link de Calendly se retiraron en
+ * septiembre de 2026: no vuelven a esta página.
  *
  * NO menciona ni enlaza la comunidad ni Skool: el Bootcamp no los incluye. Eso es del
  * Círculo Presencial ($1.000), y su tag `acceso-comunidad` no aparece en este código.
@@ -22,8 +23,8 @@ import Logo from '../assets/images/logo.webp';
 import Seo from '../components/Seo';
 import { BOOTCAMP_GRACIAS_TITLE, BOOTCAMP_GRACIAS_DESCRIPTION } from '../seoData';
 import {
-  LINK_AGENDA,
-  LIMITE_SESION,
+  CURSO_NOMBRE,
+  EFECTIVO_DIA,
   FECHA_LARGA,
   FECHA_CORTA,
   HORARIO,
@@ -76,33 +77,24 @@ function BootcampGracias() {
             </h1>
             <p className="bc-sub">
               Ya entró tu pago. En unos minutos te llega un correo con todos los detalles: si
-              no lo ves, mira en la carpeta de spam. Y hoy te queda una sola cosa por hacer.
+              no lo ves, mira en la carpeta de spam.
             </p>
 
             <div className="bc-agenda-card">
               <span className="bc-badge">Va incluido en lo que acabas de pagar</span>
-              <h2>Agenda tu media hora conmigo.</h2>
+              <h2>El curso «{CURSO_NOMBRE}» es tuyo.</h2>
               <p>
-                Media hora, tú y yo solos, cuando quieras antes del Bootcamp. Eliges tú el día
-                y la hora.
+                El sábado armas tu primer año proyectado conmigo. Con el curso aprendes a
+                repetirlo cada año, tú solo, sin depender de nadie.
               </p>
               <div className="bc-scope">
-                <b>Para ordenar tu punto de partida:</b> tu presupuesto, tus deudas, tus
-                hábitos y cómo tienes repartidas tus cuentas.
+                <b>Con el curso aprendes a:</b> proyectar tus ingresos y gastos de los doce
+                meses, anticipar los meses difíciles, ponerle fecha a tus metas y ajustar el
+                plan cuando la vida cambie.
               </div>
-              <a
-                className="btn btn-gold btn-block btn-lg"
-                href={LINK_AGENDA}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Agendar mi media hora
-              </a>
               <p className="bc-notis">
-                La puedes usar hasta el {LIMITE_SESION}, el día del Bootcamp. Mientras más
-                pronto la agendes, más tiempo tienes para trabajar con lo que salga de ahí. No
-                es asesoría sobre productos financieros — para eso hay profesionales
-                licenciados y te digo a quién preguntarle.
+                Los detalles para acceder al curso te llegan al correo. Si en un rato no los
+                ves, revisa la carpeta de spam o escríbeme.
               </p>
             </div>
 
@@ -131,6 +123,17 @@ function BootcampGracias() {
                 </div>
               </div>
               <div className="bc-prow bc-prow-warn">
+                <span className="bc-ic">💵</span>
+                <div>
+                  <small>Trae efectivo</small>
+                  <b>${EFECTIVO_DIA} en billetes</b>
+                  <span className="bc-psub">
+                    Son para un ejercicio práctico que hacemos ese día. Cada persona trae los
+                    suyos, y tienen que ser efectivo, no tarjeta.
+                  </span>
+                </div>
+              </div>
+              <div className="bc-prow bc-prow-warn">
                 <span className="bc-ic">🍽️</span>
                 <div>
                   <small>Almuerzo</small>
@@ -144,8 +147,8 @@ function BootcampGracias() {
             </div>
 
             <p className="bc-close">
-              Nos vemos el {FECHA_LARGA.toLowerCase()}. Trae tus números como estén. Para eso
-              es el día.
+              Nos vemos el {FECHA_LARGA.toLowerCase()}. Trae tus números como estén y tus $
+              {EFECTIVO_DIA} en efectivo. Para eso es el día.
             </p>
           </div>
         </div>

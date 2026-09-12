@@ -46,15 +46,18 @@
  *
  * DECISIONES DE NEGOCIO QUE ESTE ARCHIVO RESPETA
  *   · No se menciona ningún número de cupos, ni aforo, ni "quedan X plazas".
- *   · No se publica temario: el día se cuenta como tres movimientos, sin bloques, sin
- *     títulos de módulos y sin duraciones. La especificidad va en "Qué te llevas".
+ *   · No se publica temario: el día se cuenta en tres partes (mañana, mediodía, tarde),
+ *     sin horas, sin títulos de módulos y sin duraciones. La especificidad va en "Qué te
+ *     llevas".
  *   · La garantía de reembolso NO es argumento de esta página — Jonathan la anuncia desde
  *     el escenario. Vive en /terminos, enlazada solo desde el pie.
- *   · El almuerzo NO está incluido, y se dice explícitamente varias veces.
- *   · El link de Calendly no aparece acá. Solo en /bootcamp/gracias.
+ *   · El bono incluido es el curso "Proyección anual financiera" (CURSO_NOMBRE). La
+ *     sesión 1:1 de 30 minutos que existía antes se retiró y NO vuelve: ni Calendly, ni
+ *     "media hora conmigo", ni fecha límite para agendar.
+ *   · Nada de licencias, ASFL/AFSL ni "esto no es asesoría" en esta página. Jonathan lo
+ *     aclara en persona. La página vende; los descargos legales viven en /terminos.
+ *   · El almuerzo no se menciona. Eso va en los correos.
  *   · El crédito al Círculo no se menciona ni se insinúa.
- *   · La sesión 1:1 nunca se llama "asesoría": Jonathan no tiene licencia AFSL y opera
- *     bajo su ABN personal. Va con su alcance escrito y su línea de lo que no es.
  */
 
 import { useEffect, useRef, useState } from 'react';
@@ -81,7 +84,8 @@ import {
   COBRO_PAREJA,
   PRICE_IDS,
   TIERS,
-  LIMITE_SESION,
+  CURSO_NOMBRE,
+  EFECTIVO_DIA,
 } from '../config/bootcamp';
 
 const INDIVIDUAL = 'bootcamp-individual';
@@ -243,7 +247,7 @@ function Bootcamp() {
       <Seo title={BOOTCAMP_TITLE} description={BOOTCAMP_DESCRIPTION} path="/bootcamp" jsonLd={BOOTCAMP_JSON_LD} />
 
       <div className="bc-ann">
-        {FECHA_CORTA} · {LUGAR} · <b>Un sábado entero, de {HORARIO}</b>
+        {FECHA_CORTA} · {LUGAR} <b>de {HORARIO}</b>
       </div>
 
       {/* ---------- HERO + TARJETA DE COMPRA ---------- */}
@@ -254,17 +258,17 @@ function Bootcamp() {
 
         <div className="wrap bc-hero-grid">
           <div className="bc-hero-copy">
-            <span className="bc-badge">Un sábado entero, en {LUGAR.replace(', Australia', '')}</span>
-            <h1>Ya cortaste todo. <span className="bc-ital">Y todavía no te da.</span></h1>
+            <span className="bc-badge">Un día de inmersión completa</span>
+            <h1>Haces de todo. <span className="bc-ital">Y sigues sin llegar a fin de mes.</span></h1>
             <p className="bc-lead">
-              Un sábado entero, sentado, mirando tus números de frente. Vas a salir sabiendo
-              en qué se te está yendo la plata, qué frases traes de casa que ya no son tuyas,
-              y qué vas a mover el lunes.
+              Un sábado entero, sentados con tus números de frente. Sales sabiendo exactamente
+              en qué se te va la plata, qué creencias te están frenando, y con un plan claro
+              para administrar e invertir tu dinero de aquí a un año.
             </p>
 
             <div className="bc-hero-cta">
               <button type="button" className="btn btn-gold btn-block btn-lg" onClick={irAComprar}>
-                Quiero mi puesto
+                Sí, reservar mi entrada
               </button>
             </div>
 
@@ -288,7 +292,7 @@ function Bootcamp() {
             </div>
 
             <div className="bc-band">
-              <span><b>Antes del Bootcamp nos sentamos tú y yo, media hora, solos.</b> Va incluido en tu puesto.</span>
+              <span><b>Incluye el curso completo «{CURSO_NOMBRE}»</b> para que lo que armes ese día lo repitas cada año.</span>
             </div>
 
             <figure className="bc-hero-img">
@@ -299,8 +303,8 @@ function Bootcamp() {
             <div className="bc-urgency">
               <span className="bc-dot"></span>
               <span>
-                La media hora conmigo la usas cuando quieras antes del {LIMITE_SESION}. Si
-                entras hoy te sobra tiempo. Si entras en octubre te queda una tarde.
+                Es un solo sábado: el {FECHA_LARGA.toLowerCase()}. Hasta la próxima edición
+                no hay otro.
               </span>
             </div>
           </div>
@@ -387,7 +391,7 @@ function Bootcamp() {
                 )}
 
                 <button type="submit" className="btn btn-gold btn-block btn-lg" disabled={cargando || faltaConfiguracion}>
-                  {cargando ? 'Abriendo el pago…' : 'Quiero mi puesto'}
+                  {cargando ? 'Abriendo el pago…' : 'Sí, reservar mi entrada'}
                 </button>
 
                 <p className="bc-fee">
@@ -441,22 +445,8 @@ function Bootcamp() {
             </div>
           </div>
 
-          <div className="bc-subhead reveal">
-            <h3>Y ojo, este día no es para ti si vienes a que alguien te diga en qué invertir.</h3>
-          </div>
-          <div className="bc-list2">
-            <div className="bc-li bc-li-no">
-              <span className="bc-ck">✕</span>
-              <p>Eso no lo hago. <b>No tengo licencia para hacerlo</b>, y quien te lo prometa desde un escenario te está vendiendo humo.</p>
-            </div>
-            <div className="bc-li bc-li-no">
-              <span className="bc-ck">✕</span>
-              <p>Tampoco es para ti si esperas que alguien decida por ti <b>sin que tú mires tus números</b>. Todo el día se apoya en que los mires.</p>
-            </div>
-          </div>
-
           <p className="bc-close">
-            Lo que sí vas a tener es el criterio para saber qué preguntar y a quién.
+            Nada de esto es falta de esfuerzo. Es falta de un método. Y eso se aprende en un día.
           </p>
         </div>
       </section>
@@ -466,10 +456,10 @@ function Bootcamp() {
         <div className="wrap bc-ctaband-inner">
           <div>
             <h3>Un sábado entero, y de ahí no sales con tarea. Sales con decisiones.</h3>
-            <p>{FECHA_LARGA}, en {LUGAR}. Con media hora conmigo antes.</p>
+            <p>{FECHA_LARGA}, en {LUGAR}. Con el curso «{CURSO_NOMBRE}» incluido.</p>
           </div>
           <button type="button" className="btn btn-gold btn-lg" onClick={irAComprar}>
-            Quiero mi puesto
+            Sí, reservar mi entrada
           </button>
         </div>
       </section>
@@ -523,54 +513,54 @@ function Bootcamp() {
         </div>
       </section>
 
-      {/* ---------- LOS TRES MOVIMIENTOS ---------- */}
+      {/* ---------- CÓMO ES EL DÍA (sin horas ni módulos: tres partes contadas en lenguaje natural) ---------- */}
       <section className="bc-sec" id="el-dia">
         <div className="wrap">
           <div className="bc-sec-head reveal">
-            <span className="bc-eyebrow">El día</span>
-            <h2>El día tiene <span className="accent ital">tres movimientos.</span></h2>
+            <span className="bc-eyebrow">Cómo es el día</span>
+            <h2>Llegas con tus números revueltos. <span className="accent ital">Te vas con un plan.</span></h2>
             <p>
-              No te voy a poner una agenda hora por hora. Te cuento qué pasa en cada parte y
-              con qué te vas de ella.
+              Sin agenda hora por hora ni presentaciones eternas. Trabajamos en tres partes,
+              y en cada una te llevas algo tuyo, escrito por ti.
             </p>
           </div>
 
           <div className="bc-moves-grid">
             <div className="bc-moves">
               <div className="bc-move">
-                <div><span className="bc-pill">Movimiento 1</span></div>
+                <div><span className="bc-pill">Por la mañana</span></div>
                 <div className="bc-move-body">
-                  <h3>Dónde estás, de verdad</h3>
+                  <h3>Ver tu plata como es, no como la sientes</h3>
                   <p>
-                    Sin adornos. Qué tienes, qué debes, qué entra y qué sale cada mes. Es la
-                    parte incómoda, es la primera, y es la que hace que todo lo demás sirva.
-                    Te apuesto que vas a encontrar algo de tu propia plata que no sabías.
+                    Ponemos todo sobre la mesa: qué entra, qué sale, qué debes y qué te queda.
+                    Es la parte que casi nadie hace solo, y por eso es la primera. Casi todos
+                    descubren algo de su propia plata que no sabían. Ese momento vale el día.
                   </p>
                 </div>
               </div>
 
               <div className="bc-move">
-                <div><span className="bc-pill">Movimiento 2</span></div>
+                <div><span className="bc-pill">Al mediodía</span></div>
                 <div className="bc-move-body">
-                  <h3>Por qué estás ahí</h3>
+                  <h3>Entender por qué haces lo que haces con el dinero</h3>
                   <p>
-                    Las frases que traes de casa y que todavía deciden por ti. Las vamos a
-                    identificar, les vamos a poner nombre y las vamos a romper. No con
-                    motivación: con un ejercicio. Es la parte que nadie espera y la que más se
-                    comenta al salir.
+                    Las frases que oíste en casa sobre la plata siguen decidiendo por ti hoy.
+                    Las sacamos a la luz, les ponemos nombre y las reemplazamos con un
+                    ejercicio concreto, no con frases motivacionales. Es la parte que nadie
+                    espera y de la que más habla la gente al salir.
                   </p>
                 </div>
               </div>
 
               <div className="bc-move">
-                <div><span className="bc-pill">Movimiento 3</span></div>
+                <div><span className="bc-pill">Por la tarde</span></div>
                 <div className="bc-move-body">
-                  <h3>Qué haces desde el lunes</h3>
+                  <h3>Armar tu plan y decidir qué haces desde el lunes</h3>
                   <p>
-                    Cómo administras lo que tienes, cómo proyectas un año, cómo se lee el mapa
-                    de lo que existe acá para hacer crecer tu dinero, y cómo se encuentra una
-                    oportunidad real de ingreso. De ahí no sales con tarea. Sales con
-                    decisiones.
+                    Proyectas tu año completo, meses buenos y malos incluidos. Ves qué opciones
+                    reales tienes acá para que tu dinero crezca y dónde hay una oportunidad de
+                    ingreso a tu alcance. Cierras con decisiones tomadas, con fecha y primer
+                    paso. No con tarea.
                   </p>
                 </div>
               </div>
@@ -582,11 +572,11 @@ function Bootcamp() {
                 <figcaption>Se trabaja escribiendo. Todo el día.</figcaption>
               </figure>
               <div className="bc-note">
-                <b>Dos cosas prácticas</b>
+                <b>Dos cosas que necesitas traer</b>
                 <p>
-                  Hay pausa para almorzar, pero el almuerzo no está incluido: la comida la
-                  pone cada uno. Y trae tus números como estén, aunque sea en capturas del
-                  banco. Para eso es el día.
+                  Tus números como estén, aunque sea en capturas del banco. Y{' '}
+                  <strong>${EFECTIVO_DIA} en efectivo</strong>: los vamos a usar en un
+                  ejercicio práctico, y sin ellos te quedas mirando.
                 </p>
               </div>
             </aside>
@@ -598,39 +588,37 @@ function Bootcamp() {
       <section className="bc-ctaband bc-ctaband-alt">
         <div className="wrap bc-ctaband-inner">
           <div>
-            <h3>Media hora conmigo antes. Y después, el sábado entero con tus números.</h3>
+            <h3>Un sábado con tus números sobre la mesa. Y un curso para repetirlo cada año.</h3>
             <p>De {HORARIO}, en {LUGAR}.</p>
           </div>
           <button type="button" className="btn btn-gold btn-lg" onClick={irAComprar}>
-            Quiero mi puesto
+            Sí, reservar mi entrada
           </button>
         </div>
       </section>
 
-      {/* ---------- LA SESIÓN 1:1 INCLUIDA ---------- */}
-      <section className="bc-sec" id="sesion" style={{ background: 'var(--sand)' }}>
+      {/* ---------- EL CURSO INCLUIDO ---------- */}
+      <section className="bc-sec" id="curso" style={{ background: 'var(--sand)' }}>
         <div className="wrap bc-bonus-grid">
           <figure className="bc-bonus-photo reveal">
             <img src={FotoJonathan} alt="Jonathan González conversando con una asistente en un evento de Revolución del Dinero" loading="lazy" />
           </figure>
           <div className="bc-bonus-body reveal">
-            <span className="bc-eyebrow">Va incluido</span>
-            <h2>Antes del Bootcamp nos sentamos <span className="accent ital">tú y yo, media hora, solos.</span></h2>
+            <span className="bc-eyebrow">Va incluido con tu entrada</span>
+            <h2>El curso completo <span className="accent ital">«{CURSO_NOMBRE}».</span></h2>
             <p>
-              La puedes usar cuando quieras entre ahora y el {LIMITE_SESION}. La agendas tú, a
-              la hora que te sirva, y el link te llega justo después de pagar.
+              El sábado armas tu primer año proyectado conmigo al lado. El curso es para que
+              no dependas de mí para hacerlo de nuevo: cada enero, o cada vez que te cambie
+              la vida, te sientas y lo vuelves a armar tú solo.
             </p>
             <div className="bc-scope">
-              <b>Para ordenar tu punto de partida:</b> tu presupuesto, tus deudas, tus
-              hábitos y cómo tienes repartidas tus cuentas.
+              <b>Con el curso aprendes a:</b> proyectar tus ingresos y gastos de los doce
+              meses, anticipar los meses difíciles antes de que lleguen, ponerle fecha a tus
+              metas y ajustar el plan cuando la realidad cambie.
             </div>
             <p>
-              No es asesoría sobre productos financieros — para eso hay profesionales
-              licenciados y te digo a quién preguntarle. Es media hora para que llegues al
-              Bootcamp sabiendo por dónde empezar.
-            </p>
-            <p>
-              Cuanto antes entres, más tiempo tienes para usarla.
+              Es lo que convierte un buen sábado en un hábito que te acompaña el resto de la
+              vida. Y va incluido, vengas solo o con alguien.
             </p>
           </div>
         </div>
@@ -651,8 +639,8 @@ function Bootcamp() {
       {/* ---------- TESTIMONIOS EN VIDEO (componente compartido) ---------- */}
       <TestimonialsSection
         id="testimonios"
-        eyebrow="De la primera sala"
-        heading={<>Esto es lo que dijo la gente <span className="accent ital">al salir de la primera sala.</span></>}
+        eyebrow="Del taller de finanzas"
+        heading={<>Esto es lo que dijo la gente <span className="accent ital">al salir del primer evento.</span></>}
       />
 
       {/* ---------- LO PRÁCTICO ---------- */}
@@ -660,24 +648,36 @@ function Bootcamp() {
         <div className="wrap">
           <div className="bc-sec-head reveal">
             <span className="bc-eyebrow">Lo práctico</span>
-            <h2>El registro abre a las {REGISTRO}. Arrancamos a las 10 y vamos hasta las 7.</h2>
+            <h2>Lo que necesitas saber <span className="accent ital">antes de llegar.</span></h2>
+            <p>
+              Cuatro cosas. Dos las ponemos nosotros, dos las traes tú.
+            </p>
           </div>
 
           <div className="bc-cards3">
             <div className="bc-lcard reveal">
-              <div className="bc-ic">01</div>
+              <div className="bc-ic">📅</div>
+              <small className="bc-lcard-label">Cuándo</small>
               <h3>{FECHA_CORTA}</h3>
-              <p>Llegas desde las {REGISTRO} y te registras sin prisa. A las 10 arrancamos.</p>
+              <p>El registro abre a las {REGISTRO}. Arrancamos a las 10 en punto y vamos de {HORARIO}. Llega con calma: es un día largo y vale cada hora.</p>
             </div>
             <div className="bc-lcard reveal">
-              <div className="bc-ic">02</div>
+              <div className="bc-ic">📍</div>
+              <small className="bc-lcard-label">Dónde</small>
               <h3>{LUGAR}</h3>
-              <p>La dirección exacta y cómo llegar te llegan al correo antes del día.</p>
+              <p>La dirección exacta, cómo llegar y dónde parquear te llegan al correo unos días antes. Solo tienes que aparecer.</p>
+            </div>
+            <div className="bc-lcard reveal">
+              <div className="bc-ic">📱</div>
+              <small className="bc-lcard-label">Traes tú</small>
+              <h3>Tus números, como estén</h3>
+              <p>En capturas del banco, en una libreta o en la cabeza. No hace falta que vengan ordenados: para eso es el día. El material de trabajo lo ponemos nosotros.</p>
             </div>
             <div className="bc-lcard bc-lcard-warn reveal">
-              <div className="bc-ic">03</div>
-              <h3>El almuerzo no está incluido</h3>
-              <p>Hay pausa para almorzar, pero la comida la pone cada uno. Te lo digo ahora para que no llegues sin plan.</p>
+              <div className="bc-ic">💵</div>
+              <small className="bc-lcard-label">Traes tú</small>
+              <h3>${EFECTIVO_DIA} en efectivo</h3>
+              <p>Para un ejercicio práctico que hacemos con plata real en la mano. En billetes, no con tarjeta, y ${EFECTIVO_DIA} por persona. Sin ellos te quedas por fuera del ejercicio.</p>
             </div>
           </div>
         </div>
@@ -690,8 +690,7 @@ function Bootcamp() {
             <span className="bc-eyebrow">Qué cuesta</span>
             <h2>${PRECIO_INDIVIDUAL} si vienes solo. ${PRECIO_PAREJA} si vienes con alguien.</h2>
             <p>
-              La de dos es para que traigas a quien tú quieras: tu pareja, tu hermano, la
-              amiga con la que compartes arriendo.
+              La de dos es para que traigas a quien tú quieras: tu pareja, tu hermano, tu flatmate.
             </p>
           </div>
 
@@ -703,11 +702,11 @@ function Bootcamp() {
               </div>
               <ul className="bc-tk-list">
                 <li>El sábado entero, de <b>{HORARIO}</b></li>
-                <li><b>Media hora conmigo</b>, antes del día</li>
+                <li>El curso completo <b>«{CURSO_NOMBRE}»</b></li>
                 <li>Todo el material con el que vas a trabajar</li>
               </ul>
               <button type="button" className="btn btn-outline btn-block" onClick={elegirYComprar(INDIVIDUAL)}>
-                Quiero mi puesto
+                Sí, reservar mi entrada
               </button>
               <p className="bc-tk-fee">
                 En la pantalla de pago te va a aparecer ${COBRO_INDIVIDUAL}: esos $
@@ -724,12 +723,12 @@ function Bootcamp() {
               </div>
               <ul className="bc-tk-list">
                 <li>Todo lo de arriba, para <b>los dos</b></li>
-                <li><b>Media hora conmigo</b>, antes del día</li>
+                <li>El curso <b>«{CURSO_NOMBRE}»</b> para cada uno</li>
                 <li>Material para los dos</li>
                 <li>Sale a <b>${PRECIO_PAREJA / 2} cada uno</b></li>
               </ul>
               <button type="button" className="btn btn-gold btn-block" onClick={elegirYComprar(PAREJA)}>
-                Quiero mi puesto
+                Sí, reservar mi entrada
               </button>
               <p className="bc-tk-fee">
                 En la pantalla de pago te va a aparecer ${COBRO_PAREJA}: esos $
@@ -756,7 +755,17 @@ function Bootcamp() {
                 No. <b>Si supieras, no te haría falta el día.</b> No hay matemáticas raras:
                 sumar, restar y sacar porcentajes. Lo único que sí necesitas es venir
                 dispuesto a mirar tus números. Y si creciste oyendo que no eres bueno con los
-                números, esa frase es de las que vamos a romper en el movimiento 2.
+                números, esa frase es de las que vamos a desarmar ese mismo día.
+              </div>
+            </details>
+
+            <details className="bc-qa">
+              <summary>¿Para qué son los ${EFECTIVO_DIA} en efectivo? <span className="bc-pl">+</span></summary>
+              <div className="bc-ans">
+                Para un <b>ejercicio práctico</b> que hacemos ese día con plata real en la
+                mano: con billetes se aprende distinto que con números en una hoja. Tienen
+                que ser efectivo, no tarjeta ni transferencia, y cada persona trae los suyos.
+                Si vienes con alguien, ${EFECTIVO_DIA} cada uno.
               </div>
             </details>
 
@@ -770,30 +779,20 @@ function Bootcamp() {
             </details>
 
             <details className="bc-qa">
-              <summary>¿Está incluido el almuerzo? <span className="bc-pl">+</span></summary>
+              <summary>¿Qué es el curso «{CURSO_NOMBRE}»? <span className="bc-pl">+</span></summary>
               <div className="bc-ans">
-                <b>No.</b> Hay pausa para almorzar, pero la comida la pone cada uno. Son nueve
-                horas: trae algo o mira antes qué hay cerca. Te lo digo ahora para que no
-                llegues sin plan.
+                Es el curso completo para aprender a proyectar tu año financiero tú solo:
+                ingresos, gastos, deudas y metas de los doce meses. <b>Va incluido con
+                cualquier entrada</b>, y los detalles para acceder te llegan al correo después
+                de comprar.
               </div>
             </details>
 
             <details className="bc-qa">
-              <summary>¿Esto es asesoría financiera? <span className="bc-pl">+</span></summary>
+              <summary>¿Y si nunca he hecho un presupuesto? <span className="bc-pl">+</span></summary>
               <div className="bc-ans">
-                No. Es <b>educación y criterio</b>: leer tus números, ordenar tus deudas, mirar
-                tus hábitos y decidir con la cabeza fría. No te digo qué producto financiero
-                comprar ni dónde poner tu plata — no tengo licencia para eso. Para esas
-                decisiones hay profesionales licenciados y te digo a quién preguntarle.
-              </div>
-            </details>
-
-            <details className="bc-qa">
-              <summary>¿Cuándo puedo usar la media hora contigo? <span className="bc-pl">+</span></summary>
-              <div className="bc-ans">
-                Cuando quieras, desde que pagas y hasta el <b>{FECHA_LARGA.toLowerCase()}</b>.
-                El link para agendarla te llega justo después de pagar y eliges tú la hora.
-                Cuanto antes entres, más tiempo tienes.
+                Mejor. Vienes sin malos hábitos que corregir. El sábado lo armamos juntos
+                desde cero, y con el curso aprendes a repetirlo cada año sin ayuda.
               </div>
             </details>
 
@@ -833,7 +832,7 @@ function Bootcamp() {
             <div><b>Confirmación al correo</b><small>Con la dirección y cómo llegar.</small></div>
           </div>
           <div className="bc-tb-item">
-            <div><b>Media hora conmigo, incluida</b><small>Para usar antes del día.</small></div>
+            <div><b>Curso «{CURSO_NOMBRE}» incluido</b><small>Con cualquiera de las dos entradas.</small></div>
           </div>
         </div>
       </section>
@@ -844,11 +843,12 @@ function Bootcamp() {
           <span className="bc-eyebrow">{FECHA_LARGA}</span>
           <h2>El problema nunca fue que no supieras. <span className="bc-ital">Era que nadie se había sentado contigo a mirarlo.</span></h2>
           <p>
-            Un sábado entero, en {LUGAR}, con tus números sobre la mesa. ${PRECIO_INDIVIDUAL} si
-            vienes solo, ${PRECIO_PAREJA} si vienes con alguien.
+            Un sábado entero, en {LUGAR}, con tus números sobre la mesa y el curso
+            «{CURSO_NOMBRE}» incluido. ${PRECIO_INDIVIDUAL} si vienes solo, ${PRECIO_PAREJA} si
+            vienes con alguien.
           </p>
           <button type="button" className="btn btn-gold btn-lg" onClick={irAComprar}>
-            Quiero mi puesto
+            Sí, reservar mi entrada
           </button>
           <p className="bc-final-fee">
             En la pantalla de pago te va a aparecer ${COBRO_INDIVIDUAL}: esos $

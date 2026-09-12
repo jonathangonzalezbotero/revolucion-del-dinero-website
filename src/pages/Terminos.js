@@ -19,8 +19,8 @@ import './Circulo.css';
 import Logo from '../assets/images/logo.webp';
 import Seo from '../components/Seo';
 import { TERMINOS_TITLE, TERMINOS_DESCRIPTION, DISCLAIMER_AFSL } from '../seoData';
-import { FECHA_LARGA, HORARIO, LUGAR, PRECIO_INDIVIDUAL, PRECIO_PAREJA, COBRO_INDIVIDUAL, COBRO_PAREJA } from '../config/bootcamp';
-import { PRECIOS, NUMERO_CUOTAS, RECARGO_CUOTAS_PCT, CURSO_NEGOCIO, RITMO_CONTENIDO } from '../config/circulo';
+import { FECHA_LARGA, HORARIO, LUGAR, PRECIO_INDIVIDUAL, PRECIO_PAREJA, COBRO_INDIVIDUAL, COBRO_PAREJA, CURSO_NOMBRE } from '../config/bootcamp';
+import { PRECIOS, NUMERO_CUOTAS, RECARGO_CUOTAS_PCT, CURSO_NEGOCIO, RITMO_CONTENIDO, EVENTO_MARZO, SESIONES_1A1 } from '../config/circulo';
 
 // ⚠️ TODO PARA JONATHAN: no había ninguna dirección de contacto en el repositorio, así
 // que este valor es un supuesto. Cámbialo por la dirección real que lees a diario —
@@ -96,8 +96,7 @@ function Terminos() {
             </li>
             <li>
               <strong>Qué incluye:</strong> la jornada completa, el material de trabajo del
-              día y una sesión de 30 minutos uno a uno con Jonathan, para usar antes del
-              Bootcamp.
+              día y el acceso al curso «{CURSO_NOMBRE}».
             </li>
             <li>
               <strong>Qué no incluye:</strong> el almuerzo. Hay pausa para almorzar, pero la
@@ -149,13 +148,12 @@ function Terminos() {
             conservar tu lugar para la nueva fecha o recibir el reembolso completo.
           </p>
 
-          <h2>La sesión de 30 minutos del Bootcamp</h2>
+          <h2>El curso «{CURSO_NOMBRE}» del Bootcamp</h2>
           <p>
-            Va incluida en la compra del Bootcamp y se agenda con el enlace que recibes
-            justo después de pagar. Se puede usar hasta el día del Bootcamp. Si no la usas,
-            no se reembolsa por separado: forma parte de la compra, no es un producto aparte.
-            Es una sesión de trabajo sobre tu presupuesto, tus deudas, tus hábitos y la
-            organización de tus cuentas — no es asesoría sobre productos financieros.
+            Va incluido en la compra del Bootcamp y los detalles de acceso se envían por
+            correo. Es contenido educativo sobre cómo proyectar tus ingresos, gastos, deudas
+            y metas a doce meses. No se reembolsa por separado: forma parte de la compra, no
+            es un producto aparte.
           </p>
 
           <h2>El Círculo Presencial: qué es y qué cuesta</h2>
@@ -181,10 +179,12 @@ function Terminos() {
               cancelar nada. Tu acceso es el año completo, no seis meses.
             </li>
             <li>
-              <strong>Qué incluye:</strong> el Bootcamp Financiero presencial, la comunidad
-              privada, las sesiones mensuales en grupo, las sesiones uno a uno a lo largo
-              del año, la tarde de Cashflow presencial, el curso «{CURSO_NEGOCIO.nombre}» y
-              el acceso a la Ruta del Revolucionario.
+              <strong>Qué incluye:</strong> el Bootcamp Financiero presencial, el evento
+              presencial «{EVENTO_MARZO.nombre}» ({EVENTO_MARZO.cuando}), la comunidad
+              privada en Skool, el grupo privado de WhatsApp, las sesiones mensuales en
+              grupo, {SESIONES_1A1} sesiones uno a uno a lo largo del año, la tarde de
+              Cashflow presencial, el curso «{CURSO_NEGOCIO.nombre}» y el acceso a la Ruta
+              del Revolucionario.
             </li>
             <li>
               <strong>Sobre el contenido de la Ruta del Revolucionario:</strong> se publica

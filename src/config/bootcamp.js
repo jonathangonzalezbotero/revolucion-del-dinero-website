@@ -1,18 +1,13 @@
-// Single source of truth for the Bootcamp Financiero (sábado 14 de noviembre de 2026).
+// Single source of truth for the Bootcamp Financiero (sábado 28 de noviembre de 2026).
 // Imported by src/pages/Bootcamp.js and src/pages/BootcampGracias.js so no date, price
 // or link is ever typed twice.
 //
 // Ruta canónica de venta: https://www.revoluciondeldinero.com/bootcamp
 // Página de gracias:      https://www.revoluciondeldinero.com/bootcamp/gracias
 
-// El link de Calendly pasó a src/config/agenda.js cuando /circulo/gracias también empezó
-// a necesitarlo: una sola constante para los dos productos. Se re-exporta acá para que
-// quien ya lo importaba de este módulo siga funcionando sin cambios.
-export { LINK_AGENDA } from './agenda';
-
-export const FECHA_LARGA = 'Sábado 14 de noviembre de 2026';
-export const FECHA_CORTA = 'Sáb 14 de nov. de 2026';
-export const HORARIO = '10:00 a 19:00';
+export const FECHA_LARGA = 'Sábado 28 de noviembre de 2026';
+export const FECHA_CORTA = 'Sáb 28 de nov. de 2026';
+export const HORARIO = '10:00 a 7-8:00pm';
 export const REGISTRO = '09:30';
 export const LUGAR = 'Gold Coast, Australia';
 
@@ -50,5 +45,12 @@ export const TIERS = {
   },
 };
 
-// La sesión 1:1 se puede usar entre el 12 de septiembre y el 14 de noviembre de 2026.
-export const LIMITE_SESION = '14 de noviembre de 2026';
+// El curso que va incluido con cualquier entrada. Antes el bono era una sesión 1:1 de 30
+// minutos con Jonathan; se retiró en septiembre de 2026 y no debe volver a aparecer en
+// ninguna página del Bootcamp. Los detalles de acceso al curso se comunican por correo.
+export const CURSO_NOMBRE = 'Proyección anual financiera';
+
+// Cada asistente debe llevar este monto en efectivo el día del Bootcamp: se usa en un
+// ejercicio práctico con plata real. Se anuncia en /bootcamp (sección práctica, nota
+// lateral y FAQ) y en /bootcamp/gracias.
+export const EFECTIVO_DIA = 50;

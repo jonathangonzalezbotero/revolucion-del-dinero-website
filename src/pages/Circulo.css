@@ -107,52 +107,6 @@
   line-height: 1.55;
 }
 
-/* ---------- el ritmo del contenido ---------- */
-.cir-ritmo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  max-width: 760px;
-  margin: 0 auto 28px;
-}
-.cir-ritmo-card {
-  background: var(--ink);
-  color: var(--cream);
-  border-radius: var(--radius);
-  padding: 26px 24px;
-  position: relative;
-  overflow: hidden;
-}
-.cir-ritmo-card::before {
-  content: "";
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(15, 107, 79, .45), transparent 70%);
-  top: -100px;
-  right: -70px;
-}
-.cir-ritmo-card > * { position: relative; z-index: 1; }
-.cir-ritmo-card small {
-  display: block;
-  font-size: 10.5px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: #f4c56a;
-  margin-bottom: 10px;
-}
-.cir-ritmo-card b {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.2;
-  color: #fff;
-  margin-bottom: 8px;
-}
-.cir-ritmo-card p { color: rgba(246, 241, 231, .74); font-size: .93rem; line-height: 1.55; }
-
 /* ---------- selector de plan de pago ---------- */
 .cir-plan {
   display: grid;
@@ -455,7 +409,6 @@
 /* ---------- teléfono ---------- */
 @media (max-width: 640px) {
   .cir-inc { grid-template-columns: 1fr; gap: 14px; padding: 22px 20px; }
-  .cir-ritmo { grid-template-columns: 1fr; }
   .cir-prices { grid-template-columns: 1fr; gap: 28px; }
   .cir-photos { grid-template-columns: 1fr; }
   .cir-transf { padding: 24px 20px; }

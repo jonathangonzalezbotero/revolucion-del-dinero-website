@@ -1,6 +1,6 @@
 # Bootcamp Financiero — `/bootcamp`
 
-Página de venta del Bootcamp Financiero del **sábado 14 de noviembre de 2026**, en Gold
+Página de venta del Bootcamp Financiero del **sábado 28 de noviembre de 2026**, en Gold
 Coast. El QR impreso que se reparte en el evento del 12 de septiembre apunta acá.
 
 **Ruta canónica: `https://www.revoluciondeldinero.com/bootcamp`**
@@ -53,7 +53,7 @@ success_url → /bootcamp/gracias     cancel_url → /bootcamp
 6. Stripe llama a /api/stripe-webhook, que enruta por `metadata.oferta` y
    reconfirma el contacto con `bootcamp-nov-2026`. Nada más.
    ↓
-7. /bootcamp/gracias dispara `Purchase` y muestra el link de Calendly
+7. /bootcamp/gracias dispara `Purchase` y anuncia el curso incluido
 ```
 
 Los nombres de campo de la metadata son **exactamente** los que ya usa `/evento`
@@ -76,9 +76,9 @@ día, sin comunidad. El tag vive en un solo sitio: `BOOTCAMP_TAG` en
 
 | Archivo | Qué hace |
 |---|---|
-| `src/config/bootcamp.js` | Fechas, precios, `LINK_AGENDA`, price IDs. Fuente única. |
+| `src/config/bootcamp.js` | Fechas, precios, `CURSO_NOMBRE`, price IDs. Fuente única. |
 | `src/pages/Bootcamp.js` / `.css` | La página de venta. |
-| `src/pages/BootcampGracias.js` | `/bootcamp/gracias`. Único sitio con el link de Calendly. |
+| `src/pages/BootcampGracias.js` | `/bootcamp/gracias`. Confirma la compra y anuncia el curso. |
 | `src/pages/Terminos.js` | `/terminos`. Política de reembolso, enlazada solo desde el pie. |
 | `api/bootcamp-lead.js` | Guarda el contacto en systeme.io antes del pago. |
 | `api/create-bootcamp-checkout.js` | Crea la Stripe Checkout Session. |
@@ -104,14 +104,15 @@ Calca el lenguaje visual de `src/pages/Evento.css`, no lo aproxima:
   y el mismo degradado marfil encima. A la izquierda el copy; a la derecha la **tarjeta de
   compra oscura pegada** (`position: sticky`) con su resplandor esmeralda radial.
 - **Meta-chips** de fecha / horario / lugar, más el chip de precio en esmeralda.
-- **Banda dorada** con el bono de la sesión 1:1.
+- **Banda dorada** con el bono: el curso «Proyección anual financiera».
 - **Foto con marco blanco de 5px** y etiqueta esmeralda superpuesta.
-- **Punto dorado que pulsa** con la única urgencia real: la ventana de la sesión 1:1.
+- **Punto dorado que pulsa** con la única urgencia real: es un solo sábado al año.
   Nunca un número de cupos, nunca un contador de segundos.
 - **Bandas CTA a sangre** entre secciones (una en `--ink`, otra en `--emerald`).
 - **"Qué te llevas"** con numerales dorados 01–06, como los *results* de `/evento`.
-- **Los tres movimientos** con píldoras doradas y foto lateral pegada, con el mismo
-  esqueleto que la agenda de `/evento` pero sin horas, sin bloques y sin módulos.
+- **Cómo es el día** en tres partes (mañana, mediodía, tarde) con píldoras doradas y foto
+  lateral pegada, con el mismo esqueleto que la agenda de `/evento` pero sin horas, sin
+  bloques y sin módulos.
 - **Entradas en claro/oscuro**, con la de dos personas en `--ink` y acentos dorados.
 - **Trustband** en arena y **cierre esmeralda** con resplandor dorado radial.
 - `AboutSection` y `TestimonialsSection` reutilizados, igual que en `/evento`.
@@ -134,17 +135,20 @@ vacío.
 ## Decisiones de negocio que el código respeta
 
 - **Ningún número de cupos** en ninguna parte. Ni aforo, ni "quedan X plazas".
-- **Sin temario publicado.** El día se cuenta como tres movimientos: sin bloques, sin
-  títulos de módulos, sin duraciones. La especificidad va en "Qué te llevas".
-- **El almuerzo NO está incluido**, dicho explícitamente en la sección práctica, en las
-  preguntas frecuentes, en `/terminos` y en la página de gracias.
+- **Sin temario publicado.** El día se cuenta en tres partes (mañana, mediodía, tarde):
+  sin horas, sin títulos de módulos, sin duraciones. La especificidad va en "Qué te llevas".
+- **El bono es el curso «Proyección anual financiera»** (`CURSO_NOMBRE`). La sesión 1:1 de
+  30 minutos y su link de Calendly se retiraron en septiembre de 2026 y no vuelven a
+  ninguna página del Bootcamp. Los detalles de acceso al curso van por correo.
+- **Ni licencias, ni AFSL, ni "esto no es asesoría" en `/bootcamp` ni en
+  `/bootcamp/gracias`.** Jonathan lo aclara en persona. La página vende; los descargos
+  legales viven en `/terminos`.
+- **El almuerzo no se menciona en `/bootcamp`.** Va en los correos. Sigue en `/terminos` y
+  en la página de gracias como dato práctico posterior a la compra.
 - **La garantía de reembolso no es argumento de venta.** Vive solo en `/terminos`,
   enlazada desde el pie. Jonathan la anuncia desde el escenario.
 - **El crédito al Círculo no aparece en ninguna parte.** Jonathan lo anuncia en persona el
   día del Bootcamp.
-- **La sesión 1:1 nunca se llama "asesoría".** Va con su alcance escrito y su línea de lo
-  que no es. Jonathan no tiene licencia AFSL y opera bajo su ABN personal.
-- **El link de Calendly no está en la página de venta.** Quien no ha pagado no agenda.
 - `/bootcamp/gracias` no menciona ni enlaza la comunidad ni Skool.
 
 ## Pendientes para Jonathan

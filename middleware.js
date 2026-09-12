@@ -123,13 +123,13 @@ const EVENTO_HTML = page({
 // la página real: esto es lo que WhatsApp, Meta y Google leen del enlace /bootcamp, así
 // que es texto publicado con el mismo peso que el de src/pages/Bootcamp.js.
 const BOOTCAMP_DESCRIPTION =
-  'Un día presencial en español para ordenar tu plata: tus números, tus deudas, tus hábitos y tu proyección del año. Sábado 14 de noviembre de 2026, de 10:00 a 19:00, en Gold Coast, Australia. $250 AUD por persona o $400 AUD para dos, e incluye una sesión de 30 minutos con Jonathan. El almuerzo no está incluido.';
+  'Un día presencial en español para ordenar tu plata: tus números, tus deudas, tus hábitos y tu proyección del año. Sábado 28 de noviembre de 2026, de 10:00 a 19:00, en Gold Coast, Australia. $250 AUD por persona o $400 AUD para dos, e incluye una sesión de 30 minutos con Jonathan. El almuerzo no está incluido.';
 
 const BOOTCAMP_HTML = page({
-  title: 'Bootcamp Financiero en Gold Coast · Sábado 14 de noviembre de 2026 | Revolución del Dinero',
+  title: 'Bootcamp Financiero en Gold Coast · Sábado 28 de noviembre de 2026 | Revolución del Dinero',
   description: BOOTCAMP_DESCRIPTION,
   path: '/bootcamp',
-  heading: 'Bootcamp Financiero en Gold Coast — Sábado 14 de noviembre de 2026',
+  heading: 'Bootcamp Financiero en Gold Coast — Sábado 28 de noviembre de 2026',
   body: BOOTCAMP_DESCRIPTION,
   jsonLd: {
     '@context': 'https://schema.org',

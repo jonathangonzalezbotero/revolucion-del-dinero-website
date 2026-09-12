@@ -134,8 +134,8 @@ function CirculoGracias() {
                 Agendar mi primera sesión
               </a>
               <p className="bc-notis">
-                No es asesoría sobre productos financieros — para eso hay profesionales
-                licenciados y te digo a quién preguntarle.
+                Mientras más pronto la agendes, más pronto arranca tu año con un punto de
+                partida claro.
               </p>
             </div>
 

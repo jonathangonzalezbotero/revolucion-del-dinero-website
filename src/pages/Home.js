@@ -273,8 +273,8 @@ function Home() {
       </section>
 
       <TestimonialsSection
-        eyebrow="De la primera sala"
-        heading={<>Esto es lo que dijo la gente <span className="accent ital">al salir de la primera sala.</span></>}
+        eyebrow="Del taller de finanzas"
+        heading={<>Esto es lo que dijo la gente <span className="accent ital">al salir del primer evento.</span></>}
       />
 
       {/* EVENT */}

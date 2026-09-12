@@ -59,10 +59,13 @@
  *     (allow_promotion_codes en la sesión de Stripe) para que Jonathan entregue un código
  *     en persona, pero no va escrito.
  *   · Las sesiones uno a uno NUNCA se llaman "asesoría", "asesoramiento", "consultoría"
- *     ni "mentoría financiera": Jonathan no tiene licencia AFSL y opera bajo su ABN
- *     personal. Van acotadas por escrito (presupuesto, deudas, hábitos, organización de
- *     cuentas) y con su línea de lo que no son.
- *   · El disclaimer legal va en el pie, legible, no gris sobre gris.
+ *     ni "mentoría financiera". Van acotadas por escrito (presupuesto, deudas, hábitos,
+ *     organización de cuentas). En el cuerpo de la página NO hay avisos de licencia,
+ *     AFSL ni "esto no es asesoría": Jonathan lo aclara en persona y la página vende. El
+ *     único descargo legal es el del pie (DISCLAIMER_AFSL), legible, no gris sobre gris.
+ *   · El almuerzo del Bootcamp no se menciona en esta página: va en los correos.
+ *   · El Bootcamp incluido lleva el curso «Proyección anual financiera» (CURSO_NOMBRE de
+ *     config/bootcamp.js), igual que el Bootcamp suelto.
  *   · El link de Calendly no aparece acá. Solo en /circulo/gracias.
  */
 
@@ -76,7 +79,6 @@ import FotoCierre from '../assets/images/IMG_0305.webp';
 import FotoDeclaraciones from '../assets/images/_MG_0234.webp';
 import AboutSection from '../components/AboutSection';
 import TestimonialsSection from '../components/TestimonialsSection';
-import TestimonioTransformacion from '../components/TestimonioTransformacion';
 import useRevealOnScroll from '../hooks/useRevealOnScroll';
 import Seo from '../components/Seo';
 import { CIRCULO_TITLE, CIRCULO_DESCRIPTION, CIRCULO_JSON_LD, DISCLAIMER_AFSL } from '../seoData';
@@ -89,7 +91,10 @@ import {
   RITMO_CONTENIDO,
   CURSO_NEGOCIO,
   DURACION,
+  EVENTO_MARZO,
+  SESIONES_1A1,
 } from '../config/circulo';
+import { CURSO_NOMBRE } from '../config/bootcamp';
 
 const INDIVIDUAL = 'circulo-individual';
 const PAREJA = 'circulo-pareja';
@@ -245,7 +250,7 @@ function Circulo() {
       <Seo title={CIRCULO_TITLE} description={CIRCULO_DESCRIPTION} path="/circulo" jsonLd={CIRCULO_JSON_LD} />
 
       <div className="bc-ann">
-        Un año · {BOOTCAMP_INCLUIDO.lugar} · <b>Incluye el Bootcamp del 14 de noviembre</b>
+        Personas que hablan de dinero · <b>Incluye el Bootcamp de noviembre y «{EVENTO_MARZO.nombre}» en {EVENTO_MARZO.mes}</b>
       </div>
 
       {/* ---------- HERO + TARJETA DE COMPRA ---------- */}
@@ -256,12 +261,12 @@ function Circulo() {
 
         <div className="wrap bc-hero-grid">
           <div className="bc-hero-copy">
-            <span className="bc-badge">Un año, en Gold Coast</span>
-            <h1>Nadie me pidió más información. <span className="bc-ital">Todos me pidieron no hacerlo solos.</span></h1>
+            <span className="bc-badge">Un año de mentoria</span>
+            <h1>Nadie me pidió más información. <span className="bc-ital">Todos me pidieron hacerlo en grupo.</span></h1>
             <p className="bc-lead">
               Seis conversaciones con la gente de la comunidad y todos dijeron lo mismo con
-              palabras distintas. El Círculo es eso: un año conmigo y con un grupo que va en
-              lo mismo que tú.
+              palabras distintas. El Círculo es eso: un año de mentoria conmigo y con un grupo que
+              quiere lo mismo que tú.
             </p>
 
             <div className="bc-hero-cta">
@@ -289,8 +294,8 @@ function Circulo() {
 
             <div className="bc-band">
               <span>
-                <b>El Bootcamp del {BOOTCAMP_INCLUIDO.fecha.toLowerCase()} va incluido.</b>{' '}
-                Suelto vale ${BOOTCAMP_INCLUIDO.valorSuelto}.
+                <b>Incluye el Bootcamp de noviembre y «{EVENTO_MARZO.nombre}» en {EVENTO_MARZO.mes}.</b>{' '}
+                Más {SESIONES_1A1} sesiones 1:1 conmigo durante el año.
               </span>
             </div>
 
@@ -312,7 +317,7 @@ function Circulo() {
           {/* ---------- LA TARJETA DE COMPRA (única en la página) ---------- */}
           <div className="bc-formcard-sticky" id="entrar" ref={compraRef}>
             <div className="bc-formcard">
-              <h3>Entra al Círculo</h3>
+              <h3>Entra a la comunidad</h3>
               <p className="bc-fsub">
                 Eliges si entras solo o con alguien, y si pagas de una vez o en seis cuotas.
               </p>
@@ -467,7 +472,7 @@ function Circulo() {
             <span className="bc-eyebrow">El problema</span>
             <h2>Información hay de sobra. Lo que no hay es alguien que se siente contigo.</h2>
             <p>
-              Es gratis y llevas años viéndola. Y la cuenta sigue igual.
+              Y entienda tu proceso migratorio.
             </p>
           </div>
 
@@ -478,7 +483,7 @@ function Circulo() {
             </div>
             <div className="bc-li">
               <span className="bc-ck">✓</span>
-              <p>Guardaste diez videos, tres podcasts y un libro. <b>No abriste ninguno</b>, y no es por pereza: es que llegas muerto.</p>
+              <p>Guardaste diez videos, tres podcasts y un libro. <b>No abriste ninguno</b>, y no es por pereza: es que no tienes comunidad.</p>
             </div>
             <div className="bc-li">
               <span className="bc-ck">✓</span>
@@ -522,7 +527,7 @@ function Circulo() {
         <div className="wrap">
           <div className="bc-sec-head reveal">
             <span className="bc-eyebrow">Qué es</span>
-            <h2>Qué es un año <span className="accent ital">en el Círculo.</span></h2>
+            <h2>Qué es un año <span className="accent ital">en la Comunidad.</span></h2>
             <p>
               Te lo cuento como lo que te va a pasar, no como una lista de cosas que recibes.
             </p>
@@ -553,22 +558,36 @@ function Circulo() {
             <div className="bc-res">
               <span className="bc-res-num">04</span>
               <div>
-                <h3>A lo largo del año: tiempo a solas conmigo</h3>
-                <p>Unas cuantas veces al año nos sentamos tú y yo solos, porque lo tuyo nunca es exactamente lo del vecino. Más abajo te digo exactamente para qué son y para qué no.</p>
+                <h3>En {EVENTO_MARZO.mes}: «{EVENTO_MARZO.nombre}»</h3>
+                <p>El segundo evento presencial del año, y este no va de números: va de ti. De la identidad con la que te relacionas con el dinero, con el trabajo y con lo que crees que puedes. Porque ordenar la plata sin tocar eso es ordenar el síntoma.</p>
               </div>
             </div>
             <div className="bc-res">
               <span className="bc-res-num">05</span>
               <div>
-                <h3>Una tarde: se juega</h3>
-                <p>Cashflow de Kiyosaki, en persona, con el grupo. Suena a juego porque lo es, y es donde a la gente se le cae la ficha de golpe con algo que llevaba años leyendo sin entender.</p>
+                <h3>Cuatro veces al año: tú y yo solos</h3>
+                <p>{SESIONES_1A1} sesiones uno a uno conmigo, repartidas durante el año, porque lo tuyo nunca es exactamente lo del vecino. Ahí es donde se hablan las cosas que no se dicen en una llamada de doce personas.</p>
               </div>
             </div>
             <div className="bc-res">
               <span className="bc-res-num">06</span>
               <div>
+                <h3>12x sesiones de Cashflow</h3>
+                <p>Cashflow de Kiyosaki, en persona, con el grupo. Suena a juego porque lo es, y es donde a la gente se le cae la ficha de golpe con algo que llevaba años leyendo sin entender.</p>
+              </div>
+            </div>
+            <div className="bc-res">
+              <span className="bc-res-num">07</span>
+              <div>
+                <h3>Desde el primer día: mi grupo privado de WhatsApp</h3>
+                <p>Entras al chat donde está la gente de la comunidad y estoy yo. Es donde preguntas a las once de la noche lo que no le puedes preguntar a nadie más, y donde ves que a otros les está pasando lo mismo.</p>
+              </div>
+            </div>
+            <div className="bc-res">
+              <span className="bc-res-num">08</span>
+              <div>
                 <h3>Todo el año: gente que va en lo mismo</h3>
-                <p>Un grupo pequeño de latinos acá en Australia, en un chat privado, en español. Es lo único de toda esta lista que no se puede comprar suelto en ninguna parte.</p>
+                <p>Un grupo pequeño de latinos acá en Australia, en español. Es lo único de toda esta lista que no se puede comprar suelto en ninguna parte.</p>
               </div>
             </div>
           </div>
@@ -583,8 +602,8 @@ function Circulo() {
       <section className="bc-sec" id="que-incluye">
         <div className="wrap">
           <div className="bc-sec-head reveal">
-            <span className="bc-eyebrow">Lo que entra</span>
-            <h2>Lo que importa es la sala. Pero esto es lo que entra.</h2>
+            <span className="bc-eyebrow">Lo que obtendras</span>
+            <h2>Lo que importa es la comunidad. Pero esto es lo que obtendras.</h2>
             <p>Y qué es cada cosa en la práctica, no en el folleto.</p>
           </div>
 
@@ -593,7 +612,7 @@ function Circulo() {
               <div className="cir-ic">01</div>
               <div>
                 <h3>
-                  El Bootcamp del 14 de noviembre
+                  El Bootcamp del 28 de noviembre
                   <span className="cir-worth">Suelto vale ${BOOTCAMP_INCLUIDO.valorSuelto}</span>
                 </h3>
                 <p>
@@ -603,9 +622,9 @@ function Circulo() {
                   con tu año proyectado y con decisiones tomadas.
                 </p>
                 <p className="cir-inc-note">
-                  Hay pausa para almorzar, pero el almuerzo no está incluido: la comida la
-                  pone cada uno, igual que para quien compra el Bootcamp suelto. Te lo digo
-                  ahora para que no llegues sin plan.
+                  Y con él entra también el curso completo «{CURSO_NOMBRE}», el mismo que
+                  recibe quien compra el Bootcamp suelto, para que lo que armes ese sábado lo
+                  repitas cada año por tu cuenta.
                 </p>
               </div>
             </div>
@@ -613,18 +632,48 @@ function Circulo() {
             <div className="cir-inc reveal">
               <div className="cir-ic">02</div>
               <div>
-                <h3>La comunidad privada en Skool</h3>
+                <h3>«{EVENTO_MARZO.nombre}», en {EVENTO_MARZO.mes}</h3>
                 <p>
-                  El grupo, en un espacio cerrado y en español. Es donde preguntas a las once
-                  de la noche lo que no le puedes preguntar a nadie más, y donde ves que a
-                  otros les está pasando lo mismo. La plataforma es lo de menos. La gente es
-                  el punto.
+                  El segundo evento presencial del año, {EVENTO_MARZO.cuando.toLowerCase()}.
+                  Un día dedicado a tu identidad personal: quién eres cuando nadie te está
+                  mirando, qué historias sobre ti mismo te tienen frenado y qué versión tuya
+                  es la que va a sostener el plan que armaste en noviembre. Los números se
+                  ordenan en un sábado. La identidad es lo que hace que se queden ordenados.
                 </p>
               </div>
             </div>
 
             <div className="cir-inc reveal">
               <div className="cir-ic">03</div>
+              <div>
+                <h3>{SESIONES_1A1} sesiones 1:1 conmigo durante el año</h3>
+                <p>
+                  Cuatro veces al año nos sentamos tú y yo solos, sin el grupo. Son tuyas, las
+                  agendas tú, y las repartes como te sirva: una al empezar para ver dónde
+                  estás, y las otras cuando el año te apriete o cuando quieras acelerar.
+                </p>
+                <div className="cir-inc-scope">
+                  <b>Tu presupuesto, tus deudas, tus hábitos y cómo tienes repartidas tus
+                    cuentas.</b> Con nombres y con números, no en general.
+                </div>
+              </div>
+            </div>
+
+            <div className="cir-inc reveal">
+              <div className="cir-ic">04</div>
+              <div>
+                <h3>Mi grupo privado de WhatsApp</h3>
+                <p>
+                  Entras al chat donde está la gente de la comunidad y estoy yo. Ahí se
+                  celebran las deudas que se cierran, se preguntan las cosas que dan pena
+                  preguntar en otro lado y se sostiene el ritmo entre una sesión y la
+                  siguiente. Es lo que más usan los que ya están dentro.
+                </p>
+              </div>
+            </div>
+
+            <div className="cir-inc reveal">
+              <div className="cir-ic">05</div>
               <div>
                 <h3>Una sesión al mes con todo el grupo</h3>
                 <p>
@@ -636,26 +685,7 @@ function Circulo() {
             </div>
 
             <div className="cir-inc reveal">
-              <div className="cir-ic">04</div>
-              <div>
-                <h3>Unas cuantas veces al año nos sentamos tú y yo solos</h3>
-                <p>
-                  Tiempo a solas conmigo, repartido durante el año. Porque hay cosas que no se
-                  hablan en una llamada de doce personas.
-                </p>
-                <div className="cir-inc-scope">
-                  <b>Tu presupuesto, tus deudas, tus hábitos y cómo tienes repartidas tus
-                  cuentas.</b> Con nombres y con números, no en general.
-                </div>
-                <p className="cir-inc-notis">
-                  No es asesoría sobre productos financieros — para eso hay profesionales
-                  licenciados y te digo a quién preguntarle.
-                </p>
-              </div>
-            </div>
-
-            <div className="cir-inc reveal">
-              <div className="cir-ic">05</div>
+              <div className="cir-ic">06</div>
               <div>
                 <h3>Cashflow de Kiyosaki, en persona</h3>
                 <p>
@@ -667,7 +697,7 @@ function Circulo() {
             </div>
 
             <div className="cir-inc reveal">
-              <div className="cir-ic">06</div>
+              <div className="cir-ic">07</div>
               <div>
                 <h3>
                   El curso «{CURSO_NEGOCIO.nombre}»
@@ -681,13 +711,14 @@ function Circulo() {
             </div>
 
             <div className="cir-inc reveal">
-              <div className="cir-ic">07</div>
+              <div className="cir-ic">08</div>
               <div>
-                <h3>La Ruta del Revolucionario, en Skool</h3>
+                <h3>La comunidad y la Ruta del Revolucionario, en Skool</h3>
                 <p>
-                  El camino de formación de la comunidad, con material nuevo entrando a un
-                  ritmo que me comprometo a cumplir. Cuál es ese ritmo te lo digo en el bloque
-                  de abajo, sin adornos.
+                  El espacio cerrado donde vive el camino de formación de la comunidad, con
+                  material nuevo entrando {RITMO_CONTENIDO.hastaNoviembre} hasta noviembre y{' '}
+                  {RITMO_CONTENIDO.desdeDiciembre} de ahí en adelante. Un ritmo que me
+                  comprometo a cumplir.
                 </p>
               </div>
             </div>
@@ -695,43 +726,11 @@ function Circulo() {
         </div>
       </section>
 
-      {/* ---------- EL RITMO DEL CONTENIDO ---------- */}
-      <section className="bc-sec" id="el-ritmo" style={{ background: 'var(--sand)' }}>
-        <div className="wrap">
-          <div className="bc-sec-head reveal">
-            <span className="bc-eyebrow">Seamos honestos</span>
-            <h2>El camino se está construyendo <span className="accent ital">contigo dentro.</span></h2>
-            <p>
-              Acá te voy a ser honesto, porque prefiero que lo sepas antes de pagar y no
-              después.
-            </p>
-          </div>
-
-          <div className="cir-ritmo">
-            <div className="cir-ritmo-card reveal">
-              <small>Hasta noviembre</small>
-              <b>{RITMO_CONTENIDO.hastaNoviembre}</b>
-              <p>Entra material nuevo a ese ritmo, sin saltarse semanas.</p>
-            </div>
-            <div className="cir-ritmo-card reveal">
-              <small>De diciembre en adelante</small>
-              <b>{RITMO_CONTENIDO.desdeDiciembre}</b>
-              <p>Más lento, pero sostenido. Prefiero eso que arrancar fuerte y apagarme.</p>
-            </div>
-          </div>
-
-          <p className="bc-close">
-            No te voy a vender una biblioteca terminada, porque no la tengo. Te voy a vender
-            el ritmo. Y ese sí lo cumplo.
-          </p>
-        </div>
-      </section>
-
       {/* ---------- BANDA CTA ---------- */}
       <section className="bc-ctaband bc-ctaband-alt">
         <div className="wrap bc-ctaband-inner">
           <div>
-            <h3>El Bootcamp de noviembre, el grupo cada mes, y tiempo a solas conmigo.</h3>
+            <h3>Dos eventos presenciales, el grupo cada mes y {SESIONES_1A1} sesiones a solas conmigo.</h3>
             <p>Un año entero, desde el día que entras.</p>
           </div>
           <button type="button" className="btn btn-gold btn-lg" onClick={irAComprar}>
@@ -755,23 +754,26 @@ function Circulo() {
       {/* ---------- PRUEBA SOCIAL ---------- */}
       <TestimonialsSection
         id="testimonios"
-        eyebrow="De la primera sala"
-        heading={<>Esto es lo que dijo la gente <span className="accent ital">al salir de la primera sala.</span></>}
+        eyebrow="Del taller de finanzas"
+        heading={<>Esto es lo que dijo la gente <span className="accent ital">al salir del primer evento.</span></>}
       />
 
       <section className="bc-sec" id="transformacion">
         <div className="wrap">
           <div className="bc-sec-head reveal">
-            <span className="bc-eyebrow">Y seamos precisos</span>
-            <h2>Esos videos prueban una sala. Todavía no prueban un año.</h2>
+            <span className="bc-eyebrow">Imagina un año de esto</span>
+            <h2>Eso pasó en una sola tarde. <span className="accent ital">El Círculo es un año entero.</span></h2>
             <p>
-              Las seis personas de arriba cuentan qué se llevaron de un taller de una tarde, y
-              ninguna es del Círculo. Prueban una cosa concreta y nada más: que lo que pasa en
-              esa sala sirve. El testimonio de un año entero lo estamos grabando ahora.
+              Las personas de arriba cuentan qué se llevaron de un taller de unas horas. Si
+              eso se mueve en una tarde, imagina lo que se mueve con doce meses de grupo,
+              sesiones y un sábado entero de trabajo en persona.
             </p>
           </div>
 
-          <TestimonioTransformacion />
+          {/* El testimonio de transformación (src/components/TestimonioTransformacion.js) está
+              maquetado pero todavía sin grabar. Se retiró de la página el 12 de septiembre
+              de 2026 a pedido de Jonathan; cuando exista, se vuelve a importar y a montar
+              acá, entre el encabezado y las fotos. */}
 
           <div className="cir-photos">
             <figure className="cir-photo reveal">
@@ -794,8 +796,7 @@ function Circulo() {
             <span className="bc-eyebrow">Qué cuesta</span>
             <h2>${PRECIOS[INDIVIDUAL].unico.anunciado} el año si entras solo. ${PRECIOS[PAREJA].unico.anunciado} si entras con alguien.</h2>
             <p>
-              La de dos es para que entres con quien tú quieras: tu pareja, tu hermano, la
-              amiga con la que compartes arriendo.
+              La de dos es para que entres con quien tú quieras: tu pareja, tu hermano, tu flatmate.
             </p>
           </div>
 
@@ -810,7 +811,7 @@ function Circulo() {
               </p>
               <div className="cir-alt">
                 <b>Y si de golpe no te da, son {NUMERO_CUOTAS} cuotas de $
-                {PRECIOS[INDIVIDUAL].cuotas.mensual} al mes.</b> El total queda en $
+                  {PRECIOS[INDIVIDUAL].cuotas.mensual} al mes.</b> El total queda en $
                 {PRECIOS[INDIVIDUAL].cuotas.total}, y después del sexto cobro se para solo.
               </div>
               <button type="button" className="btn btn-emerald btn-block" onClick={elegir(INDIVIDUAL, 'unico')}>
@@ -848,7 +849,7 @@ function Circulo() {
               </p>
               <div className="cir-alt">
                 <b>Y si de golpe no les da, son {NUMERO_CUOTAS} cuotas de $
-                {PRECIOS[PAREJA].cuotas.mensual} al mes.</b> El total queda en $
+                  {PRECIOS[PAREJA].cuotas.mensual} al mes.</b> El total queda en $
                 {PRECIOS[PAREJA].cuotas.total}, y después del sexto cobro se para solo.
               </div>
               <button type="button" className="btn btn-gold btn-block" onClick={elegir(PAREJA, 'unico')}>
@@ -932,17 +933,6 @@ function Circulo() {
             </details>
 
             <details className="bc-qa">
-              <summary>¿Esto es asesoría financiera? <span className="bc-pl">+</span></summary>
-              <div className="bc-ans">
-                No. Es <b>educación y criterio</b>: leer tus números, ordenar tus deudas, mirar
-                tus hábitos, repartir tus cuentas y decidir con la cabeza fría. No te digo qué
-                producto financiero elegir ni dónde poner tu plata, y las sesiones uno a uno
-                tampoco son para eso — no tengo licencia para hacerlo. Para esas decisiones
-                hay profesionales licenciados acá en Australia y te digo a quién preguntarle.
-              </div>
-            </details>
-
-            <details className="bc-qa">
               <summary>¿Qué pasa si me cambio de ciudad o me voy del país? <span className="bc-pl">+</span></summary>
               <div className="bc-ans">
                 La comunidad, la sesión mensual del grupo y las sesiones uno a uno son en
@@ -957,8 +947,8 @@ function Circulo() {
               <summary>¿Puedo entrar con mi pareja o con un amigo? <span className="bc-pl">+</span></summary>
               <div className="bc-ans">
                 Sí. Con la de <b>${PRECIOS[PAREJA].unico.anunciado} entran dos</b>, y es para
-                que entres con quien tú quieras: tu pareja, tu hermano, tu mamá, un amigo, la
-                persona con la que compartes arriendo. Los dos entran completos al año. Y te
+                que entres con quien tú quieras: tu pareja, tu hermano, tu mamá, un amigo, tu flatmate.
+                Los dos entran completos al año. Y te
                 digo algo que he visto: cuando las dos personas están adentro, la conversación
                 de la plata en esa casa cambia por completo.
               </div>
@@ -982,7 +972,7 @@ function Circulo() {
                 Menos de lo que crees, porque está pensado para alguien que trabaja mucho. Una
                 sesión de grupo al mes, el material nuevo cuando puedas verlo, y los
                 presenciales con la fecha avisada con meses de antelación. <b>Lo que sí pide es
-                que hagas las cosas entre sesión y sesión</b>, y eso son ratos cortos.
+                  que hagas las cosas entre sesión y sesión</b>, y eso son ratos cortos.
               </div>
             </details>
 
@@ -1044,12 +1034,6 @@ function Circulo() {
           <img src={Logo} alt="Revolución del Dinero" />
           <div>
             <a href="/terminos">Términos y política de reembolso</a>
-          </div>
-
-          {/* Disclaimer legal. Legible a propósito: no es gris sobre gris. */}
-          <div className="cir-disclaimer">
-            <b>Aviso importante</b>
-            {DISCLAIMER_AFSL}
           </div>
 
           <div className="bc-cr">

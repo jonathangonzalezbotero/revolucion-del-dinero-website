@@ -1,5 +1,5 @@
 /*
-  Bootcamp Financiero — 14 de noviembre de 2026.
+  Bootcamp Financiero — 28 de noviembre de 2026.
 
   Calca el lenguaje visual de src/pages/Evento.css: hero de dos columnas con video de
   fondo y tarjeta de compra oscura pegada, meta-chips, banda dorada, foto con marco
@@ -187,8 +187,8 @@
   font-weight: 700;
 }
 
-/* La única urgencia real de la página: la ventana de la sesión 1:1. Nunca un número de
-   cupos, y nunca un contador de segundos. */
+/* La única urgencia de la página: es un solo sábado al año. Nunca un número de cupos, y
+   nunca un contador de segundos. */
 .bc-urgency {
   display: flex;
   align-items: flex-start;
@@ -536,7 +536,7 @@
 }
 .bc-wide-photo img { width: 100%; aspect-ratio: 21/9; object-fit: cover; }
 
-/* ---------- los tres movimientos ---------- */
+/* ---------- cómo es el día (tres partes, sin horas) ---------- */
 .bc-moves-grid {
   display: grid;
   grid-template-columns: 1.35fr .65fr;
@@ -605,7 +605,7 @@
 }
 .bc-note p { font-size: .93rem; color: var(--ink-soft); }
 
-/* ---------- la sesión 1:1 ---------- */
+/* ---------- el curso incluido ---------- */
 .bc-bonus-grid {
   display: grid;
   grid-template-columns: .9fr 1.1fr;
@@ -626,7 +626,7 @@
 }
 .bc-bonus-body p { color: var(--ink-soft); margin-bottom: 15px; }
 
-/* El alcance escrito de la sesión. */
+/* Lo que se aprende con el curso, en una caja. */
 .bc-scope {
   background: var(--paper);
   border: 1px solid var(--line);
@@ -637,7 +637,7 @@
   font-size: 1rem;
   margin-bottom: 15px;
 }
-/* Y la línea de lo que NO es. No debilita la oferta: la hace creíble. */
+/* Nota al pie de la tarjeta del curso en /bootcamp/gracias. */
 .bc-notis {
   font-size: .9rem;
   color: var(--ink-faint);
@@ -646,18 +646,32 @@
 }
 
 /* ---------- lo práctico ---------- */
+/* Cuatro fichas: cuándo, dónde, y las dos cosas que trae cada persona. Cuatro columnas
+   en escritorio, dos en tablet, una en teléfono. */
 .bc-cards3 {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
 }
 .bc-lcard {
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 30px 26px;
+  padding: 26px 22px;
+  display: flex;
+  flex-direction: column;
   transition: transform .35s, box-shadow .35s;
 }
+.bc-lcard-label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--emerald);
+  margin-bottom: 6px;
+}
+.bc-lcard-warn .bc-lcard-label { color: var(--gold-deep); }
 .bc-lcard:hover { transform: translateY(-5px); box-shadow: var(--shadow-soft); }
 .bc-lcard .bc-ic {
   font-size: 1.4rem;
@@ -670,11 +684,11 @@
   border: 1px solid rgba(15, 107, 79, .16);
   margin-bottom: 18px;
 }
-.bc-lcard h3 { font-size: 1.25rem; margin-bottom: 10px; }
-.bc-lcard p { color: var(--ink-soft); font-size: .98rem; }
+.bc-lcard h3 { font-size: 1.18rem; margin-bottom: 8px; }
+.bc-lcard p { color: var(--ink-soft); font-size: .94rem; line-height: 1.55; }
 
-/* Nueve horas de jornada sin avisar que la comida no va incluida es la queja más fácil
-   de evitar, así que esta tarjeta se destaca a propósito. */
+/* La tarjeta de los $50 en efectivo se destaca a propósito: quien llegue sin ellos se
+   queda por fuera de una parte del día. */
 .bc-lcard-warn {
   background: #fffaf0;
   border-color: rgba(217, 154, 43, .55);
@@ -929,7 +943,7 @@
   margin-bottom: 34px;
 }
 
-/* Tarjeta de agenda: la única con el link de Calendly, y solo acá. */
+/* Tarjeta oscura de /bootcamp/gracias: anuncia el curso incluido. */
 .bc-agenda-card {
   background: var(--ink);
   color: var(--cream);
@@ -1031,7 +1045,7 @@
   .bc-bonus-grid { grid-template-columns: 1fr; gap: 30px; }
   .bc-ctaband-inner { flex-direction: column; align-items: flex-start; }
   .bc-ctaband .btn { width: 100%; }
-  .bc-cards3 { grid-template-columns: 1fr; }
+  .bc-cards3 { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ---------- teléfono ---------- */
@@ -1042,6 +1056,7 @@
   .bc-list2 { grid-template-columns: 1fr; }
   .bc-results { grid-template-columns: 1fr; gap: 28px; }
   .bc-tickets { grid-template-columns: 1fr; gap: 28px; }
+  .bc-cards3 { grid-template-columns: 1fr; }
   .bc-moves-side { grid-template-columns: 1fr; }
   .bc-move { grid-template-columns: 1fr; gap: 9px; }
   .bc-practical { grid-template-columns: 1fr; }
@@ -1055,7 +1070,7 @@
 /*
   Teléfonos angostos (375px es el suelo que hay que soportar: iPhone SE / 12 mini / 13
   mini). Los .btn de shared.css llevan white-space:nowrap, y una etiqueta larga como
-  "Agendar mi sesión de 30 minutos →" no cabe en los 323px de contenido — se saldría por
+  "Quiero mi puesto" con padding generoso puede no caber en los 323px de contenido — se saldría por
   el costado. Acá se deja envolver y se recorta el padding lateral.
 */
 @media (max-width: 430px) {

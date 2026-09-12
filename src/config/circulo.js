@@ -3,7 +3,7 @@
 // Ruta canónica de venta: https://www.revoluciondeldinero.com/circulo
 // Página de gracias:      https://www.revoluciondeldinero.com/circulo/gracias
 
-export const DURACION = '1 año desde el día que entras';
+export const DURACION = '12 meses de mentoria';
 
 // Precios anunciados y lo que realmente cobra Stripe.
 //
@@ -54,13 +54,25 @@ export const PRICE_IDS = {
 // cambia la fecha de una edición del Bootcamp, la del Círculo no tiene por qué ser la
 // misma.
 export const BOOTCAMP_INCLUIDO = {
-  fecha: 'Sábado 14 de noviembre de 2026',
-  fechaCorta: 'Sáb 14 de nov. de 2026',
+  fecha: 'Sábado 28 de noviembre de 2026',
+  fechaCorta: 'Sáb 28 de nov. de 2026',
   horario: '10:00 a 19:00',
   registro: '09:30',
-  lugar: 'Gold Coast, Australia',
+  lugar: 'Australia',
   valorSuelto: 250,
 };
+
+// El segundo evento presencial del año, enfocado en identidad personal. Fecha exacta y
+// lugar se anuncian por correo cuando estén cerrados: acá solo el mes.
+export const EVENTO_MARZO = {
+  nombre: 'Libera tu potencial',
+  cuando: 'Marzo de 2027',
+  mes: 'marzo',
+};
+
+// Sesiones uno a uno con Jonathan incluidas en el año. Se nombra el número en la página
+// porque es una promesa concreta y verificable.
+export const SESIONES_1A1 = 4;
 
 // El ritmo del contenido. Es lo único que se promete sobre la Ruta del Revolucionario:
 // una cadencia comprometida, nunca un número de etapas, clases o videos disponibles, ni
