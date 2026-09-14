@@ -62,7 +62,7 @@
  *     ni "mentoría financiera". Van acotadas por escrito (presupuesto, deudas, hábitos,
  *     organización de cuentas). En el cuerpo de la página NO hay avisos de licencia,
  *     AFSL ni "esto no es asesoría": Jonathan lo aclara en persona y la página vende. El
- *     único descargo legal es el del pie (DISCLAIMER_AFSL), legible, no gris sobre gris.
+ *     descargo legal (DISCLAIMER_AFSL) vive solo en /terminos, no en esta página.
  *   · El almuerzo del Bootcamp no se menciona en esta página: va en los correos.
  *   · El Bootcamp incluido lleva el curso «Proyección anual financiera» (CURSO_NOMBRE de
  *     config/bootcamp.js), igual que el Bootcamp suelto.
@@ -81,7 +81,7 @@ import AboutSection from '../components/AboutSection';
 import TestimonialsSection from '../components/TestimonialsSection';
 import useRevealOnScroll from '../hooks/useRevealOnScroll';
 import Seo from '../components/Seo';
-import { CIRCULO_TITLE, CIRCULO_DESCRIPTION, CIRCULO_JSON_LD, DISCLAIMER_AFSL } from '../seoData';
+import { CIRCULO_TITLE, CIRCULO_DESCRIPTION, CIRCULO_JSON_LD } from '../seoData';
 import {
   PRECIOS,
   PRICE_IDS,
