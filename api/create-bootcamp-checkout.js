@@ -77,6 +77,10 @@ module.exports = async (req, res) => {
       mode: 'payment',
       line_items: [{ price: priceId, quantity: 1 }],
       customer_email: email.trim(),
+      // Muestra el campo "Agregar código de promoción" en el checkout de Stripe. El código
+      // en sí (cupón + promotion code) lo crea Jonathan en el dashboard de Stripe; acá no
+      // se valida nada: Stripe aplica el descuento y cobra el total ya rebajado.
+      allow_promotion_codes: true,
       success_url: `${origin}/bootcamp/gracias?nombre=${encodeURIComponent(nombre.trim())}&tier=${tier}`,
       cancel_url: `${origin}/bootcamp`,
       metadata: {

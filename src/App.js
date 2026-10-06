@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-import Evento from './pages/Evento';
 import Bootcamp from './pages/Bootcamp';
 import BootcampGracias from './pages/BootcampGracias';
 import Circulo from './pages/Circulo';
@@ -22,7 +21,8 @@ function App() {
       <PixelTracker />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/evento" element={<Evento />} />
+        {/* /evento (taller del 12 de septiembre de 2026) ya pasó: vercel.json la redirige
+            a /bootcamp con un 308. Evento.js se conserva en el repo como referencia. */}
         <Route path="/bootcamp" element={<Bootcamp />} />
         <Route path="/bootcamp/gracias" element={<BootcampGracias />} />
         <Route path="/circulo" element={<Circulo />} />

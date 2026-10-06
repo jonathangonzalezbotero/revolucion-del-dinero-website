@@ -1,12 +1,40 @@
 {
+  "redirects": [
+    {
+      "source": "/evento",
+      "destination": "/bootcamp",
+      "permanent": true
+    },
+    {
+      "source": "/evento/",
+      "destination": "/bootcamp",
+      "permanent": true
+    }
+  ],
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/evento", "destination": "/evento/index.html" },
-    { "source": "/evento/", "destination": "/evento/index.html" },
-    { "source": "/bootcamp", "destination": "/bootcamp/index.html" },
-    { "source": "/bootcamp/", "destination": "/bootcamp/index.html" },
-    { "source": "/circulo", "destination": "/circulo/index.html" },
-    { "source": "/circulo/", "destination": "/circulo/index.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/bootcamp",
+      "destination": "/bootcamp/index.html"
+    },
+    {
+      "source": "/bootcamp/",
+      "destination": "/bootcamp/index.html"
+    },
+    {
+      "source": "/circulo",
+      "destination": "/circulo/index.html"
+    },
+    {
+      "source": "/circulo/",
+      "destination": "/circulo/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }

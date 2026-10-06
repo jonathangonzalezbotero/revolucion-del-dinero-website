@@ -19,7 +19,7 @@ import './Bootcamp.css';
 import './Circulo.css';
 import Logo from '../assets/images/logo.webp';
 import Seo from '../components/Seo';
-import { CIRCULO_GRACIAS_TITLE, CIRCULO_GRACIAS_DESCRIPTION, DISCLAIMER_AFSL } from '../seoData';
+import { CIRCULO_GRACIAS_TITLE, CIRCULO_GRACIAS_DESCRIPTION } from '../seoData';
 import { LINK_AGENDA } from '../config/agenda';
 import { PRECIOS, NUMERO_CUOTAS, BOOTCAMP_INCLUIDO } from '../config/circulo';
 
@@ -194,10 +194,6 @@ function CirculoGracias() {
           <img src={Logo} alt="Revolución del Dinero" />
           <div>
             <a href="/terminos">Términos y política de reembolso</a>
-          </div>
-          <div className="cir-disclaimer">
-            <b>Aviso importante</b>
-            {DISCLAIMER_AFSL}
           </div>
           <div className="bc-cr">
             © 2026 Revolución del Dinero · Jonathan González Botero · {BOOTCAMP_INCLUIDO.lugar}

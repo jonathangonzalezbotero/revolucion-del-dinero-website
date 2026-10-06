@@ -8,6 +8,7 @@ import TestimonialsSection from '../components/TestimonialsSection';
 import useRevealOnScroll from '../hooks/useRevealOnScroll';
 import Seo from '../components/Seo';
 import { HOME_TITLE, HOME_DESCRIPTION, HOME_JSON_LD, SKOOL_URL } from '../seoData';
+import { FECHA_CORTA, HORARIO, LUGAR, PRECIO_INDIVIDUAL, PRECIO_PAREJA, CURSO_NOMBRE } from '../config/bootcamp';
 
 const LOGO_URL = Logo;
 
@@ -102,10 +103,10 @@ function Home() {
             <a href="#metodo" onClick={() => setMenuOpen(false)}>El método</a>
             <a href="#comunidad" onClick={() => setMenuOpen(false)}>Comunidad</a>
             <a href="#testimonios" onClick={() => setMenuOpen(false)}>Historias</a>
-            <Link to="/evento">Evento</Link>
+            <Link to="/bootcamp">Bootcamp</Link>
           </nav>
           <div className="nav-cta">
-            <Link to="/evento" className="btn btn-outline">Taller de finanzas</Link>
+            <Link to="/bootcamp" className="btn btn-outline">Bootcamp Financiero</Link>
             <a href={SKOOL_URL} target="_blank" rel="noopener noreferrer" className="btn btn-emerald">Unirme a la comunidad</a>
           </div>
           <div className="burger" onClick={() => setMenuOpen((o) => !o)}>
@@ -127,7 +128,7 @@ function Home() {
             {/* <p className="lead">Soy Jonathan González. Te ayudo a reprogramar tu mente, administrar lo que ganas e invertir con confianza — para que dejes de trabajar 50–60 horas y aun así sentir que el dinero no alcanza.</p> */}
             <div className="hero-cta">
               {/* <a href={SKOOL_URL} target="_blank" rel="noopener noreferrer" className="btn btn-emerald btn-lg">Unirme a la comunidad <span className="ar">→</span></a> */}
-              <Link to="/evento" className="btn btn-outline btn-lg">Asistir al taller de finanzas</Link>
+              <Link to="/bootcamp" className="btn btn-outline btn-lg">Ir al Bootcamp Financiero</Link>
             </div>
           </div>
           <div className="hero-visual reveal">
@@ -220,19 +221,19 @@ function Home() {
             <div className="offer reveal">
               <div className="top">
                 <span className="kicker k-go">📍 En Australia</span>
-                <h3>Taller de finanzas</h3>
+                <h3>Bootcamp Financiero</h3>
               </div>
-              <p className="desc">Una tarde presencial en Gold Coast para dar el primer paso en serio, con otros latinos que están en lo mismo que tú.</p>
+              <p className="desc">Un sábado entero, presencial en Gold Coast, sentados con tus números de frente. Llegas con la plata revuelta y te vas con un plan para el año.</p>
               <ul>
-                <li>Los cuatro pilares, trabajados en vivo</li>
-                <li>Sales con tu plan escrito, no con apuntes</li>
-                <li>Conoces gente que va en la misma dirección</li>
-                <li>Opción VIP: workbook impreso, primera fila y Q&amp;A</li>
+                <li>Tus números, tus deudas y tu año proyectado, en una hoja</li>
+                <li>Sales con decisiones tomadas, no con apuntes</li>
+                <li>Incluye el curso «{CURSO_NOMBRE}»</li>
+                <li>Entrada para dos si vienes con alguien</li>
               </ul>
               <div className="foot">
-                <div className="price"><span className="free">$10 AUD</span></div>
-                <div className="price-note">Admite 2 personas · lo recaudado en entradas se dona a Colombia</div>
-                <Link to="/evento" className="btn btn-ink">Registrarme al evento →</Link>
+                <div className="price"><span className="free">${PRECIO_INDIVIDUAL} AUD</span></div>
+                <div className="price-note">O ${PRECIO_PAREJA} para dos · {FECHA_CORTA}</div>
+                <Link to="/bootcamp" className="btn btn-ink">Sí, reservar mi entrada →</Link>
               </div>
             </div>
             {/*
@@ -281,20 +282,20 @@ function Home() {
       <section className="sec event">
         <div className="wrap event-grid">
           <div className="reveal">
-            <span className="au">📍 Evento presencial · Gold Coast, Australia</span>
-            <h2>¿Estás en Australia? Nos vemos el sábado 12.</h2>
-            <p>Tres horas y media de taller para mirar tu plata de frente: de dónde viene, en qué se te va, y qué vas a hacer distinto a partir del lunes. Te vas con tu plan escrito de tu puño y letra.</p>
+            <span className="au">📍 Bootcamp presencial · Gold Coast, Australia</span>
+            <h2>¿Estás en Australia? Nos vemos el 28 de noviembre.</h2>
+            <p>Un sábado entero para mirar tu plata de frente: qué entra, qué sale, qué debes y qué te queda. Sales con tu año proyectado, tus deudas con fecha de salida y decisiones tomadas, escritas de tu puño y letra.</p>
             <div className="when">
-              <div><small>Fecha</small><b>Sáb 12 de sept., 2026</b></div>
-              <div><small>Hora</small><b>3:00 a 6:30 pm</b></div>
-              <div><small>Lugar</small><b>Robina Events Centre</b></div>
-              <div><small>Entrada</small><b>$10 AUD</b></div>
+              <div><small>Fecha</small><b>{FECHA_CORTA}</b></div>
+              <div><small>Hora</small><b>{HORARIO}</b></div>
+              <div><small>Lugar</small><b>{LUGAR}</b></div>
+              <div><small>Entrada</small><b>${PRECIO_INDIVIDUAL} · ${PRECIO_PAREJA} para dos</b></div>
             </div>
-            <p className="event-note">✨ Tu entrada admite dos personas, así que tu pareja o un amigo entra sin pagar de más. Y todo lo que se recaude en entradas se va para las familias afectadas por el terremoto en Colombia.</p>
+            <p className="event-note">✨ Incluye el curso completo «{CURSO_NOMBRE}», para que lo que armes ese sábado lo repitas cada año por tu cuenta.</p>
           </div>
           <div className="event-actions reveal">
-            <Link to="/evento" className="btn btn-gold btn-lg">Registrarme · $10 AUD →</Link>
-            <Link to="/evento" className="btn btn-outline btn-lg" style={{ borderColor: 'rgba(246,241,231,.4)', color: 'var(--cream)' }}>Ver detalles</Link>
+            <Link to="/bootcamp" className="btn btn-gold btn-lg">Sí, reservar mi entrada →</Link>
+            <Link to="/bootcamp" className="btn btn-outline btn-lg" style={{ borderColor: 'rgba(246,241,231,.4)', color: 'var(--cream)' }}>Ver detalles</Link>
           </div>
         </div>
       </section>
@@ -325,7 +326,7 @@ function Home() {
               <p>Adentro vas a encontrar el contenido, los encuentros en vivo y gente que está haciendo exactamente lo mismo que tú. Eso último es lo que más cuesta encontrar solo.</p>
               <div className="join-cta">
                 <a href={SKOOL_URL} target="_blank" rel="noopener noreferrer" className="btn btn-gold btn-lg">Unirme a la comunidad →</a>
-                <Link to="/evento" className="btn btn-outline btn-lg" style={{ borderColor: 'rgba(246,241,231,.4)', color: 'var(--cream)' }}>Asistir al evento · $10 AUD</Link>
+                <Link to="/bootcamp" className="btn btn-outline btn-lg" style={{ borderColor: 'rgba(246,241,231,.4)', color: 'var(--cream)' }}>Ir al Bootcamp Financiero</Link>
               </div>
             </div>
           </div>
@@ -350,7 +351,7 @@ function Home() {
             <div className="grp">
               <b>Empieza</b>
               <a href={SKOOL_URL} target="_blank" rel="noopener noreferrer">Comunidad en Skool</a>
-              <Link to="/evento">Evento presencial</Link>
+              <Link to="/bootcamp">Bootcamp Financiero</Link>
             </div>
           </div>
           <div className="cr">© 2026 Revolución del Dinero · Jonathan González Botero · Educación financiera en español para latinos en todo el mundo.</div>

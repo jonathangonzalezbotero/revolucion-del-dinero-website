@@ -43,6 +43,9 @@ La persona elige individual ($250) o para dos ($400) y llena el formulario
    ↓
 3. POST /api/create-bootcamp-checkout → Stripe Checkout Session
    metadata: { nombre, tel, tier, amigoNombre, amigoTel, oferta: 'bootcamp' }
+   allow_promotion_codes: true → el checkout muestra "Agregar código de promoción".
+   Los códigos se crean y administran en el dashboard de Stripe (Productos → Cupones);
+   el sitio no sabe cuáles existen ni los valida.
    ↓
 4. Píxel de Meta → evento `InitiateCheckout`
    ↓

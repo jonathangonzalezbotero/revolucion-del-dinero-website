@@ -18,7 +18,7 @@ import './Bootcamp.css';
 import './Circulo.css';
 import Logo from '../assets/images/logo.webp';
 import Seo from '../components/Seo';
-import { TERMINOS_TITLE, TERMINOS_DESCRIPTION, DISCLAIMER_AFSL } from '../seoData';
+import { TERMINOS_TITLE, TERMINOS_DESCRIPTION } from '../seoData';
 import { FECHA_LARGA, HORARIO, LUGAR, PRECIO_INDIVIDUAL, PRECIO_PAREJA, COBRO_INDIVIDUAL, COBRO_PAREJA, CURSO_NOMBRE } from '../config/bootcamp';
 import { PRECIOS, NUMERO_CUOTAS, RECARGO_CUOTAS_PCT, CURSO_NEGOCIO, RITMO_CONTENIDO, EVENTO_MARZO, SESIONES_1A1 } from '../config/circulo';
 
@@ -75,10 +75,6 @@ function Terminos() {
             profesional licenciado.
           </p>
 
-          <div className="cir-disclaimer" style={{ margin: '18px 0' }}>
-            <b>Aviso importante</b>
-            {DISCLAIMER_AFSL}
-          </div>
           <p>
             Los resultados dependen de lo que cada persona haga con lo que aprende. No
             prometemos ni garantizamos ningún resultado económico.
@@ -276,10 +272,6 @@ function Terminos() {
           <img src={Logo} alt="Revolución del Dinero" />
           <div>
             <a href="/bootcamp">Volver al Bootcamp</a>
-          </div>
-          <div className="cir-disclaimer">
-            <b>Aviso importante</b>
-            {DISCLAIMER_AFSL}
           </div>
           <div className="bc-cr">
             © 2026 Revolución del Dinero · Jonathan González Botero · {LUGAR}

@@ -8,13 +8,13 @@
 // Real users and JS-executing bots (Googlebot renders JS) are untouched —
 // this only intercepts requests whose User-Agent matches a known crawler.
 //
-// Keep HOME_HTML / EVENTO_HTML's title/description/JSON-LD in sync with
-// src/pages/Home.js and src/pages/Evento.js (via src/components/Seo.js) if
+// Keep HOME_HTML / BOOTCAMP_HTML / CIRCULO_HTML's title/description/JSON-LD in sync with
+// src/pages/Home.js, Bootcamp.js and Circulo.js (via src/components/Seo.js) if
 // that copy changes — this file can't share code with the React bundle since
 // it runs in a separate Edge runtime.
 
 export const config = {
-  matcher: ['/', '/evento', '/bootcamp', '/circulo'],
+  matcher: ['/', '/bootcamp', '/circulo'],
 };
 
 const SITE_URL = 'https://www.revoluciondeldinero.com';
@@ -84,46 +84,6 @@ const HOME_HTML = page({
     },
   ],
 });
-
-const EVENTO_HTML = page({
-  title: 'Taller de Finanzas Personales en Gold Coast · $10 AUD | Revolución del Dinero',
-  description:
-    'Evento presencial de educación financiera en español, en el Robina Events Centre, Gold Coast, Australia — 12 de septiembre de 2026. Entrada $10 AUD, incluye a tu pareja o acompañante. Cupos limitados.',
-  path: '/evento',
-  heading: 'Taller de Finanzas Personales en Gold Coast — $10 AUD',
-  body: 'Evento presencial de educación financiera en español, en el Robina Events Centre, Gold Coast, Australia, el 12 de septiembre de 2026. Entrada $10 AUD, incluye a tu pareja o acompañante. Cupos limitados.',
-  jsonLd: {
-    '@context': 'https://schema.org',
-    '@type': 'Event',
-    name: 'Taller de Finanzas Personales — Revolución del Dinero',
-    description:
-      'Evento presencial de educación financiera en español, en el Robina Events Centre, Gold Coast, Australia — 12 de septiembre de 2026. Entrada $10 AUD, incluye a tu pareja o acompañante. Cupos limitados.',
-    startDate: '2026-09-12',
-    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-    eventStatus: 'https://schema.org/EventScheduled',
-    location: {
-      '@type': 'Place',
-      name: 'Robina Events Centre',
-      address: { '@type': 'PostalAddress', addressLocality: 'Robina', addressRegion: 'QLD', addressCountry: 'AU' },
-    },
-    image: [OG_IMAGE],
-    organizer: { '@type': 'Person', name: 'Jonathan González Botero', url: SITE_URL },
-    offers: {
-      '@type': 'Offer',
-      price: '10',
-      priceCurrency: 'AUD',
-      availability: 'https://schema.org/InStock',
-      url: `${SITE_URL}/evento`,
-      validFrom: '2026-01-01',
-    },
-  },
-});
-
-// Sin temario publicado y sin lenguaje de asesoría sobre productos financieros, igual que
-// la página real: esto es lo que WhatsApp, Meta y Google leen del enlace /bootcamp, así
-// que es texto publicado con el mismo peso que el de src/pages/Bootcamp.js.
-const BOOTCAMP_DESCRIPTION =
-  'Un día presencial en español para ordenar tu plata: tus números, tus deudas, tus hábitos y tu proyección del año. Sábado 28 de noviembre de 2026, de 10:00 a 19:00, en Gold Coast, Australia. $250 AUD por persona o $400 AUD para dos, e incluye una sesión de 30 minutos con Jonathan. El almuerzo no está incluido.';
 
 const BOOTCAMP_HTML = page({
   title: 'Bootcamp Financiero en Gold Coast · Sábado 28 de noviembre de 2026 | Revolución del Dinero',
@@ -218,7 +178,6 @@ const CIRCULO_HTML = page({
 });
 
 const CRAWLER_PAGES = {
-  '/evento': EVENTO_HTML,
   '/bootcamp': BOOTCAMP_HTML,
   '/circulo': CIRCULO_HTML,
 };

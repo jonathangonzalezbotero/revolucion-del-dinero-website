@@ -195,14 +195,6 @@ const ROUTES = [
     jsonLd: HOME_JSON_LD,
   },
   {
-    path: '/evento',
-    outputFile: 'evento/index.html',
-    title: EVENTO_TITLE,
-    description: EVENTO_DESCRIPTION,
-    image: DEFAULT_OG_IMAGE,
-    jsonLd: EVENTO_JSON_LD,
-  },
-  {
     path: '/bootcamp',
     outputFile: 'bootcamp/index.html',
     title: BOOTCAMP_TITLE,

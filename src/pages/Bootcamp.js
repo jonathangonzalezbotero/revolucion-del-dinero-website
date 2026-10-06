@@ -31,6 +31,8 @@
  *   3. POST /api/create-bootcamp-checkout → crea la Stripe Checkout Session. La metadata
  *                                  usa los mismos nombres de campo que /evento (nombre,
  *                                  tel, tier, amigoNombre, amigoTel) más `oferta`.
+ *                                  allow_promotion_codes: true — los códigos de descuento
+ *                                  se crean en el dashboard de Stripe, no acá.
  *   4. Píxel de Meta             → evento `InitiateCheckout`.
  *   5. Redirección a Stripe. success_url → /bootcamp/gracias · cancel_url → /bootcamp
  *
