@@ -85,6 +85,12 @@ const HOME_HTML = page({
   ],
 });
 
+// Sin temario publicado y sin lenguaje de asesoría sobre productos financieros, igual que
+// la página real: esto es lo que WhatsApp, Meta y Google leen del enlace /bootcamp, así
+// que es texto publicado con el mismo peso que el de src/pages/Bootcamp.js.
+const BOOTCAMP_DESCRIPTION =
+  'Un día presencial en español para ordenar tu plata: tus números, tus deudas, tus hábitos y tu proyección del año. Sábado 28 de noviembre de 2026, de 10:00 a 19:00, en Gold Coast, Australia. $250 AUD por persona o $400 AUD para dos, con el curso completo «Proyección anual financiera» incluido.';
+
 const BOOTCAMP_HTML = page({
   title: 'Bootcamp Financiero en Gold Coast · Sábado 28 de noviembre de 2026 | Revolución del Dinero',
   description: BOOTCAMP_DESCRIPTION,
@@ -96,9 +102,9 @@ const BOOTCAMP_HTML = page({
     '@type': 'Event',
     name: 'Bootcamp Financiero — Revolución del Dinero',
     description: BOOTCAMP_DESCRIPTION,
-    startDate: '2026-11-14T10:00:00+10:00',
-    endDate: '2026-11-14T19:00:00+10:00',
-    doorTime: '2026-11-14T09:30:00+10:00',
+    startDate: '2026-11-28T10:00:00+10:00',
+    endDate: '2026-11-28T19:00:00+10:00',
+    doorTime: '2026-11-28T09:30:00+10:00',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     eventStatus: 'https://schema.org/EventScheduled',
     location: {
